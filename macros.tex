@@ -1,0 +1,109 @@
+\newcommand{\LTL}{\ensuremath{\text{LTL}}\xspace}
+\newcommand{\LTLf}{\ensuremath{\text{LTL}_f}\xspace}
+\newcommand{\PLTL}{\ensuremath{\text{PLTL}_f}\xspace}
+\newcommand{\PLTLz}{\ensuremath{\text{PLTL}_f^0}\xspace}
+
+\newcommand{\Wuntil}{\mathcal{W}}
+
+\newcommand{\At}{\ensuremath{\mathsf{At}}\xspace}
+
+\newcommand{\nats}{\ensuremath{\mathbb{N}}\xspace}
+\newcommand{\acc}{\ensuremath{\mathsf{acc}}\xspace}
+\newcommand{\branch}{\ensuremath{\mathsf{b}}\xspace}
+\newcommand{\exa}{\ensuremath{\mathsf{exa}}\xspace}
+\newcommand{\ini}{\ensuremath{\mathsf{in}}\xspace}
+\newcommand{\ms}{\ensuremath{\mathsf{m}}\xspace}
+\newcommand{\wt}{\ensuremath{\mathsf{wt}}\xspace}
+%\newcommand{\run}{\ensuremath{\mathsf{run}}\xspace}
+\newcommand{\rnk}{\ensuremath{\mathsf{rk}}\xspace}
+\newcommand{\swt}{\ensuremath{\mathsf{w}}\xspace}
+\newcommand{\csub}{\ensuremath{\mathsf{csub}}\xspace}
+\newcommand{\END}{\ensuremath{\mathsf{END}}\xspace}
+
+\newcommand{\atom}{\ensuremath{\mathbf{a}}\xspace}
+
+\newcommand{\Amc}{\ensuremath{\mathcal{A}}\xspace}
+\newcommand{\Bmc}{\ensuremath{\mathcal{B}}\xspace}
+\newcommand{\Imc}{\ensuremath{\mathcal{I}}\xspace}
+\newcommand{\Lmc}{\ensuremath{\mathcal{L}}\xspace}
+\newcommand{\Omc}{\ensuremath{\mathcal{O}}\xspace}
+\newcommand{\Pmc}{\ensuremath{\mathcal{P}}\xspace}
+\newcommand{\Qmc}{\ensuremath{\mathcal{Q}}\xspace}
+\newcommand{\Smc}{\ensuremath{\mathcal{S}}\xspace}
+\newcommand{\Wmc}{\ensuremath{\mathcal{W}}\xspace}
+
+\newcommand{\Imf}{\ensuremath{\mathfrak{I}}\xspace}
+
+\newcommand{\PS}{\text{\sc{PSpace}}\xspace}
+\newcommand{\ET}{\text{\sc{ExpTime}}\xspace}
+
+%\newcommand{\prob}[1]{\ensuremath{\scaleobj{1.2}{\circledcirc}_{#1}}\xspace}
+
+\newcommand{\argmax}{\text{argmax}\xspace}
+\newcommand{\declare}{Declare\xspace}
+\newcommand{\pdeclare}{ProbDeclare\xspace}
+\newcommand{\constraint}[1]{\texttt{#1}}
+\newcommand{\activity}[1]{\ensuremath{\mathsf{#1}}}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{claim}[theorem]{Claim}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\theoremstyle{definition}
+%\newtheorem{example}[theorem]{Example}
+%\newtheorem{definition}[theorem]{Definition}
+
+
+
+%% temporal operators
+\newcommand{\Next}{{\ensuremath\raisebox{0.25ex}{\text{\scriptsize$\bigcirc$}}}}
+\newcommand{\Until}{\ensuremath{\mathbin{\mathcal{U}}}}
+\newcommand{\Release}{\ensuremath{\mathbin{\mathcal{R}}}}
+\newcommand{\Wntil}{\ensuremath{\mathbin{\mathcal{W}}}}
+
+
+
+
+
+
+
+
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%  Conference / arXiv Versions  %%%%%%%
+\newif\iffull\fulltrue
+%\fullfalse		%%% uncomment to make conference version
+\newcommand{\FullT}[1]{\iffull #1 \fi}
+\newcommand{\FullF}[1]{\iffull \else #1 \fi}
+\newcommand{\FullTF}[2]{\iffull #1 \else #2 \fi}
+\input{macros-declare}
+\input{macros-style}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\newcommand{\nodedist}{6mm}
+\newcommand{\textsize}{80mm}
+\newcommand{\taskdist}{12mm}
+\newcommand{\autshift}{5mm}
+
+\tikzstyle{pconstraint} = [
+  draw=lightBlue!80,
+]
+
+\tikzstyle{pwords} = [
+  text=lightBlue!80
+]
+
+\newcommand{\exclose}{\ensuremath{\Diamond \activity{close}}}
+\newcommand{\negexclose}{\ensuremath{\neg \Diamond \activity{close}}}
+\newcommand{\translation}[2]{\ensuremath{\uptau_{#1}^{#2}}}

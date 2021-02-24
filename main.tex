@@ -1,0 +1,148 @@
+\documentclass[runningheads]{llncs}
+
+\setlength{\paperheight}{232.8mm}
+\setlength{\paperwidth}{151.5mm}
+\setlength\voffset     {-23mm}
+\setlength\hoffset     {-34mm}
+
+%
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage[final]{changes}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{rotating}
+\usepackage{latexsym,amssymb,amsmath}
+\usepackage{makecell}
+\usepackage{xspace}
+\usepackage{paralist}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{cite}
+%\usepackage{times}
+\input{macros-common}
+\usepackage{todonotes}
+
+\input{neue_imports}
+\input{neue_macros}
+
+\input{macros}
+
+\usepackage{graphicx}
+\usepackage{actuarialsymbol2}
+\usepackage{upgreek}
+
+\usepackage{linegoal}
+\usepackage{changepage}
+\newlength{\previousLine}
+\newenvironment{UnknownEnvironment}
+{%
+	\setlength{\previousLine}{\linewidth}%
+	\addtolength{\previousLine}{-\linegoal}
+	\par\bigskip%
+	\bfseries%
+	\begin{adjustwidth}{0.5cm}{0cm}%
+	}
+	{%
+	\end{adjustwidth}
+	\par\bigskip%
+	\hspace*{\previousLine}%
+}
+
+
+
+\begin{document}
+
+
+%
+\title{MAX-SAT over Data-Aware Declare Models}
+%\subtitle{\emph{Vision Paper}}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+%\author{
+%	Giacomo Bergami\inst{1} \and%
+%	Fabrizio Maria Maggi\inst{1} \and \dots}
+
+%\authorrunning{G.~Bergami, F.M.~Maggi, \dots}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+%\institute{
+%	Free University of Bozen-Bolzano, Italy \\\email{gibergami@unibz.it,maggi@inf.unibz.it}
+	%\and
+	%University of Milano-Bicocca \\\email{rafael.penaloza@unimib.it}
+%}
+
+%\vspace{1.5cm}
+%
+%
+\maketitle              % typeset the header of the contribution
+\linespread{0.92}
+\vspace{-0.5cm}
+
+\begin{abstract}
+%Conformance checking techniques verify whether the observed behavior recorded in an event log matches a modeled behavior. This type of analysis is crucial, because often real process executions deviate from the reference process models. Currently, one of the most common approaches to conformance checking is based on trace alignments.
+%Alignments provide sophisticated diagnostics that pinpoint deviations in a trace with respect to a process model and their severity. However, approaches based on trace alignments use crisp process models as reference and recent probabilistic conformance checking approaches check the degree of conformance of an event log with respect to a stochastic process model instead of finding trace alignments. In this paper, for the first time, we provide a conformance checking approach based on trace alignments using stochastic Workflow nets. Conceptually, this requires to handle the two possibly contrasting forces of the cost of the alignment on the one hand and the likelihood of the model trace with respect to which the alignment is computed on the other.
+%If the cost of the alignment is too high, even if the considered model trace is very likely, applying too many changes in the original trace is not always the best option. The proposed approach has been evaluated using a real-life event log pertaining to the treatment of the sepsis disease in a hospital.
+%\vspace{-0.3cm}
+\end{abstract}
+
+%\keywords{[TODO]}
+
+\section{Introduction}
+
+
+The \textbf{\color{blue}alignment problem}
+\begin{UnknownEnvironment}
+	Quindi, non siamo interessati alla soddisfacibilità tout court, ma all'impiego della soddisfacibilità per stimare l'allineamento di una traccia $\sigma$ di un log $\mathcal{L}$, come per l'allineamento classico. {\color{blue}È per questo motivo dunque che non siamo interessati alla soddisfacibilità di tutte le possibili tracce per il log, perché questo lavoro esiste già in letteratura \cite{LiPZVR20}, anche se non ancora Data Aware come \cite{8944989}. Quello che manca ad ora è la definizione di allineamenti con modelli Data Aware.}
+\end{UnknownEnvironment}
+for a log trace against a Declare Model 
+\begin{UnknownEnvironment}
+Quindi, non siamo interessati a tutte le possibili formule LTL$_f$, ma a quelle la cui semantica è esprimibile tramite Delcare Model.
+\end{UnknownEnvironment}
+can be formulated as a MAX-SAT, as the latter determines the maximum number of clauses  that are satisfied. 
+\begin{UnknownEnvironment}
+	Questo è possibile perché, allo stato attuale delle cose, non esistono condizioni di join tra template Declare. Quindi,
+	ciascuna formula declare è soddisfacibile indipendentemente dalla semantica delle altre formule. {\color{red}Qual è insieme di formule Declare che è ragionevole assumere come base di partenza?}
+\end{UnknownEnvironment}
+Albeit MAX-SAT is generally an NP-Complete problem, finite models enable tractable solutions.
+\begin{UnknownEnvironment}
+	\color{blue}Come ricordato nel meeting del 23 Feb., lo scopo del paper è di mostrare come gli approcci tramite match sui grafi sono plausibili per fornire un'interpretazione dell'allineamento della traccia col modello. Dato che uno di questi algoritmi (\S\ref{ref:agm}) è sempre decidibile in tempo polinomiale, voglio motivare che questo algoritmo fornisce una caratterizzazione accettabile dell'approssimazione della soddisfacibilità tramite allineamento.
+\end{UnknownEnvironment}
+
+
+\input{sections/00_propositionalization}
+%
+%\input{sections/01_introduction}
+%%\input{sections/02_preliminaries}
+%\input{sections/03_embedding}
+%\input{sections/04_approxRegMatch}
+\input{sections/05_modelMining}
+%%\input{sections/03_embedding}
+%%\input{sections/03_embedding_2}
+%%\input{sections/05_experiment}
+%%\input{sections/06_conclusion}
+
+
+\bibliographystyle{splncs04}
+\bibliography{biblio3}
+%,bibliography2,references,libraryFiltered,main,Bibliography-CDC,DiCiccio,biblio}
+
+\appendix 
+
+
+\counterwithin{lemma}{section}
+\renewcommand{\thelemma}{\thesection\arabic{lemma}}
+
+\section{Appendix}
+
+
+
+
+\end{document}

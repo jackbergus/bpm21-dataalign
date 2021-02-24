@@ -1,0 +1,167 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Time-stamp: "2018-09-07 18:35:03 calvanese"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% General Math
+
+\newcommand{\A}{\ensuremath{\mathcal{A}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+%\newcommand{\C}{\ensuremath{\mathcal{C}}}
+\newcommand{\D}{\ensuremath{\mathcal{D}}}
+\newcommand{\E}{\ensuremath{\mathcal{E}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+%\newcommand{\G}{\ensuremath{\mathcal{G}}}
+\renewcommand{\H}{\ensuremath{\mathcal{H}}}
+\newcommand{\I}{\ensuremath{\mathcal{I}}}
+\newcommand{\J}{\ensuremath{\mathcal{J}}}
+\newcommand{\K}{\ensuremath{\mathcal{K}}}
+\renewcommand{\L}{\ensuremath{\mathcal{L}}}
+\newcommand{\M}{\ensuremath{\mathcal{M}}}
+\newcommand{\N}{\ensuremath{\mathcal{N}}}
+\renewcommand{\O}{\ensuremath{\mathcal{O}}}
+\renewcommand{\P}{\ensuremath{\mathcal{P}}}
+\newcommand{\Q}{\ensuremath{\mathcal{Q}}}
+\newcommand{\R}{\ensuremath{\mathcal{R}}}
+%\renewcommand{\S}{\ensuremath{\mathcal{S}}}
+\newcommand{\T}{\ensuremath{\mathcal{T}}}
+%\newcommand{\U}{\ensuremath{\mathcal{U}}}
+\newcommand{\V}{\ensuremath{\mathcal{V}}}
+\newcommand{\W}{\ensuremath{\mathcal{W}}}
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\Y}{\ensuremath{\mathcal{Y}}}
+\newcommand{\Z}{\ensuremath{\mathcal{Z}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Abbreviations
+
+%%\newcommand{\eset}{\emptyset}
+%%\newcommand{\col}{\colon}
+\newcommand{\ol}[1]{\overline{#1}}                % overline
+%\newcommand{\ul}[1]{\underline{#1}}               % underline
+%%\newcommand{\uls}[1]{\underline{\raisebox{0pt}[0pt][0.45ex]{}#1}}
+%% ul with space between text and line
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\La}{\Leftarrow}
+%\newcommand{\lra}{\leftrightarrow}
+\newcommand{\Lra}{\Leftrightarrow}
+\newcommand{\lora}{\longrightarrow}
+\newcommand{\Lora}{\Longrightarrow}
+\newcommand{\lola}{\longleftarrow}
+\newcommand{\Lola}{\Longleftarrow}
+\newcommand{\lolra}{\longleftrightarrow}
+\newcommand{\Lolra}{\Longleftrightarrow}
+%\newcommand{\ua}{\uparrow}
+\newcommand{\Ua}{\Uparrow}
+\newcommand{\da}{\downarrow}
+\newcommand{\Da}{\Downarrow}
+\newcommand{\uda}{\updownarrow}
+\newcommand{\Uda}{\Updownarrow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Relations
+
+%%\newcommand{\incl}{\subseteq}
+%%\newcommand{\imp}{\rightarrow}
+\newcommand{\per}{\mbox{\bf .}}                  % period
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Delimiters
+
+%%\newcommand{\quotes}[1]{{\lq\lq #1\rq\rq}}
+%\newcommand{\set}[1]{\{#1\}}                      % set
+%\newcommand{\Set}[1]{\left\{#1\right\}}
+\newcommand{\bigset}[1]{\Bigl\{#1\Bigr\}}
+\newcommand{\bigmid}{\Big|}
+\newcommand{\size}[1]{|{#1}|}                     % cardinality of a set
+%%\newcommand{\Card}[1]{\left| #1\right|}
+\newcommand{\card}[1]{\sharp #1}
+\newcommand{\tup}[1]{\langle #1\rangle}            % tuple
+\newcommand{\Tup}[1]{\Braket{#1}}
+\newcommand{\norm}[2]{\|#1\|_{#2}}
+\newcommand{\setone}[2][1]{\set{#1\cld #2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% STYLING AND SPACING
+
+%\newcommand{\inlinetitle}[1]{\smallskip\noindent\textbf{#1.}\xspace}
+
+
+
+
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+%\makeatletter
+%\g@addto@macro\normalsize{%
+%\setlength{\abovecaptionskip}{-2pt}
+%\setlength{\belowcaptionskip}{12pt}
+%\setlength\abovedisplayskip{3pt}
+%\setlength\belowdisplayskip{3pt}
+%\setlength\abovedisplayshortskip{3pt}
+%\setlength\belowdisplayshortskip{3pt}
+%}
+%\makeatother
+
+\newcounter{dummy} 
+\newcounter{dummy1} 
+\newcounter{dummy2}
+\newcounter{dummy3} 
+\newcounter{dummy4}
+\newcounter{dummy5} 
+\newcounter{dummy6}
+\newcounter{dummy7}
+%\numberwithin{dummy}{section}
+
+\usepackage[thmmarks,amsmath]{ntheorem}
+%\theorempreskip{1pt}
+%\theorempostskip{1pt}
+
+%\theoremstyle{plain}
+%\theorembodyfont{\normalfont}
+%\theoremseparator{.}
+%\let\definition\relax
+%\theoremsymbol{\ensuremath{\square}}
+%\newtheorem{definition}{Definition}
+
+
+\let\proposition\relax
+\let\theorem\relax
+\let\lemma\relax
+\let\definition\relax
+\theoremseparator{.}
+\theorembodyfont{\itshape}
+\theoremsymbol{$\triangleleft$}
+\newtheorem{theorem}[dummy]{Theorem}
+\newtheorem{definition}[dummy2]{Definition}
+\newtheorem{proposition}[dummy3]{Proposition}
+
+\usepackage{booktabs}
+\usepackage{apptools}
+\usepackage{chngcntr}
+\newtheorem{lemma}[dummy1]{Lemma}
+
+\let\remark\relax
+\let\example\relax
+%\let\example*\relax
+\theorembodyfont{\normalfont}
+\newtheorem{example}[dummy4]{Example}
+\newtheorem{remark}[dummy5]{Remark}
+%\newtheorem{example*}[dummy4]{Example}
+
+
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\let\proof\relax
+\theoremseparator{.}
+\theoremsymbol{\ensuremath{\dashv}}
+\newtheorem{proof}[dummy6]{Proof}
+
+
+\qedsymbol{\ensuremath{\dashv}}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% save-place: t
+%%% End:

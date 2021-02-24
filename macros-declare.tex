@@ -1,0 +1,190 @@
+\usepackage{tkz-graph}
+\usetikzlibrary{matrix,automata,arrows,calc,fit}
+\usetikzlibrary{decorations.pathreplacing,positioning}
+
+
+\definecolor{deepblue}{HTML}{0C3B80}
+\definecolor{deepgreen}{HTML}{2EA601}
+%\definecolor{deepblue}{HTML}{232F3E}
+%\definecolor{chaptercolor}{HTML}{232F3E}{0.8}
+\definecolor{lightOrange}{HTML}{FFA03C}
+\definecolor{darkOrange}{HTML}{F1800A}
+\definecolor{lightBlue}{HTML}{0174CD}
+\definecolor{greenF}{HTML}{2CBB5C}
+\definecolor{cyan}{HTML}{86A6D5}
+\definecolor{darkred}{HTML}{8B0000}
+
+\usetikzlibrary{automata,positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc, positioning}
+\usetikzlibrary{arrows.meta,decorations.markings}
+
+
+
+%%%%%%%%%%%%%%%%%%%%% TIKZS MACROS
+\def\DTZU {2ex}
+
+\tikzstyle{taskfg} = [
+  text=deepblue,
+]
+
+\tikzstyle{taskbg} = [
+  fill=cyan!50,
+]
+
+\tikzstyle{taskline} = [
+  draw=deepblue,
+]
+
+\tikzstyle{taskstyle} = [
+  ultra thick,
+  taskfg,
+  taskbg,
+  taskline
+]
+
+\tikzstyle{task} = [
+  rectangle,
+  minimum width=12mm,
+  minimum height=10mm,
+  taskstyle
+]
+
+\tikzstyle{smalltask} = [
+  rectangle,
+  minimum width=8mm,
+  minimum height=6mm,
+  taskstyle,
+  very thick
+]
+
+\tikzstyle{constraint} = [
+  ultra thick,
+  taskline,
+  taskbg
+]
+
+\tikzstyle{response} = [
+  constraint,
+  *-triangle 60
+]
+
+\tikzstyle{precedence} = [
+  constraint,
+  *triangle 60-
+]
+\tikzstyle{succession} = [
+  constraint,
+  *triangle 60-*
+]
+
+
+\tikzstyle{respondedexistence} = [
+  constraint,
+  *-
+]
+
+\tikzstyle{coexistence} = [
+  constraint,
+  *-*
+]
+
+\tikzstyle{negationconstraint} = [
+  constraint,
+  postaction={decorate,decoration={markings,
+   mark=at position .5 with {\arrow[xshift=0.15*\DTZU]{Bar[width=1.5*\DTZU]}},
+   mark=at position .5 with {\arrow[xshift=-0.15*\DTZU]{Bar[width=1.5*\DTZU]}}
+  }}
+]
+
+\tikzstyle{notcoexistence} = [
+  negationconstraint,
+  coexistence,
+]
+
+\tikzstyle{negationresponse} = [
+  constraint,
+  response,
+  postaction={decorate,decoration={markings,
+   mark=at position .5 with {\arrow[xshift=0.15*\DTZU]{Bar[width=1.5*\DTZU]}},
+   mark=at position .5 with {\arrow[xshift=-0.15*\DTZU]{Bar[width=1.5*\DTZU]}}
+  }}
+]
+
+\tikzstyle{negationsuccession} = [
+  constraint,
+  succession,
+  postaction={decorate,decoration={markings,
+   mark=at position .65 with {\arrow[xshift=0.15*\DTZU]{Bar[width=1.5*\DTZU]}},
+   mark=at position .65 with {\arrow[xshift=-0.15*\DTZU]{Bar[width=1.5*\DTZU]}}
+  }}
+]
+
+
+
+\tikzstyle{exclusivechoice} = [
+  constraint,
+  -,
+  postaction={decorate,decoration={markings,
+   mark=at position .5 with {\arrow[xshift=0.5*\DTZU]{Diamond[width=1*\DTZU]}} 
+  }}
+]
+
+\tikzstyle{choice} = [
+  constraint,
+  -,
+  postaction={decorate,decoration={markings,
+   mark=at position .5 with {\arrow[xshift=0.5*\DTZU]{Diamond[width=1*\DTZU]}},
+    mark=at position .5 with {\arrow[xshift=0.28*\DTZU,white,scale=.6]{Diamond[width=1*\DTZU]}} 
+  }}
+]
+
+
+
+
+
+
+
+\tikzstyle{circ} = [
+  solid,
+  text=black
+]
+
+\tikzstyle{timeline} = [
+  -,
+  thin,
+  ]
+  
+\tikzstyle{snapshot} = [
+  -,
+  thin,
+  densely dotted,
+  ]
+  
+
+\tikzstyle{objnode} = [
+  inner sep=2pt,
+  circle,
+  ultra thick,
+]
+
+\tikzstyle{tobj} = [
+  objnode,
+  taskfg,
+  taskbg,
+  taskline
+]
+
+\tikzstyle{cobj} = [
+  objnode,
+  classfg,
+  classbg,
+  classline
+]
+
+\tikzstyle{link} = [
+  solid,
+  -angle 60
+]
+%%%%%%%%%%%%%%%%%%%%%
