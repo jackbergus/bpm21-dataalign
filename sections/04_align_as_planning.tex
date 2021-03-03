@@ -1,0 +1,21 @@
+\section{Declarative Conformance Checking}\label{sec:dccap}
+Briefly, the syntax of the LTL$_f$ language is defined as follows:
+\[\varphi::=\phi\;|\;\neg \varphi\;|\;\varphi_1\wedge\varphi_2\;|\;\Next \varphi_1\;|\;\varphi_1\Until\varphi_2\]
+where $\phi\in \mathsf{Prop}$, while $\Next$ and $\Until$ are respectively the \textit{next} and \textit{until} operators. This is the functionally complete set of connectives, with which we can express  disjunction ($\vee$),  logical implication ($\Rightarrow$),  equivalence ($\Leftrightarrow$), globally ($\Globally$), finally ($\Finally$), weak until ($\Wntil$), and release ($\Release$) as in \cite{XuLZ17a}. Given a finite trace $\sigma=\sigma_1\cdots \sigma_n$ such that $\sigma_i\in\mathsf{Prop}$ and of length $|\sigma|=n$, the satisfiability of $\varphi$ at the step $1\leq i\leq |\sigma|$, namely $\sigma_i\vDash \varphi$, is inductively defined as follows:
+\begin{itemize}
+	\item $\sigma_i\vDash\phi$ iff. $\sigma_i\vDash\phi$, $\phi\in \mathsf{Prop}$
+	\item $\sigma_i\vDash\neg\varphi$ iff. $\sigma_i\not\vDash\varphi$
+	\item $\sigma_i\vDash\varphi_1\wedge\varphi_2$ iff. jointly $\sigma_i\vDash\varphi_1$ and $\sigma_i\vDash\varphi_2$
+	\item $\sigma_i\vDash\Next\varphi$ iff. $\sigma_{i+1}\vDash\varphi$ with $1\leq i< |\sigma|$
+	\item $\sigma_i\vDash\varphi_1\Until\varphi_2$ iff. it exists $i\leq j\leq |\sigma|$ such that $\sigma_j\vDash\varphi_2$ and, for each $i\leq k<j$, $\sigma_k\vDash\varphi_1$
+\end{itemize}
+We say that $\sigma$ satisfies $\varphi$, namely $\sigma\vDash\varphi$, if $\sigma_1\vDash\varphi$. Given that any Data-Aware Declare clause can be expressed in terms of LTL$_f$ \cite{10.1007/978-3-642-40176-3_8}, any possible Data-Aware Declare model can be expressed as the conjunction of the LTL$_f$ representations of the Data-Aware Declare clauses within the model. Walking in the footsteps of \cite{XuLZ17a}, we consider insertions and deletions as possible repairs, while substitutions can be modeled by deletions followed by insertions. Synchronizations are \texttt{noops} requiring that a trace $\sigma$ at step $k$ contains a predicate $\phi$. 
+\begin{itemize}
+	\item synchronization $[\sigma_k\leftrightarrow \phi]$ aborts if $\sigma_k\neq\phi$, for  $1\leq k\leq |\sigma|$
+	\item deletion\,\, $[\#\sigma_k\leftarrow \phi]::= \sigma_1\cdots\sigma_{k-1}\sigma_{k}\cdots \sigma_n$,\,\,\, for $n=|\sigma|$, $1\leq k\leq n$, and $\phi=\sigma_k$
+	\item insertion $[@\sigma_k\leftarrow \phi]::= \sigma_1\cdots\sigma_{k-1}\phi\sigma_{k}\cdots \sigma_n$, for $n=|\sigma|$ and $1\leq k\leq n$
+\end{itemize}
+Therefore, any repair  of a trace $\sigma$ can be expressed in terms of a sequence of operations $\texttt{op}_1\cdots \texttt{op}_m$ which, when executed in appearance order, generate a novel trace $\tilde{\sigma}$ from $\sigma$. The amount of repairs can be numerically quantified using a cost function $\mathcal{C}$ returning zero for any synchronization and $1$ otherwise; therefore $cost(\sigma, \tilde{\sigma})$ returns the minimal number of non-synchronization operations\footnote{Formally, $cost(\sigma,\tilde{\sigma})=\min_{\substack{\texttt{op}_1\cdots \texttt{op}_m,\\(\texttt{op}_m\,\circ \cdots\circ\, \texttt{op}_1)(\sigma)=\tilde{\sigma}}}\sum_{1\leq i\leq m}\mathcal{C}(\texttt{op}_m)$} required to obtain $\tilde{\sigma}$ from $\sigma$. Therefore, the conformance checking of a log trace $\sigma$ against a Data-Aware Declare model represented as an LTL$_f$ formula $\varphi$ as in \cite{XuLZ17a} either returns $\sigma$ with cost zero if $\varphi\vDash\varsigma$ or, otherwise, returns a set of pairs $\Set{\braket{\tilde{\sigma},\texttt{op}_1\cdots\texttt{op}_m}_i}_{1\leq i\leq k, k\in\mathbb{N}}$, where\footnote{Formally, $\sigma\tilde{\vDash}\varphi = \Set{\braket{\tilde{\sigma},\texttt{op}_1\cdots\texttt{op}_m} | cost(\sigma,\tilde{\sigma}) = \min_\mu cost(\sigma,\mu),\;\tilde{\sigma}\vDash\varphi,\; (\texttt{op}_m\,\circ \cdots\circ\, \texttt{op}_1)(\sigma)=\tilde{\sigma}}$.} each trace $\tilde{\sigma}\in S$ is conformant to $\varphi$ and minimizes the alignment cost $cost(\sigma,\tilde{\sigma})$ via a repair sequence $\texttt{op}_1\cdots\texttt{op}_m$. We denote the output of such conformance checking as $\sigma\tilde{\vDash}\varphi$. 
+
+
+

@@ -1,5 +1,0 @@
-\section{Declare Constraints Ranking}
-
-Given that the minimum alignment cost for a Declare model $\DeclModel=(\Activities, \DeclConstr)$ over an arbitrary trace $\nonlogtrace$ can be determined by the best $\DeclModel$-trace $\logtrace\in\TraceOf{\DeclModel}$ \cite{LeoniMA12}, we can first associate to each $\logtrace\in\TraceOf{\DeclModel}$ all the Declare constraints $P\in\DeclConstr$ for which $\logtrace\vDash P$ via a function $\InvInterp{\logtrace}=\Set{P\in\DeclConstr | \logtrace\vDash P}$; then, 
-we can represent all the traces $\logtrace\in\TraceOf{\DeclModel}$ and $\nonlogtrace$ as vectors  in the Euclidean Space \cite{CAiSE21}, so that the alignment can be reduced to a k-nearest neighbor search of traces inducing a ranking over a similarity function $\mathcal{R}(\logtrace,\nonlogtrace)\in[0,1]$. At this point, we can rank the constraints in $\DeclConstr$ over $\nonlogtrace$ by ensembling the normalized similarities as follows:
-\[\mathcal{R}_\DeclConstr(P,\nonlogtrace)=1-\prod_{\substack{\logtrace\in\TraceOf{\DeclModel},\\ P\in\InvInterp{\logtrace}}}(1-\mathcal{R}(\logtrace,\nonlogtrace))\]

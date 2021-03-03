@@ -1,148 +1,162 @@
 \documentclass[runningheads]{llncs}
-
-\setlength{\paperheight}{232.8mm}
-\setlength{\paperwidth}{151.5mm}
-\setlength\voffset     {-23mm}
-\setlength\hoffset     {-34mm}
-
 %
-\usepackage{hyperref}
-\usepackage{multicol}
-\usepackage[final]{changes}
-\usepackage{url}
-\usepackage{amsmath}
-\usepackage{bm}
-\usepackage{multirow}
-\usepackage{tcolorbox}
-\usepackage{rotating}
-\usepackage{latexsym,amssymb,amsmath}
-\usepackage{makecell}
-\usepackage{xspace}
-\usepackage{paralist}
-\usepackage{wrapfig}
-\usepackage{adjustbox}
-\usepackage{cite}
-%\usepackage{times}
-\input{macros-common}
-\usepackage{todonotes}
-
-\input{neue_imports}
-\input{neue_macros}
-
-\input{macros}
-
 \usepackage{graphicx}
-\usepackage{actuarialsymbol2}
-\usepackage{upgreek}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[inline]{enumitem}
+\usepackage{braket}
+\usepackage{caption}
+\usepackage{subcaption}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+\renewcommand\UrlFont{\color{blue}\rmfamily}
 
-\usepackage{linegoal}
-\usepackage{changepage}
-\newlength{\previousLine}
-\newenvironment{UnknownEnvironment}
-{%
-	\setlength{\previousLine}{\linewidth}%
-	\addtolength{\previousLine}{-\linegoal}
-	\par\bigskip%
-	\bfseries%
-	\begin{adjustwidth}{0.5cm}{0cm}%
+\newcommand{\Sdeclare}[3]{\textsf{#1(}\texttt{#2},\;\texttt{#3}\textsf{)}}
+\newcommand{\Pfdeclare}[4]{\ensuremath{\textsf{#1(}\texttt{#2},\;#4,\;\texttt{#3}\textsf{)}}}
+\usepackage{amsmath,scalerel,amssymb}
+\newcommand{\Globally}{\ensuremath{\square}}
+\newcommand{\Finally}{\ensuremath{\lozenge}}
+\newcommand{\Next}{{\ensuremath\raisebox{0.25ex}{\text{\scriptsize$\bigcirc$}}}}
+\newcommand{\Until}{\ensuremath{\mathbin{\mathcal{U}}}}
+\newcommand{\Release}{\ensuremath{\mathbin{\mathcal{R}}}}
+\newcommand{\Wntil}{\ensuremath{\mathbin{\mathcal{W}}}}
+
+\usepackage{xparse}
+\NewDocumentCommand{\INTERVALINNARDS}{ m m }{
+	#1 {,} #2
+}
+\NewDocumentCommand{\interval}{ s m >{\SplitArgument{1}{,}}m m o }{
+	\IfBooleanTF{#1}{
+		\left#2 \INTERVALINNARDS #3 \right#4
+	}{
+		\IfValueTF{#5}{
+			#5{#2} \INTERVALINNARDS #3 #5{#4}
+		}{
+			#2 \INTERVALINNARDS #3 #4
+		}
 	}
-	{%
-	\end{adjustwidth}
-	\par\bigskip%
-	\hspace*{\previousLine}%
 }
 
-
-
 \begin{document}
-
-
 %
-\title{MAX-SAT over Data-Aware Declare Models}
-%\subtitle{\emph{Vision Paper}}
+\title{Contribution Title\thanks{Supported by organization x.}}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-%\author{
-%	Giacomo Bergami\inst{1} \and%
-%	Fabrizio Maria Maggi\inst{1} \and \dots}
-
-%\authorrunning{G.~Bergami, F.M.~Maggi, \dots}
+\author{Giacomo Bergami\inst{1}\orcidID{0000-0002-1844-0851} \and
+Fabrizio Maria Maggi\inst{1}\orcidID{0000-0002-9089-6896} \and
+Andrea Marrella\inst{2}\orcidID{0000-0002-1031-0374}}
+%
+\authorrunning{G. Bergami et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-%\institute{
-%	Free University of Bozen-Bolzano, Italy \\\email{gibergami@unibz.it,maggi@inf.unibz.it}
-	%\and
-	%University of Milano-Bicocca \\\email{rafael.penaloza@unimib.it}
-%}
-
-%\vspace{1.5cm}
-%
+\institute{Free University of Bozen-Bolzano, Italy \\
+\email{gibergami@unibz.it, maggi@inf.unibz.it}\\
+ \and
+Sapienza - University of Rome, Italy\\
+\email{marrella@diag.uniroma1.it}}
 %
 \maketitle              % typeset the header of the contribution
-\linespread{0.92}
-\vspace{-0.5cm}
-
+%
 \begin{abstract}
-%Conformance checking techniques verify whether the observed behavior recorded in an event log matches a modeled behavior. This type of analysis is crucial, because often real process executions deviate from the reference process models. Currently, one of the most common approaches to conformance checking is based on trace alignments.
-%Alignments provide sophisticated diagnostics that pinpoint deviations in a trace with respect to a process model and their severity. However, approaches based on trace alignments use crisp process models as reference and recent probabilistic conformance checking approaches check the degree of conformance of an event log with respect to a stochastic process model instead of finding trace alignments. In this paper, for the first time, we provide a conformance checking approach based on trace alignments using stochastic Workflow nets. Conceptually, this requires to handle the two possibly contrasting forces of the cost of the alignment on the one hand and the likelihood of the model trace with respect to which the alignment is computed on the other.
-%If the cost of the alignment is too high, even if the considered model trace is very likely, applying too many changes in the original trace is not always the best option. The proposed approach has been evaluated using a real-life event log pertaining to the treatment of the sepsis disease in a hospital.
-%\vspace{-0.3cm}
+Alignments are a conformance checking strategy quantifying the amount of deviations of a trace with respect to a process model, as well as providing optimal repairs for making the trace compliant to the process model. Data-aware alignment strategies are also gaining momentum, as they provide richer descriptions for deviance detection. Nonetheless, no technique is currently able to provide trace repair solutions in the context data-aware declarative process models: current approaches either focus on procedural models, or numerically quantify the deviance with no proposed repair strategy. After discussing our working hypotheses, we show how such problem can be reduced to a data agnostic trace alignment problem, while ensuring the correctness of such approach. We also show how we can leverage such approach to repair both event traces as well as event and trace data. Last, we discuss the limitations of such proposed approach and propose some future works for generalizing the proposed approach. 
+
+\keywords{First keyword  \and Second keyword \and Another keyword.}
 \end{abstract}
 
-%\keywords{[TODO]}
-
-\section{Introduction}
-
-
-The \textbf{\color{blue}alignment problem}
-\begin{UnknownEnvironment}
-	Quindi, non siamo interessati alla soddisfacibilità tout court, ma all'impiego della soddisfacibilità per stimare l'allineamento di una traccia $\sigma$ di un log $\mathcal{L}$, come per l'allineamento classico. {\color{blue}È per questo motivo dunque che non siamo interessati alla soddisfacibilità di tutte le possibili tracce per il log, perché questo lavoro esiste già in letteratura \cite{LiPZVR20}, anche se non ancora Data Aware come \cite{8944989}. Quello che manca ad ora è la definizione di allineamenti con modelli Data Aware.}
-\end{UnknownEnvironment}
-for a log trace against a Declare Model 
-\begin{UnknownEnvironment}
-Quindi, non siamo interessati a tutte le possibili formule LTL$_f$, ma a quelle la cui semantica è esprimibile tramite Delcare Model.
-\end{UnknownEnvironment}
-can be formulated as a MAX-SAT, as the latter determines the maximum number of clauses  that are satisfied. 
-\begin{UnknownEnvironment}
-	Questo è possibile perché, allo stato attuale delle cose, non esistono condizioni di join tra template Declare. Quindi,
-	ciascuna formula declare è soddisfacibile indipendentemente dalla semantica delle altre formule. {\color{red}Qual è insieme di formule Declare che è ragionevole assumere come base di partenza?}
-\end{UnknownEnvironment}
-Albeit MAX-SAT is generally an NP-Complete problem, finite models enable tractable solutions.
-\begin{UnknownEnvironment}
-	\color{blue}Come ricordato nel meeting del 23 Feb., lo scopo del paper è di mostrare come gli approcci tramite match sui grafi sono plausibili per fornire un'interpretazione dell'allineamento della traccia col modello. Dato che uno di questi algoritmi (\S\ref{ref:agm}) è sempre decidibile in tempo polinomiale, voglio motivare che questo algoritmo fornisce una caratterizzazione accettabile dell'approssimazione della soddisfacibilità tramite allineamento.
-\end{UnknownEnvironment}
-
-
-\input{sections/00_propositionalization}
+\input{sections/01_introduction.tex}
+\input{sections/02_motivating_example.tex}
+\input{sections/03_work_assumpt.tex}
+\input{sections/04_align_as_planning.tex}
+\input{sections/05_pipeline.tex}
 %
-%\input{sections/01_introduction}
-%%\input{sections/02_preliminaries}
-%\input{sections/03_embedding}
-%\input{sections/04_approxRegMatch}
-\input{sections/05_modelMining}
-%%\input{sections/03_embedding}
-%%\input{sections/03_embedding_2}
-%%\input{sections/05_experiment}
-%%\input{sections/06_conclusion}
-
-
+%
+%
+%\section{First Section}
+%\subsection{A Subsection Sample}
+%Please note that the first paragraph of a section or subsection is
+%not indented. The first paragraph that follows a table, figure,
+%equation etc. does not need an indent, either.
+%
+%Subsequent paragraphs, however, are indented.
+%
+%\subsubsection{Sample Heading (Third Level)} Only two levels of
+%headings should be numbered. Lower level headings remain unnumbered;
+%they are formatted as run-in headings.
+%
+%\paragraph{Sample Heading (Fourth Level)}
+%The contribution should contain no more than four levels of
+%headings. Table~\ref{tab1} gives a summary of all heading levels.
+%
+%\begin{table}
+%\caption{Table captions should be placed above the
+%tables.}\label{tab1}
+%\begin{tabular}{|l|l|l|}
+%\hline
+%Heading level &  Example & Font size and style\\
+%\hline
+%Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
+%1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
+%2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
+%3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
+%4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
+%\hline
+%\end{tabular}
+%\end{table}
+%
+%
+%\noindent Displayed equations are centered and set on a separate
+%line.
+%\begin{equation}
+%x + y = z
+%\end{equation}
+%Please try to avoid rasterized images for line-art diagrams and
+%schemas. Whenever possible, use vector graphics instead (see
+%Fig.~\ref{fig1}).
+%
+%\begin{figure}
+%\includegraphics[width=\textwidth]{fig1.eps}
+%\caption{A figure caption is always placed below the illustration.
+%Please note that short captions are centered, while long ones are
+%justified by the macro package automatically.} \label{fig1}
+%\end{figure}
+%
+%\begin{theorem}
+%This is a sample theorem. The run-in heading is set in bold, while
+%the following text appears in italics. Definitions, lemmas,
+%propositions, and corollaries are styled the same way.
+%\end{theorem}
+%%
+%% the environments 'definition', 'lemma', 'proposition', 'corollary',
+%% 'remark', and 'example' are defined in the LLNCS documentclass as well.
+%%
+%\begin{proof}
+%Proofs, examples, and remarks have the initial word in italics,
+%while the following text appears in normal font.
+%\end{proof}
+%For citations of references, we prefer the use of square brackets
+%and consecutive numbers. Citations using labels or the author/year
+%convention are also acceptable. The following bibliography provides
+%a sample reference list with entries for journal
+%articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
+%book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
+%and a homepage~\cite{ref_url1}. Multiple citations are grouped
+%\cite{ref_article1,ref_lncs1,ref_book1},
+%\cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
 \bibliographystyle{splncs04}
-\bibliography{biblio3}
-%,bibliography2,references,libraryFiltered,main,Bibliography-CDC,DiCiccio,biblio}
-
-\appendix 
-
-
-\counterwithin{lemma}{section}
-\renewcommand{\thelemma}{\thesection\arabic{lemma}}
-
-\section{Appendix}
-
-
-
+ \bibliography{mybibliography}
+%
 
 \end{document}

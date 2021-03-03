@@ -43,7 +43,7 @@
 				{$\bot\;\mathcal{R}\;(\neg p_3\vee  p_1\vee p_2)\wedge \top\;\mathcal{U}\; p_1$};
 
 
-\node (CTraces) [fill=red!25,text width=3.3cm,draw=black,above=1.5cm of LTLf4] 
+\node (CTraces) [fill=red!25,text width=2cm,draw=black,above=1.5cm of LTLf4] 
                 {\texttt{1:\quad B\;$p_2$\;$p_1$}\\
                  \texttt{2:}\quad $p_2$\;$p_3$};
 
@@ -59,8 +59,8 @@
 %\node[draw=black,fit=(SA) (ST) (W1) (W2) (bot) (W3)] (NFA) {};
 
 \node (Traces) [fill=red!25,text width=3.3cm,draw=black,above=1.3cm of Clause] 
-               {\texttt{1:\quad b\{x=1\}a\{x=6\}a\{x=4\}}\\
-               	\texttt{2:\quad a\{x=8\}a\{x=10\}}};
+               {\texttt{1:\quad B\{x=1\}A\{x=6\}A\{x=4\}}\\
+               	\texttt{2:\quad A\{x=8\}A\{x=10\}}};
 
 \draw[->] (LTLf3) -- (LTLf4) node[midway,below]  {\textit{atomize}};
 
