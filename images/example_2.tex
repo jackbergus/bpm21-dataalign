@@ -40,7 +40,7 @@
 \draw[->,densely dotted] (tab1) -- ($(LTLf2)!0.4!(LTLf3)$);
 
 \node (LTLf4) 	[right=2cm of LTLf3,fill=blue!25,text width=4cm,rounded corners=.3cm,draw=black] 
-				{$\bot\;\mathcal{R}\;(\neg p_3\vee  p_1\vee p_2)\wedge \top\;\mathcal{U}\; p_1$};
+				{$\bot\mathcal{R}(\neg\texttt{A}\vee(\top\mathcal{U}(p_2\vee p_3)))\wedge\top\mathcal{U} p_3$};
 
 \node (Traces) [fill=red!25,text width=3.3cm,draw=black,above=1.3cm of Clause] 
 			   {\texttt{1:\quad B\{x=1\}A\{x=6\}A\{x=4\}}\\
