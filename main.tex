@@ -15,7 +15,7 @@
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 
 \newcommand{\Sdeclare}[3]{\textsf{#1(}\texttt{#2},\;\texttt{#3}\textsf{)}}
-\newcommand{\Pfdeclare}[4]{\ensuremath{\textsf{#1(}\texttt{#2},\;#4,\;\texttt{#3}\textsf{)}}}
+\newcommand{\Pfdeclare}[4]{\ensuremath{\textsf{#1(}\texttt{#2},\;\texttt{#3},\;#4\textsf{)}}}
 \usepackage{amsmath,scalerel,amssymb}
 \newcommand{\Globally}{\ensuremath{\square}}
 \newcommand{\Finally}{\ensuremath{\lozenge}}
@@ -39,7 +39,12 @@
 		}
 	}
 }
-
+\makeatletter
+\newcommand\xleftrightarrow[2][]{%
+	\ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+\newcommand\longleftrightarrowfill@{%
+	\arrowfill@\leftarrow\relbar\rightarrow}
+\makeatother
 \begin{document}
 %
 \title{Aligning Data-Aware Declarative Process Models and Event Logs}
@@ -48,19 +53,20 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Giacomo Bergami\inst{1}\orcidID{0000-0002-1844-0851} \and
-Fabrizio Maria Maggi\inst{1}\orcidID{0000-0002-9089-6896} \and
-Andrea Marrella\inst{2}\orcidID{0000-0002-1031-0374} \and Marco Montali\inst{1}\orcidID{0000-0002-8021-3430}}
+%%\author{Giacomo Bergami\inst{1}\orcidID{0000-0002-1844-0851} \and
+%%Fabrizio Maria Maggi\inst{1}\orcidID{0000-0002-9089-6896} \and
+%%Andrea Marrella\inst{2}\orcidID{0000-0002-1031-0374} \and Marco Montali\inst{1}\orcidID{0000-0002-8021-3430}}
+
 %
 \authorrunning{G. Bergami et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Free University of Bozen-Bolzano, Italy \\
-\email{gibergami@unibz.it, \{maggi,montali\}@inf.unibz.it}\\
- \and
-Sapienza - University of Rome, Italy\\
-\email{marrella@diag.uniroma1.it}}
+%%\institute{Free University of Bozen-Bolzano, Italy \\
+%%\email{gibergami@unibz.it, \{maggi,montali\}@inf.unibz.it}\\
+%% \and
+%%Sapienza - University of Rome, Italy\\
+%%\email{marrella@diag.uniroma1.it}}
 %
 \maketitle              % typeset the header of the contribution
 %
@@ -72,6 +78,7 @@ Alignments are a conformance checking strategy quantifying the amount of deviati
 
 \input{sections/01_introduction.tex}
 \input{sections/02_motivating_example.tex}
+
 \input{sections/03_work_assumpt.tex}
 \input{sections/04_align_as_planning.tex}
 \input{sections/05_pipeline.tex}
