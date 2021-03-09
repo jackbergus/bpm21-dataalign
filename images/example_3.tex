@@ -20,16 +20,16 @@
 %				 $\lozenge(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
 				
 %% Conversion to NNF				
-\node (LTLf2) 	[right=2cm of Clause,fill=blue!25,text width=3.5cm,rounded corners=.3cm,draw=black] 
+\node (LTLf2) 	[right=2cm of Clause,fill=blue!25,text width=3.5cm,rounded corners=.3cm,draw=black,label=above left:{$\varphi_{\mathcal{M}}$}] 
 				{$\bot\; \mathcal{R}\; (\neg\texttt{A} \vee (\top\;\mathcal{U}\;(\texttt{B}\wedge \texttt{B}.x>0)))$\\
-				 $\top\;\mathcal{U}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
+				 $\wedge\;\;\top\;\mathcal{U}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
 \draw[->] (Clause) -- (LTLf2) node[midway,above] {Declare2LTL$_f$};
 %\draw[->] (LTLf1) --  (LTLf2) node[midway,above] {\textit{nnf}};
 
 %% Data predicates decomposition
 \node (LTLf3) 	[right=1.5cm of LTLf2,fill=blue!25,text width=5.5cm,rounded corners=.3cm,draw=black] 
 				{$\bot\; \mathcal{R}\; (\neg\texttt{A} \vee (\top\;\mathcal{U}\;(\texttt{B}\wedge \left(0<\texttt{B}.x\leq 3\vee \texttt{B}.x>3\right))))$\\
-				 $\top\;\mathcal{U}\;(\texttt{B}\wedge \texttt{B}.x>3)$};
+				 $\wedge\;\;\top\;\mathcal{U}\;(\texttt{B}\wedge \texttt{B}.x>3)$};
 \draw[->] (LTLf2) --  (LTLf3) node[midway,above] {\textit{decompose}};
 
 \node (tab1) [ shape=rectangle,draw] at ($(LTLf2)!0.3!(LTLf3)+(0,2)$) {
@@ -45,14 +45,14 @@
 };
 \draw[->,densely dotted] (tab1) -- ($(LTLf2)!0.4!(LTLf3)$);
 
-\node (LTLf4) 	[right=2cm of LTLf3,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black] 
+\node (LTLf4) 	[right=2cm of LTLf3,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black,label=above right:{$\varphi_{\mathcal{M}}'$}] 
 				{$\bot\mathcal{R}(\neg\texttt{A}\vee(\top\mathcal{U}(\bigvee_{4\leq i\leq9}p_i)))\wedge\top\mathcal{U} p_8$};
 
 \node (Traces) [fill=red!25,text width=3.9cm,draw=black,above=3cm of Clause,label=above left:{$\mathcal{L}$}] 
 			   {\texttt{1:\quad B\{x=1,y=0\}A\{x=6\}A\{x=4\}}\\
 				\texttt{2:\quad A\{x=8\}B\{x=10,y=0\}}};
 
-\node (CTraces) [fill=red!25,text width=2cm,draw=black,above=3.2cm of LTLf4] 
+\node (CTraces) [fill=red!25,text width=2cm,draw=black,above=3.2cm of LTLf4,label=above right:{$T$}] 
                 {\texttt{1:\quad $p_5$\;\texttt{A\;A}}\\
                  \texttt{2:\quad A}\;$p_8$};
 
