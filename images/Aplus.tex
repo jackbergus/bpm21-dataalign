@@ -9,13 +9,26 @@
 	\thickmuskip=0mu
 	\node[state,initial] (SA) {$s_1$};
 	\path (SA) edge[loop] node[midway,above] (W1) {$\Sigma\backslash\{p_8\}$} (SA);
+	
+	\path (SA) edge[in=225,out=315,looseness=8,red] node[midway,below]  {$\{\textit{del\_}\phi\;\;|\;\phi\in\Sigma\cup\Sigma_t\}$} (SA);
 	\node[state,accepting,right =2cm of SA] (ST) {$s_2$};
 	\path (ST) edge[loop] node[midway,above] (W2) {$\Sigma\backslash\{\texttt{A}\}$} (ST);
 	\draw[->] (SA) -- (ST) node[midway,above] {$ \{p_8\}$};
-	\node[state,right=2cm of ST] (bot)  {$s_8$};
+	
+	\path (ST) edge[in=225,out=315,looseness=8,red] node[midway,below]  {$\{\textit{del\_}\phi\;\;|\;\phi\in\Sigma\cup\Sigma_t\}$} (ST);
+	
+	\draw[->,blue] (SA) edge[bend left]  node[midway,above,sloped] {$ \{\textit{ins\_}p_8\}$} (ST);
+	\node[state,right=3cm of ST] (bot)  {$s_8$};
 	\draw[->] (ST) edge [bend left] node[midway,above,sloped] {$\{\texttt{A}\}$}  (bot)  ; 
+	\draw[->,blue] (ST) edge [bend left=70] node[midway,above,sloped] {$\{\textit{ins\_}\texttt{A}\}$}  (bot)  ; 
 	\draw[->] (bot) 
 	edge [bend left] node[midway,below,sloped] {$\{p_i|4\leq i\leq 9\}$} (ST)  ;
+	
+	
+	\draw[->,blue] (bot) -- node[midway,above,sloped] {$\{\textit{ins\_}p_i|4\leq i\leq 9\}$} (ST)  ;
+	
 	\draw (bot) to [loop] node[above] (W3) {$\Sigma\backslash\{p_i|4\leq i\leq 9\}$} (bot);
+	
+	\path (bot) edge[in=225,out=315,looseness=8,red] node[midway,below]  {$\{\textit{del\_}\phi\;\;|\;\phi\in\Sigma\cup\Sigma_t\}$} (bot);
 	\end{tikzpicture}
 \end{document}
