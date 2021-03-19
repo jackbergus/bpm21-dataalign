@@ -42,7 +42,7 @@ Such constraints express either positive (or negative) dependencies between two 
 
 Declare has been extended to include conditions over data in the Declare constraints \cite{}. In the context of this paper, we will consider two types of data predicates $\phi^d$ (\textit{conditions}) decorating activations (a.k.a.\ activation conditions) and targets (a.k.a.\ target conditions), respectively.
 %The conditions over the activation (or target) labels \texttt{a} can be expressed via predicates $\phi_{\texttt{a}}$ \cite{SchonigCMM16,LenoDM18}.
-While activation conditions must be valid when an event exhibiting the activation label occurs, target conditions impose value limitations on the payload of events containing the target label. 
+While activation conditions must be valid when an event exhibiting the activation label occurs, target conditions impose value limitations on the payload of events containing the target label.
 
 
 We can indicate an atom $\lambda(\sigma_i)=\texttt{a}$ for $\texttt{a}\in\textsf{Act}$ and for a given event $\sigma_i$ to be assessed as $\phi_\texttt{a}$, while $\phi^d$ is a propositional formula containing as atoms either the universal truth ($\top$), or the falsehood ($\bot$), or a binary relation ``$\texttt{a}.k\;\Re\;c$'', where $c$ is a constant value representing either a number or a string, $\Re$ is either an equality or a precedence/subsequent relation over values in $V$ or their negation, and $k\in K$ acts as a placeholder for $\varsigma(\sigma_i)(k)$, where $\varsigma(\sigma_i)$ is the payload associated to the event $\sigma_i$ and $k$ is associated to a value $\sigma(\sigma_i)(k)$. E.g., ``$\texttt{RP}.\textit{quality}\leq 3$'' is formally represented as $\varsigma(\sigma_i)(k)\leq 3$ for any event $\sigma_i$ having $\lambda(\sigma_i)=\texttt{RP}$.  This is a widely adopted assumption, that spans from data-aware procedural models \cite{MultiPerspective} to data-aware declarative models \cite{10.1007/978-3-642-40176-3_8}. Furthermore, this assumption can be also adapted to categorical data, as strings are ordered via lexicographical orderings over the single characters \cite{MultiPerspective}. We denote the \textit{compound conditions}, namely the conjunction of label requirements and data conditions, as $\psi=\phi_{\texttt{a}}\wedge \phi^d$.
@@ -67,7 +67,7 @@ and $\psi_1 \lsince \psi_2$ means that $\psi_1$ has held sometime in the past an
 \textbf{Template} & \textbf{LTL$_f$ Semantics} \\
 \midrule
 existence & $\top \rightarrow \lfuture (\phi_{\texttt{a}} \textcolor{gray}{\wedge \phi^d}) \vee \lonce (\phi_{\texttt{a}} \textcolor{gray}{\wedge \phi^d}))$ \\
-\midrule  
+\midrule
 responded existence  & $\lglobally( (\phi_{\texttt{a}} \textcolor{gray}{\wedge \phi^d}) \rightarrow (\lonce (\phi_{\texttt{b}} \textcolor{gray}{\wedge \phi^d}) \vee \lfuture (\phi_{\texttt{b}} \textcolor{gray}{\wedge \phi^d})))$ \\
 \midrule
 response &  $\lglobally(  (\phi_{\texttt{a}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lfuture (\phi_{\texttt{b}} \textcolor{gray}{\wedge \phi^d}))$ \\
@@ -93,7 +93,7 @@ not chain precedence  & $\lglobally( (\phi_{\texttt{b}} \textcolor{gray}{\wedge 
 
 
 %Even if current literature  considers \textit{correlation} conditions between activations and targets \cite{SchonigCMM16}, we will not model such
-constraints as previously discussed in \S\ref{sec:mot}. Such constraints can be represented by either an intuitive graphical representation, which makes them easy to use and interpret for process analysts, or with a formal semantics \cite{LeoniMA12}.
+%constraints as previously discussed in \S\ref{sec:mot}. Such constraints can be represented by either an intuitive graphical representation, which makes them easy to use and interpret for process analysts, or with a formal semantics \cite{LeoniMA12}.
 
 \subsection{Automated Planning}\label{ssec:ap}
 Planning systems are problem-solving algorithms, modelling a problem as a set of possible configurations that can be reached through a sequence of actions \cite{MaggiMCA18}. Planning systems such as PDDL allow us to formulate such problems as $\mathcal{P}=(I,G,\mathcal{P}_\mathcal
