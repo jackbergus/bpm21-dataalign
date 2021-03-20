@@ -21,15 +21,15 @@
 				
 %% Conversion to NNF				
 \node (LTLf2) 	[right=2cm of Clause,fill=blue!25,text width=3.5cm,rounded corners=.3cm,draw=black,label=above left:{$\varphi_{\mathcal{M}}$}] 
-				{$\bot\; \mathbf{R}\; (\neg\texttt{A} \vee (\top\;\mathbf{U}\;(\texttt{B}\wedge \texttt{B}.x>0)))$\\
-				 $\wedge\;\;\top\;\mathbf{U}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
+				{$\mathbf{G} (\neg\texttt{A} \vee (\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>0)))$\\
+				 $\wedge\;\;\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
 \draw[->] (Clause) -- (LTLf2) node[midway,above] {Declare2LTL$_f$} node[midway,below] {${\scriptscriptstyle \neg(\neg\phi\mathbf{U}\neg\phi)\equiv\phi\mathbf{R}\psi}$};
 %\draw[->] (LTLf1) --  (LTLf2) node[midway,above] {\textit{nnf}};
 
 %% Data predicates decomposition
-\node (LTLf3) 	[right=1.5cm of LTLf2,fill=blue!25,text width=5.5cm,rounded corners=.3cm,draw=black] 
-				{$\bot\; \mathbf{R}\; (\neg\texttt{A} \vee (\top\;\mathbf{U}\;(\texttt{B}\wedge \left(0<\texttt{B}.x\leq 3\vee \texttt{B}.x>3\right))))$\\
-				 $\wedge\;\;\top\;\mathbf{U}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
+\node (LTLf3) 	[right=1.5cm of LTLf2,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black] 
+				{$ \mathbf{G} (\neg\texttt{A} \vee (\mathbf{F}\;(\texttt{B}\wedge \left(0<\texttt{B}.x\leq 3\vee \texttt{B}.x>3\right))))$\\
+				 $\wedge\;\;\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
 \draw[->] (LTLf2) --  (LTLf3) node[midway,above] {\textit{decompose}};
 
 \node (tab1) [ shape=rectangle,draw] at ($(LTLf2)!0.3!(LTLf3)+(0,2)$) {
@@ -46,7 +46,7 @@
 \draw[->,densely dotted] (tab1) -- ($(LTLf2)!0.4!(LTLf3)$);
 
 \node (LTLf4) 	[right=2cm of LTLf3,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black,label=above right:{$\varphi_{\mathcal{M}}'$}] 
-				{$\bot\mathbf{R}(\neg\texttt{A}\vee(\top\mathbf{U}(\bigvee_{4\leq i\leq9}p_i)))\wedge\top\mathbf{U} p_8$};
+				{$\mathbf{G}(\neg\texttt{A}\vee(\mathbf{F}(\bigvee_{4\leq i\leq9}p_i)))\wedge\mathbf{F} p_8$};
 
 \node (Traces) [fill=red!25,text width=4cm,draw=black,above=3cm of Clause,label=above left:{$\mathcal{L}$}] 
 			   {$\sigma$\texttt{:\quad B\{x=1,y=0\}A\{x=6\}A\{x=4\}}\\

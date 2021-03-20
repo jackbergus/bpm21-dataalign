@@ -12,7 +12,7 @@ As per the previous considerations, we want to show that it is sufficient to pro
 In step 1, we exploit the usual conversion of each single Declare clause into an LTL$_f$ formula in the \textit{negated normal form} \cite{LiPZVR20}, where negation is possibly pushed inside atoms ``$\texttt{A}.k\;\Re\; c$'' by replacing $\Re$ with its negation.
 
 
-In step 2, for each compound condition $\psi=\phi_{\texttt{A}}\wedge \phi^d$ over labels $\texttt{A}\in\textsf{Act}$, we collect all the atoms in $\phi_d$ in the form ``$\texttt{A}.k\;\Re\; c$'' for $k\in K$ in a map $\mu(\texttt{A},k)$. Contextually, we represent each atom as an interval, and we \textit{decompose} them
+In step 2, for each compound condition $\psi=\texttt{A}\wedge \phi^d$ over labels $\texttt{A}\in\textsf{Act}$, we collect all the atoms in $\phi_d$ in the form ``$\texttt{A}.k\;\Re\; c$'' for $k\in K$ in a map $\mu(\texttt{A},k)$. Contextually, we represent each atom as an interval, and we \textit{decompose} them
 %
 %%We now describe the main contribution of the paper, namely a technique for computing log trace alignments over Declare data-aware models. Our approach takes as input \begin{enumerate*}[label=\emph{\alph*})]
 %	\item a Declare data-aware model $\mathcal{M}$ expressed as a set of instantiated templates,

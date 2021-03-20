@@ -41,11 +41,11 @@ Declare is a declarative process modeling language. A Declare model $\mathcal{M}
 Such constraints express either positive (or negative) dependencies between two events having labels in $\textsf{Act}$, or quantify the occurrence of events having a specific label in $\textsf{Act}$. In the first case, one of the two clause labels is called \textit{activation}, and the other \textit{target}; while testing a trace $\sigma$ for conformance over this clause, the presence of the activation label in $\sigma$ triggers the clause verification, requiring the (non-)execution of an event containing the target label in the same trace.
 
 Declare has been extended to include conditions over data in the Declare constraints \cite{BurattinMS16}. In the context of this paper, we will consider two types of data predicates $\phi^d$ (\textit{conditions}) decorating activations (a.k.a.\ activation conditions) and targets (a.k.a.\ target conditions), respectively.
-%The conditions over the activation (or target) labels \texttt{A} can be expressed via predicates $\phi_{\texttt{A}}$ \cite{SchonigCMM16,LenoDM18}.
+%The conditions over the activation (or target) labels \texttt{A} can be expressed via predicates $\texttt{A}$ \cite{SchonigCMM16,LenoDM18}.
 While activation conditions must be valid when an event exhibiting the activation label occurs, target conditions impose value limitations on the payload of events containing the target label.
 
 
-We can indicate an atom $\lambda(\sigma_i)=\texttt{A}$ for $\texttt{A}\in\textsf{Act}$ and for a given event $\sigma_i$ to be assessed as $\phi_\texttt{A}$, while $\phi^d$ is a propositional formula containing as atoms either the universal truth ($\top$), or the falsehood ($\bot$), or a binary relation ``$\texttt{A}.k\;\Re\;c$'', where $c$ is a constant value representing either a number or a string, $\Re$ is either an equality or a precedence/subsequent relation over values in $V$ or their negation, and $k\in K$ acts as a placeholder for $\varsigma(\sigma_i)(k)$, where $\varsigma(\sigma_i)$ is the payload associated to the event $\sigma_i$ and $k$ is associated to a value $\sigma(\sigma_i)(k)$. E.g., ``$\texttt{RP}.\textit{quality}\leq 3$'' is formally represented as $\varsigma(\sigma_i)(k)\leq 3$ for any event $\sigma_i$ having $\lambda(\sigma_i)=\texttt{RP}$.  This is a widely adopted assumption, that spans from data-aware procedural models \cite{MultiPerspective} to data-aware declarative models \cite{10.1007/978-3-642-40176-3_8}. Furthermore, this assumption can be also adapted to categorical data, as strings are ordered via lexicographical orderings over the single characters \cite{MultiPerspective}. We denote the \textit{compound conditions}, namely the conjunction of label requirements and data conditions, as $\psi=\phi_{\texttt{A}}\wedge \phi^d$.
+We can indicate an atom $\texttt{A}$ for each $\texttt{A}\in\textsf{Act}$ as a shorthand for $\lambda(\sigma_i)=\texttt{A}$ given and event $\sigma_i$ to be assessed, while $\phi^d$ is a propositional formula containing as atoms either the universal truth ($\top$), or the falsehood ($\bot$), or a binary relation ``$\texttt{A}.k\;\Re\;c$'', where $c$ is a constant value representing either a number or a string, $\Re$ is either an equality or a precedence/subsequent relation over values in $V$ or their negation, and $k\in K$ acts as a placeholder for $\varsigma(\sigma_i)(k)$, where $\varsigma(\sigma_i)$ is the payload associated to the event $\sigma_i$ and $k$ is associated to a value $\sigma(\sigma_i)(k)$. E.g., ``$\texttt{RP}.\textit{quality}\leq 3$'' is formally represented as $\varsigma(\sigma_i)(k)\leq 3$ for any event $\sigma_i$ having $\lambda(\sigma_i)=\texttt{RP}$.  This is a widely adopted assumption, that spans from data-aware procedural models \cite{MultiPerspective} to data-aware declarative models \cite{10.1007/978-3-642-40176-3_8}. Furthermore, this assumption can be also adapted to categorical data, as strings are ordered via lexicographical orderings over the single characters \cite{MultiPerspective}. We denote the \textit{compound conditions}, namely the conjunction of label requirements and data conditions, as $\psi=\texttt{A}\wedge \phi^d$.
 
 
 
@@ -66,24 +66,24 @@ and $\psi_1 \lsince \psi_2$ means that $\psi_1$ has held sometime in the past an
 \toprule
 \textbf{Template} & \textbf{LTL$_f$ Semantics} \\
 \midrule
-existence & $\top \rightarrow \lfuture (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \vee \lonce (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}))$ \\
+existence & $\top \rightarrow \lfuture (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \vee \lonce (\texttt{A} \textcolor{gray}{\wedge \phi^d}))$ \\
 \midrule
-responded existence  & $\lglobally( (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow (\lonce (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \vee \lfuture (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d})))$ \\
+responded existence  & $\lglobally( (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow (\lonce (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \vee \lfuture (\texttt{B} \textcolor{gray}{\wedge \phi^d})))$ \\
 \midrule
-response &  $\lglobally(  (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lfuture (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}))$ \\
-alternate response  & $ \lglobally( (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lnext(\neg (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \luntil (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}))$ \\
-chain response &  $\lglobally( (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lnext (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}))$ \\
+response &  $\lglobally(  (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lfuture (\texttt{B} \textcolor{gray}{\wedge \phi^d}))$ \\
+alternate response  & $ \lglobally( (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lnext(\neg (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \luntil (\texttt{B} \textcolor{gray}{\wedge \phi^d}))$ \\
+chain response &  $\lglobally( (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lnext (\texttt{B} \textcolor{gray}{\wedge \phi^d}))$ \\
 \midrule
-precedence &  $\lglobally( (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lonce (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}))$ \\
-alternate precedence & $ \lglobally( (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lyesterday(\neg (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \lsince (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}))$ \\
-chain precedence & $\lglobally( (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lyesterday (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}))$ \\
+precedence &  $\lglobally( (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lonce (\texttt{A} \textcolor{gray}{\wedge \phi^d}))$ \\
+alternate precedence & $ \lglobally( (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lyesterday(\neg (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \lsince (\texttt{A} \textcolor{gray}{\wedge \phi^d}))$ \\
+chain precedence & $\lglobally( (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \rightarrow \lyesterday (\texttt{A} \textcolor{gray}{\wedge \phi^d}))$ \\
 \midrule
 not responded existence  &
-$\lglobally( (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg (\lonce (\phi_{\texttt{B}}   \textcolor{gray}{\wedge \phi^d}) \vee \lfuture (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d})))$ \\
-not response  & $\lglobally(  (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lfuture (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}))$ \\
-not precedence & $\lglobally( (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lonce (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}))$ \\
-not chain response  & $\lglobally( (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lnext (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}))$ \\
-not chain precedence  & $\lglobally( (\phi_{\texttt{B}} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lyesterday (\phi_{\texttt{A}} \textcolor{gray}{\wedge \phi^d}))$ \\
+$\lglobally( (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg (\lonce (\texttt{B}   \textcolor{gray}{\wedge \phi^d}) \vee \lfuture (\texttt{B} \textcolor{gray}{\wedge \phi^d})))$ \\
+not response  & $\lglobally(  (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lfuture (\texttt{B} \textcolor{gray}{\wedge \phi^d}))$ \\
+not precedence & $\lglobally( (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lonce (\texttt{A} \textcolor{gray}{\wedge \phi^d}))$ \\
+not chain response  & $\lglobally( (\texttt{A} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lnext (\texttt{B} \textcolor{gray}{\wedge \phi^d}))$ \\
+not chain precedence  & $\lglobally( (\texttt{B} \textcolor{gray}{\wedge \phi^d}) \rightarrow \neg \lyesterday (\texttt{A} \textcolor{gray}{\wedge \phi^d}))$ \\
 \bottomrule
 \end{tabular}}
 \end{table*}
@@ -116,7 +116,7 @@ Recently, the planning community has developed several planners implementing sca
 \includegraphics[scale=0.9]{images/example_3_graph}
 %\caption{$\bot\Release(\neg\texttt{A}\vee(\top\Until(p_2\vee p_3)))\wedge\top\Until p_3$}
 %\label{fig:g2}
-	\caption{Representation of the LTL$_f$ formula $\lfuture(\texttt{A}\wedge\neg(\lfuture(p_4\vee p_5\vee p_6\vee p_7\vee p_8\vee p_9)))\wedge \lfuture p_8$  as a constraint automaton \cite{Westergaard11}, where $\Sigma$ contains all the non-$\bot$ and non-$\top$ atoms.}
+	\caption{Representation of the LTL$_f$ formula $\lglobally(\neg\texttt{A}\vee(\lfuture(p_4\vee p_5\vee p_6\vee p_7\vee p_8\vee p_9)))\wedge \lfuture p_8$  as a constraint automaton \cite{Westergaard11}, where $\Sigma$ contains all the non-$\bot$ and non-$\top$ atoms.}
 	\label{fig:g1g2}
 \end{figure}
 
@@ -133,6 +133,6 @@ In this section, we outline some working assumptions that can be inferred from t
 
 
 Given an appropriately chosen set $\Sigma$ of atoms, it is always possible to represent a trace $\sigma=\sigma_1\cdots \sigma_n$ as a finite sequence $t_\sigma=t_1\cdots t_n$, where, for $1\leq i\leq n$, $t_i$ is a unique atom $t_i\in\Sigma$ such that $\sigma_i\vDash t_i$ \cite{XuLZ17a,MaggiMCA18}.
-Contextually,  any LTL$_f$ formula $\varphi_{\mathcal{M}}$ representing a Declare model $\mathcal{M}$ can be represented as a deterministic finite-state automaton (DFA) $\mathcal{A}_{\varphi_{\tiny\mathcal{M}}}$ \cite{Westergaard11,Lydia} accepting all the sequences $t_\sigma$ from traces $\sigma$ satisfying $\varphi_{\mathcal{M}}$ (see Figure~\ref{fig:g1g2}). A DFA  $(\Sigma,Q,q_0,\rho,F)$ is defined \cite{0016921} over a finite set of states $Q$ reading as an input symbols from a finite alphabet $\Sigma$ that are consumed by traversing the automaton from a starting state $q_0\in Q$ via a transition function $\rho\colon Q\times \Sigma\to Q$; the input sequence is accepted once the input sequence is completely digested and an accepting state in $F\subseteq Q$ is reached through navigation. Given that in the non data-aware Declare scenario the atoms within LTL$_f$ could be either $\top$, or $\bot$, or $\psi=\phi_\texttt{A}$ for $\texttt{A}\in\textsf{Act}$, $\Sigma$ corresponds to the set of label requirements $\Set{\phi_\texttt{A}|\texttt{A}\in\textsf{Act}}\sim\textsf{Act}$, as each event is associated to one single label. For data-aware Declare we will extend $\Sigma$ o take into consideration propositional formulas representing data conditions.
+Contextually,  any LTL$_f$ formula $\varphi_{\mathcal{M}}$ representing a Declare model $\mathcal{M}$ can be represented as a deterministic finite-state automaton (DFA) $\mathcal{A}_{\varphi_{\tiny\mathcal{M}}}$ \cite{Westergaard11,Lydia} accepting all the sequences $t_\sigma$ from traces $\sigma$ satisfying $\varphi_{\mathcal{M}}$ (see Figure~\ref{fig:g1g2}). A DFA  $(\Sigma,Q,q_0,\rho,F)$ is defined \cite{0016921} over a finite set of states $Q$ reading as an input symbols from a finite alphabet $\Sigma$ that are consumed by traversing the automaton from a starting state $q_0\in Q$ via a transition function $\rho\colon Q\times \Sigma\to Q$; the input sequence is accepted once the input sequence is completely digested and an accepting state in $F\subseteq Q$ is reached through navigation. Given that in the non data-aware Declare scenario the atoms within LTL$_f$ could be either $\top$, or $\bot$, or $\psi=\texttt{A}$, $\Sigma$ corresponds to the activity set  $\textsf{Act}$, as each event is associated to one single label. For data-aware Declare we will extend $\Sigma$ o take into consideration propositional formulas representing data conditions.
 
 Last, we freely assume that all the events having the same label will always contain the same set of keys, with possibly differently associated values. This is a common assumption in the relational database field, where all the rows belonging to the same table contain the same number of values. We also freely assume that missing values are represented with specific values, such as an empty string, $-1$, $0$, $-\infty$, or $+\infty$, depending on the context. 
