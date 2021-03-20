@@ -1,5 +1,5 @@
 \section{Data-Aware Declarative Conformance Checking as Planning}\label{sec:dccap}
-In this section, we study the conformance checking problem of log traces $\sigma\in\mathcal{L}$ to a (Data-Aware) Declare model $\mathcal{M}$: walking on the footsteps of \cite{XuLZ17a,MaggiMCA18}, we firstly reduce such problem to a mere automaton sequence acceptation task via a specific set of atoms $\Sigma$ (\textit{Cf.} \S\ref{sec:wa}) generated from the compound atoms in  $\mathcal{M}$: the finite sequence $t_\sigma$ generated from the log trace $\sigma$ is going to be accepted by the automaton $\mathcal{A}_{\varphi_{\mathcal{M}}'}$ iff. $\sigma$ is conformant to the model $\mathcal{M}$ (\S\ref{sec:dadtap}). Next, we are going to code $t_\sigma$ and $\mathcal{A}_{\varphi_{\mathcal{M}}'}$ as specific automata (\S\ref{ssec:amfta}) that are going to be exploited by a PDDL planner to generate the minimally repaired sequence $\hat{t_\sigma}$ of $t_\sigma$ (\S\ref{ssec:eip}), out of which we generate the minimally repaired trace $\hat{\sigma}$ which is conformant from $\mathcal{M}$ (\S\ref{ssec:trerepair}).
+In this section, we study the conformance checking problem of log traces $\sigma\in\mathcal{L}$ to a (data-aware) Declare model $\mathcal{M}$: walking on the footsteps of \cite{XuLZ17a,MaggiMCA18}, we firstly reduce such problem to a mere automaton sequence acceptation task via a specific set of atoms $\Sigma$ (\textit{Cf.} \S\ref{sec:wa}) generated from the compound atoms in  $\mathcal{M}$: the finite sequence $t_\sigma$ generated from the log trace $\sigma$ is going to be accepted by the automaton $\mathcal{A}_{\varphi_{\mathcal{M}}'}$ iff. $\sigma$ is conformant to the model $\mathcal{M}$ (\S\ref{sec:dadtap}). Next, we are going to code $t_\sigma$ and $\mathcal{A}_{\varphi_{\mathcal{M}}'}$ as specific automata (\S\ref{ssec:amfta}) that are going to be exploited by a PDDL planner to generate the minimally repaired sequence $\hat{t_\sigma}$ of $t_\sigma$ (\S\ref{ssec:eip}), out of which we generate the minimally repaired trace $\hat{\sigma}$ which is conformant from $\mathcal{M}$ (\S\ref{ssec:trerepair}).
 
 
 %%the finite sequence $t_\sigma$ generated from $\sigma$ by replacing the events with the satisfied atoms in $\Sigma$ is going to be accepted by the automaton $\mathcal{A}_{}$
@@ -7,9 +7,9 @@ In this section, we study the conformance checking problem of log traces $\sigma
 
 %% a sequence acceptation task over an automaton by generating a specific set of atoms $\Sigma$ out of \dots
 
-%%In this section, we demonstrate that assessing the conformance checking of a log trace $\sigma$ containing payloads against a (Data-Aware) Declare model $\mathcal{M}$ can be reduced to the sequence acceptation problem in \S\ref{sec:wa} by choosing a specific set of atoms $\Sigma$ partitioning the data space (\S\ref{sec:dadtap}). Then, we can exploit $\Sigma$ to generate a string sequence $t_\sigma$ from $\sigma$ and a DFA for $\mathcal{M}$, from which we will generate two further automata accepting \cite{XuLZ17a,MaggiMCA18} (\S\ref{ssec:amfta}). Last, we can encode such technique as a planning problem in PDDL by adding a novel \texttt{replacement} planning action (\S\ref{ssec:eip}).
+%%In this section, we demonstrate that assessing the conformance checking of a log trace $\sigma$ containing payloads against a (data-aware) Declare model $\mathcal{M}$ can be reduced to the sequence acceptation problem in \S\ref{sec:wa} by choosing a specific set of atoms $\Sigma$ partitioning the data space (\S\ref{sec:dadtap}). Then, we can exploit $\Sigma$ to generate a string sequence $t_\sigma$ from $\sigma$ and a DFA for $\mathcal{M}$, from which we will generate two further automata accepting \cite{XuLZ17a,MaggiMCA18} (\S\ref{ssec:amfta}). Last, we can encode such technique as a planning problem in PDDL by adding a novel \texttt{replacement} planning action (\S\ref{ssec:eip}).
 
-%Given a Declare model $\mathcal{M}=\Set{c_i}_{1\leq i\leq m}$, we can always express $\mathcal{M}$ as one single LTL$_f$ formula $\varphi=\bigwedge_{1\leq i\leq m}\varphi_i$, where $\varphi_i$ is the LTL$_f$ translation of the Declare constraint $c_i\in\mathcal{M}$ \cite{LeoniMA12}. 
+%Given a Declare model $\mathcal{M}=\Set{c_i}_{1\leq i\leq m}$, we can always express $\mathcal{M}$ as one single LTL$_f$ formula $\varphi=\bigwedge_{1\leq i\leq m}\varphi_i$, where $\varphi_i$ is the LTL$_f$ translation of the Declare constraint $c_i\in\mathcal{M}$ \cite{LeoniMA12}.
 %
 %
 %
@@ -25,7 +25,7 @@ In this section, we study the conformance checking problem of log traces $\sigma
 %	\item $\sigma_i\vDash\Next\varphi$ iff. $\sigma_{i+1}\vDash\varphi$ with $1\leq i< |\sigma|$
 %	\item $\sigma_i\vDash\varphi_1\Until\varphi_2$ iff. it exists $i\leq j\leq |\sigma|$ such that $\sigma_j\vDash\varphi_2$ and, for each $i\leq k<j$, $\sigma_k\vDash\varphi_1$
 %\end{itemize}
-%Given the working assumptions in \S\ref{sec:wa} and the interpretation of the Declare templates in LTL$_f$, we can restrict $\phi$ to a propositional formulas containing either the universal truth or falsehoods, or predicates $\psi(\sigma_i)$ in the form $\phi_{\texttt{a}}(\sigma_i)\wedge \phi^d(\sigma_i)$.  We say that $\sigma$ satisfies $\varphi$, namely $\sigma\vDash\varphi$, if $\sigma_1\vDash\varphi$. Given that any  Declare clause can be expressed in terms of LTL$_f$ \cite{10.1007/978-3-642-40176-3_8}, any possible  Declare model can be expressed as the conjunction of the LTL$_f$ representations of the  Declare clauses within the model. 
+%Given the working assumptions in \S\ref{sec:wa} and the interpretation of the Declare templates in LTL$_f$, we can restrict $\phi$ to a propositional formulas containing either the universal truth or falsehoods, or predicates $\psi(\sigma_i)$ in the form $\phi_{\texttt{a}}(\sigma_i)\wedge \phi^d(\sigma_i)$.  We say that $\sigma$ satisfies $\varphi$, namely $\sigma\vDash\varphi$, if $\sigma_1\vDash\varphi$. Given that any  Declare clause can be expressed in terms of LTL$_f$ \cite{10.1007/978-3-642-40176-3_8}, any possible  Declare model can be expressed as the conjunction of the LTL$_f$ representations of the  Declare clauses within the model.
 %
 %\cite{XuLZ17a} showed that we can reduce the conformance checking strategy into a trace alignment problem by following those subsequent steps.
 %
@@ -35,15 +35,15 @@ In this section, we study the conformance checking problem of log traces $\sigma
 %\item  picking a transformation $\tau$ of traces $\sigma$ into strings $\tau(\sigma_1\cdots \sigma_n)=\tau(\sigma_1)\cdots \tau(\sigma_n)=t_1\cdots t_n$ in $\Sigma^*$,
 %\item  picking a bijection $p_i\xleftrightarrow{f}\psi_i$ between $p_i\in\Sigma$ and atoms $\psi_i$ in $\varphi$, and
 %\item  transforming $\varphi$ into a  DFA\footnote{}  $\mathcal{A}$
-%\end{enumerate*} %and a bijection $p_i\xleftrightarrow{f}\psi_i$ and $\varphi$ into a finite-state automaton 
+%\end{enumerate*} %and a bijection $p_i\xleftrightarrow{f}\psi_i$ and $\varphi$ into a finite-state automaton
 %such that $t_1\cdots t_n$ is accepted by $\mathcal{A}$ iff. %$\sigma\vDash\varphi$. This happens when
 %, for $1\leq i\leq |\sigma|$, it always exists a transition $q_i\xrightarrow{p_i}q_{i+1}$ in $\mathcal{A}$ for which $\psi_i(\sigma_i)$ and, for $i=|\sigma|$, $q_{|\sigma|+1}$ is also an accepting state for $\mathcal{A}$. In the non data-aware  scenario where the set of all the possible activity labels $\textsf{Act}$ is finite and atoms $\psi_i$ are always in the form of $\phi_{\texttt{a}}$ with $\texttt{a}\in\textsf{Act}$ \cite{XuLZ17a,Westergaard11}, this reduces to choose
 % \begin{enumerate*}[label=\emph{\alph*})]
 %	\item  $\textsf{Act}$ as $\Sigma$,
 %	\item  $\lambda$ as the transformation $\tau$,
 %	\item  use the immediate bijection $\texttt{a}\xleftrightarrow{f}\phi_{\texttt{a}}$, and
-%	\item  to generate a DFA from the automata in Figure~\ref{fig:g1g2} from $\varphi$ by replacing an edge $q_i\xrightarrow{S}q_j$ with $q_i\xrightarrow{\texttt{a}}q_j$ for each $\texttt{a}\in S$. 
-%\end{enumerate*} On the other hand, we can observe that the representation of $\psi_i$ as a combination of atoms is less straightforward in a general Data-Aware Declare scenario, as we must guarantee that each event $\sigma_i$ is transformed into one single symbol in $\Sigma$ (see also \S\ref{sec:wa}). For this reason, we firstly show how we can build such set of atoms $\Sigma$:
+%	\item  to generate a DFA from the automata in Figure~\ref{fig:g1g2} from $\varphi$ by replacing an edge $q_i\xrightarrow{S}q_j$ with $q_i\xrightarrow{\texttt{a}}q_j$ for each $\texttt{a}\in S$.
+%\end{enumerate*} On the other hand, we can observe that the representation of $\psi_i$ as a combination of atoms is less straightforward in a general data-aware Declare scenario, as we must guarantee that each event $\sigma_i$ is transformed into one single symbol in $\Sigma$ (see also \S\ref{sec:wa}). For this reason, we firstly show how we can build such set of atoms $\Sigma$:
 %
 
 %\begin{lemma}
@@ -56,12 +56,12 @@ In this section, we study the conformance checking problem of log traces $\sigma
 %%Secondly, we can transform the constraint automaton $\mathcal{A}$ into an augmented automaton $\mathcal{A}$ accepting all the traces satisfying $\varphi$
 %%%
 %%\begin{proof}	
-%%Given that non-deterministic finite-state automata (NFA) accept the same language of deterministic finite-state automata \cite{0016921} and that LTL$_f$ formulae can be modeled as DFAs \cite{Westergaard11,Lydia}, there exists a transformation for  $\varphi$ into a deterministic finite-state automaton $\mathcal{A}$ (\textit{constraint automaton}) and one for $\sigma$ into a deterministic finite-state automaton $\mathcal{T}$ (\textit{trace automaton}) as a single (accepting) path such that, if $\mathcal{T}$ is (also) an accepting path for $\mathcal{A}$, then $\sigma\vDash\varphi$ \cite{XuLZ17a}. 
+%%Given that non-deterministic finite-state automata (NFA) accept the same language of deterministic finite-state automata \cite{0016921} and that LTL$_f$ formulae can be modeled as DFAs \cite{Westergaard11,Lydia}, there exists a transformation for  $\varphi$ into a deterministic finite-state automaton $\mathcal{A}$ (\textit{constraint automaton}) and one for $\sigma$ into a deterministic finite-state automaton $\mathcal{T}$ (\textit{trace automaton}) as a single (accepting) path such that, if $\mathcal{T}$ is (also) an accepting path for $\mathcal{A}$, then $\sigma\vDash\varphi$ \cite{XuLZ17a}.
 %%\end{proof}
 %%
 %%
 %%
-%%We can show that the declarative conformance checking can be modeled as a trace alignment problem by firstly transforming a Declare model as a deterministic finite-state automaton (DFA) via an LTL$_f$ formula, namely \textit{constraint automaton} $\mathcal{A}$, as well as directly translating the trace $\sigma$ as another DFA, namely \textit{trace automaton} $\mathcal{T}$, which is formed by one single path accepting $\sigma$. Last, we need to show that $\mathcal{A}$ contains the exact path $\mathcal{T}$ 
+%%We can show that the declarative conformance checking can be modeled as a trace alignment problem by firstly transforming a Declare model as a deterministic finite-state automaton (DFA) via an LTL$_f$ formula, namely \textit{constraint automaton} $\mathcal{A}$, as well as directly translating the trace $\sigma$ as another DFA, namely \textit{trace automaton} $\mathcal{T}$, which is formed by one single path accepting $\sigma$. Last, we need to show that $\mathcal{A}$ contains the exact path $\mathcal{T}$
 %%
 %%We can represent $\sigma$ as a DFA $\mathcal{T}=(\Sigma_\sigma,Q_\sigma,q_0^\sigma,\rho_\sigma,F_\sigma)$, namely a \textit{trace automaton} \cite{XuLZ17a}, having having \begin{enumerate*}[label=\emph{\alph*})]
 %%	\item $\Sigma_\sigma=\Set{\sigma_1,\dots,\sigma_n}$,
@@ -76,7 +76,7 @@ In this section, we study the conformance checking problem of log traces $\sigma
 %%	\item an initial state $q_0\in Q$ and
 %%	\item a set $F\subseteq Q$ of accepting states, where
 %%	\item the latter can be reached from the former via a transition relation $\rho\colon Q\times \Sigma\to Q$.
-%%\end{enumerate*} Furthermore, 
+%%\end{enumerate*} Furthermore,
 %%
 %%\[s_{\mathcal{A},\sigma}(q,i)=\begin{cases}
 %% 	\textbf{true} & i>|\sigma|\wedge q\in F\\
