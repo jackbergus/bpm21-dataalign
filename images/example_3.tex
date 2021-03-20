@@ -5,6 +5,23 @@
 		minimum size=1cm,
 		font=\Large\bfseries},thick} 
 \usepackage{booktabs}
+\usetikzlibrary{arrows.meta,fit}
+\definecolor{marcoorange}{RGB}{255,147,0}
+\tikzstyle{joint}=[
+circle,
+minimum size=1mm,
+draw,
+very thick,
+]
+\tikzstyle{cjoint}=[
+joint,
+fill=marcoorange!80,
+]
+
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main} 
+
+\usepackage{pifont} % ding
 \begin{document}
   \begin{tikzpicture}[->,>=stealth',shorten >=1pt,thick,initial text=$ $,align=center,node distance=5mm,font=\footnotesize]
 \thickmuskip=0mu
@@ -12,7 +29,7 @@
 \node (Clause)  [fill=blue!25,text width=3.5cm,rounded corners=.3cm,draw=black,label=above left:{$\mathcal{M}$}] 
 				{$\mathsf{Response}(\texttt{A},\texttt{B},\;\texttt{B}.x>0)$\\
 				 $\mathsf{Existence}(\texttt{B},\; \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
-			 
+
 %% Straightforward translation
 %\node (LTLf1) 
 %				[right=2cm of Clause,fill=blue!25,text width=3cm,rounded corners=.3cm,draw=black] 
@@ -20,41 +37,67 @@
 %				 $\lozenge(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
 				
 %% Conversion to NNF				
-\node (LTLf2) 	[right=2cm of Clause,fill=blue!25,text width=3.5cm,rounded corners=.3cm,draw=black,label=above left:{$\varphi_{\mathcal{M}}$}] 
-				{$\mathbf{G} (\neg\texttt{A} \vee (\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>0)))$\\
-				 $\wedge\;\;\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
-\draw[->] (Clause) -- (LTLf2) node[midway,above] {Declare2LTL$_f$} node[midway,below] {${\scriptscriptstyle \neg(\neg\phi\mathbf{U}\neg\phi)\equiv\phi\mathbf{R}\psi}$};
+%\node (LTLf2) 	[right=2cm of Clause,fill=blue!25,text width=3.5cm,rounded corners=.3cm,draw=black,label=above left:{$\varphi_{\mathcal{M}}$}] 
+%				{$\mathbf{G} (\neg\texttt{A} \vee (\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>0)))$\\
+%				 $\wedge\;\;\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
+			 
+%\draw[->] (Clause) -- (LTLf2) node[midway,above] {Declare2LTL$_f$} node[midway,below] {${\scriptscriptstyle \neg(\neg\phi\mathbf{U}\neg\phi)\equiv\phi\mathbf{R}\psi}$};
 %\draw[->] (LTLf1) --  (LTLf2) node[midway,above] {\textit{nnf}};
 
 %% Data predicates decomposition
-\node (LTLf3) 	[right=1.5cm of LTLf2,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black] 
-				{$ \mathbf{G} (\neg\texttt{A} \vee (\mathbf{F}\;(\texttt{B}\wedge \left(0<\texttt{B}.x\leq 3\vee \texttt{B}.x>3\right))))$\\
-				 $\wedge\;\;\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
-\draw[->] (LTLf2) --  (LTLf3) node[midway,above] {\textit{decompose}};
+%\node (LTLf3) 	[right=1.5cm of LTLf2,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black] 
+%				{$ \mathbf{G} (\neg\texttt{A} \vee (\mathbf{F}\;(\texttt{B}\wedge \left(0<\texttt{B}.x\leq 3\vee \texttt{B}.x>3\right))))$\\
+%				 $\wedge\;\;\mathbf{F}\;(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$};
+%\draw[->] (LTLf2) --  (LTLf3) node[midway,above] {\textit{decompose}};
 
-\node (tab1) [ shape=rectangle,draw] at ($(LTLf2)!0.3!(LTLf3)+(0,2)$) {
-	\begin{tabular}{c|c||c|c|}
-	\toprule
-	\multicolumn{2}{c||}{$\mu(\texttt{B},x)$} & \multicolumn{2}{c}{$\mu(\texttt{B},y)$}\\
-	\midrule
-	$\texttt{B}.x>3$      & $\texttt{B}.x>3$ & $\texttt{B}.y=0$ & $0\leq \texttt{B}.y\leq 0$\\
-	$\texttt{B}.x> 0$ & $0<\texttt{B}.x\leq 3$, $ \texttt{B}.x>3$ & $\texttt{B}.y\neq 0$ & $\texttt{B}.y<0\vee \texttt{B}.y>0$\\
-	$\texttt{B}.x\leq 0$ & $ \texttt{B}.x\leq 0$ & & \\
-	\bottomrule
-	\end{tabular}
-};
-\draw[->,densely dotted] (tab1) -- ($(LTLf2)!0.4!(LTLf3)$);
+%\node (tab1) [ shape=rectangle,draw] at ($(LTLf2)!0.3!(LTLf3)+(0,2)$) {
+%	\begin{tabular}{c|c||c|c|}
+%	\toprule
+%	\multicolumn{2}{c||}{$\mu(\texttt{B},x)$} & \multicolumn{2}{c}{$\mu(\texttt{B},y)$}\\
+%	\midrule
+%	$\texttt{B}.x>3$      & $\texttt{B}.x>3$ & $\texttt{B}.y=0$ & $0\leq \texttt{B}.y\leq 0$\\
+%	$\texttt{B}.x> 0$ & $0<\texttt{B}.x\leq 3$, $ \texttt{B}.x>3$ & $\texttt{B}.y\neq 0$ & $\texttt{B}.y<0\vee \texttt{B}.y>0$\\
+%	$\texttt{B}.x\leq 0$ & $ \texttt{B}.x\leq 0$ & & \\
+%	\bottomrule
+%	\end{tabular}
+%};
+%\draw[->,densely dotted] (tab1) -- ($(LTLf2)!0.4!(LTLf3)$);
 
-\node (LTLf4) 	[right=2cm of LTLf3,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black,label=above right:{$\varphi_{\mathcal{M}}'$}] 
+\node (LTLf4) 	[right=3.5cm of Clause,fill=blue!25,text width=5cm,rounded corners=.3cm,draw=black,label=above right:{$\varphi_{\mathcal{M}}'$}] 
 				{$\mathbf{G}(\neg\texttt{A}\vee(\mathbf{F}(\bigvee_{4\leq i\leq9}p_i)))\wedge\mathbf{F} p_8$};
+
+\node[draw,circle,fill=white] (mu)  at ($(Clause)!0.47!(LTLf4)+(0,1.5)$)  {$\mu$};
+
+\draw ($(Clause)!0.47!(LTLf4)+(0,0.1)$) edge[->] node[midway,left] {\large\ding{193}} (mu);
+\draw (Clause) edge[-Implies,line width=1pt,double distance=5pt] 
+               node[pos=0.37, above] {\large\ding{192}}
+               node[pos=0.65, above] {\large\ding{195}} (LTLf4);
 
 \node (Traces) [fill=red!25,text width=4cm,draw=black,above=3cm of Clause,label=above left:{$\mathcal{L}$}] 
 			   {$\sigma$\texttt{:\quad B\{x=1,y=0\}A\{x=6\}A\{x=4\}}\\
 				$\sigma'$\texttt{:\quad A\{x=8\}B\{x=10,y=0\}}};
 
-\node (CTraces) [fill=red!25,text width=2cm,draw=black,above=3.2cm of LTLf4,label=above right:{$T$}] 
+\node (CTraces) [fill=red!25,text width=2cm,draw=black,right=3.2cm of Traces,label=above right:{$T$}] 
                 {$t_\sigma$\texttt{:\quad $p_5$\;\texttt{A\;A}}\\
                  $t_{\sigma'}$\texttt{:\quad A}\;$p_8$};
+
+\draw (Traces.south east) 
+	edge[bend right=60,line width=1pt,double distance=5pt,-Implies]
+	node[pos=0.65, below] {\large\ding{196}} (CTraces.south west);
+
+
+\node[draw,circle,above=of mu,fill=white] (sigma)   {$\Sigma$};
+\draw (mu) edge[->] node[midway,left] {\large\ding{194}} (sigma);
+\node (endpipe) at ($(Clause)!0.54!(LTLf4)-(0,0.1)$) {};
+\node (begpipe) at ($(Clause)!0.4!(LTLf4)-(0,0.1)$) {};
+\draw (sigma) edge[->,out=300,in=90]    ($(Clause)!0.54!(LTLf4)+(0,0.1)$);
+
+
+
+
+\begin{pgfonlayer}{bg}    % select the background layer
+\node[fit=(mu)(sigma)(endpipe)(begpipe), draw,fill=orange!40] {};
+\end{pgfonlayer}
 
 %\node[state,initial] (SA) at ($(LTLf4)-(1.3,3.5)$) {$s_1$};
 %\path (SA) edge[loop] node[midway,above] (W1) {$\Sigma\backslash\{p_1,p_3\}$} (SA);
@@ -69,26 +112,26 @@
 
 
 
-\draw[->] (LTLf3) -- (LTLf4) node[midway,below]  {\textit{atomize}};
+%\draw[->] (LTLf3) -- (LTLf4) node[midway,below]  {\textit{atomize}};
 
 
 
 
-\draw[->] (Traces) -- (CTraces);
-\node (tab2) [shape=rectangle,draw,label=above left:{$\Sigma\backslash\{\texttt{A}\}$}] at ($(LTLf4)!0.5!(LTLf3)+(0,2)$) {
-	\begin{tabular}{c|ccc}
-	\toprule
-	\texttt{B} & $\texttt{B}.y< 0$ & $\texttt{B}.y=0$ & $\texttt{B}.y>0$ \\
-	\midrule
-	$\texttt{B}.x\leq 0$ & $p_1$ & $p_2$ & $p_3$   \\
-	$0<\texttt{B}.x\leq 3$ & $p_4$ & $p_5$ & $p_6$\\
-	$\texttt{B}.x>3$ & $p_7$ & $p_8$& $p_9$ \\
-	\bottomrule
-	\end{tabular}
-};
-
-\draw[->,dashed] (tab2) -- ($(Traces)!(tab2.north)!(CTraces)$) node [above] {\textit{atomize}};
-\draw[->,dashed] (tab2) -- ($(LTLf3)!0.5!(LTLf4)$);
+%\draw[->] (Traces) -- (CTraces);
+%\node (tab2) [shape=rectangle,draw,label=above left:{$\Sigma\backslash\{\texttt{A}\}$}] at ($(LTLf4)!0.5!(LTLf3)+(0,2)$) {
+%	\begin{tabular}{c|ccc}
+%	\toprule
+%	\texttt{B} & $\texttt{B}.y< 0$ & $\texttt{B}.y=0$ & $\texttt{B}.y>0$ \\
+%	\midrule
+%	$\texttt{B}.x\leq 0$ & $p_1$ & $p_2$ & $p_3$   \\
+%	$0<\texttt{B}.x\leq 3$ & $p_4$ & $p_5$ & $p_6$\\
+%	$\texttt{B}.x>3$ & $p_7$ & $p_8$& $p_9$ \\
+%	\bottomrule
+%	\end{tabular}
+%};
+%
+%\draw[->,dashed] (tab2) -- ($(Traces)!(tab2.north)!(CTraces)$) node [above] {\textit{atomize}};
+%\draw[->,dashed] (tab2) -- ($(LTLf3)!0.5!(LTLf4)$);
 
 %
 %\draw[->] (LTLf4) -- (NFA) node[midway,left] {LTL$_f$2DFA};
