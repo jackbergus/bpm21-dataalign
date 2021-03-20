@@ -25,7 +25,7 @@ In this section, we study the problem of aligning log traces $\sigma\in\mathcal{
 %	\item $\sigma_i\vDash\Next\varphi$ iff. $\sigma_{i+1}\vDash\varphi$ with $1\leq i< |\sigma|$
 %	\item $\sigma_i\vDash\varphi_1\Until\varphi_2$ iff. it exists $i\leq j\leq |\sigma|$ such that $\sigma_j\vDash\varphi_2$ and, for each $i\leq k<j$, $\sigma_k\vDash\varphi_1$
 %\end{itemize}
-%Given the working assumptions in \S\ref{sec:wa} and the interpretation of the Declare templates in LTL$_f$, we can restrict $\phi$ to a propositional formulas containing either the universal truth or falsehoods, or predicates $\psi(\sigma_i)$ in the form $\phi_{\texttt{a}}(\sigma_i)\wedge \phi^d(\sigma_i)$.  We say that $\sigma$ satisfies $\varphi$, namely $\sigma\vDash\varphi$, if $\sigma_1\vDash\varphi$. Given that any  Declare clause can be expressed in terms of LTL$_f$ \cite{10.1007/978-3-642-40176-3_8}, any possible  Declare model can be expressed as the conjunction of the LTL$_f$ representations of the  Declare clauses within the model.
+%Given the working assumptions in \S\ref{sec:wa} and the interpretation of the Declare templates in LTL$_f$, we can restrict $\phi$ to a propositional formulas containing either the universal truth or falsehoods, or predicates $\psi(\sigma_i)$ in the form $\phi_{\texttt{A}}(\sigma_i)\wedge \phi^d(\sigma_i)$.  We say that $\sigma$ satisfies $\varphi$, namely $\sigma\vDash\varphi$, if $\sigma_1\vDash\varphi$. Given that any  Declare clause can be expressed in terms of LTL$_f$ \cite{10.1007/978-3-642-40176-3_8}, any possible  Declare model can be expressed as the conjunction of the LTL$_f$ representations of the  Declare clauses within the model.
 %
 %\cite{XuLZ17a} showed that we can reduce the conformance checking strategy into a trace alignment problem by following those subsequent steps.
 %
@@ -37,17 +37,17 @@ In this section, we study the problem of aligning log traces $\sigma\in\mathcal{
 %\item  transforming $\varphi$ into a  DFA\footnote{}  $\mathcal{A}$
 %\end{enumerate*} %and a bijection $p_i\xleftrightarrow{f}\psi_i$ and $\varphi$ into a finite-state automaton
 %such that $t_1\cdots t_n$ is accepted by $\mathcal{A}$ iff. %$\sigma\vDash\varphi$. This happens when
-%, for $1\leq i\leq |\sigma|$, it always exists a transition $q_i\xrightarrow{p_i}q_{i+1}$ in $\mathcal{A}$ for which $\psi_i(\sigma_i)$ and, for $i=|\sigma|$, $q_{|\sigma|+1}$ is also an accepting state for $\mathcal{A}$. In the non data-aware  scenario where the set of all the possible activity labels $\textsf{Act}$ is finite and atoms $\psi_i$ are always in the form of $\phi_{\texttt{a}}$ with $\texttt{a}\in\textsf{Act}$ \cite{XuLZ17a,Westergaard11}, this reduces to choose
+%, for $1\leq i\leq |\sigma|$, it always exists a transition $q_i\xrightarrow{p_i}q_{i+1}$ in $\mathcal{A}$ for which $\psi_i(\sigma_i)$ and, for $i=|\sigma|$, $q_{|\sigma|+1}$ is also an accepting state for $\mathcal{A}$. In the non data-aware  scenario where the set of all the possible activity labels $\textsf{Act}$ is finite and atoms $\psi_i$ are always in the form of $\phi_{\texttt{A}}$ with $\texttt{A}\in\textsf{Act}$ \cite{XuLZ17a,Westergaard11}, this reduces to choose
 % \begin{enumerate*}[label=\emph{\alph*})]
 %	\item  $\textsf{Act}$ as $\Sigma$,
 %	\item  $\lambda$ as the transformation $\tau$,
-%	\item  use the immediate bijection $\texttt{a}\xleftrightarrow{f}\phi_{\texttt{a}}$, and
-%	\item  to generate a DFA from the automata in Figure~\ref{fig:g1g2} from $\varphi$ by replacing an edge $q_i\xrightarrow{S}q_j$ with $q_i\xrightarrow{\texttt{a}}q_j$ for each $\texttt{a}\in S$.
+%	\item  use the immediate bijection $\texttt{A}\xleftrightarrow{f}\phi_{\texttt{A}}$, and
+%	\item  to generate a DFA from the automata in Figure~\ref{fig:g1g2} from $\varphi$ by replacing an edge $q_i\xrightarrow{S}q_j$ with $q_i\xrightarrow{\texttt{A}}q_j$ for each $\texttt{A}\in S$.
 %\end{enumerate*} On the other hand, we can observe that the representation of $\psi_i$ as a combination of atoms is less straightforward in a general data-aware Declare scenario, as we must guarantee that each event $\sigma_i$ is transformed into one single symbol in $\Sigma$ (see also \S\ref{sec:wa}). For this reason, we firstly show how we can build such set of atoms $\Sigma$:
 %
 
 %\begin{lemma}
-%It always possible to decompose a proposition $\psi(\sigma_i)=\phi_{\texttt{a}}(\sigma_i)\wedge \phi^d(\sigma_i)$ from an LTL$_f$ interpretation of a Declare model $\mathcal{M}$ via a disjunction of atoms in $\Sigma$ such that each event $\sigma_i$ satisfies only one atom in $\Sigma$.
+%It always possible to decompose a proposition $\psi(\sigma_i)=\phi_{\texttt{A}}(\sigma_i)\wedge \phi^d(\sigma_i)$ from an LTL$_f$ interpretation of a Declare model $\mathcal{M}$ via a disjunction of atoms in $\Sigma$ such that each event $\sigma_i$ satisfies only one atom in $\Sigma$.
 %\end{lemma}
 %\begin{proof}
 %Figure~\ref{fig:twoexamples} provides an intuitive sketch of the proof. In more detail, after representing each constraint $c_i\in\mathcal{M}$ (step 1) as an LTL$_f$ formula (step 2) in \textit{negated normal form} (\textit{nnf}), we colle
@@ -85,7 +85,7 @@ In this section, we study the problem of aligning log traces $\sigma\in\mathcal{
 %%
 %%\bigskip
 %
-%Secondly, the authors introduced \textit{repair atoms}  \texttt{del\_a} (or \texttt{add\_a}) for each $\texttt{a}\in\Sigma$ respectively remarking that \texttt{a} was removed (or added) in the input trace, while it needs to be added (removed) to make the string accepted. This allows to transform $\mathcal{A}$ into $\mathcal{A}^+$ accepting all the repaired strings $\tilde{t}$ from $t$ \texttt{\color{red}[TODO]}
+%Secondly, the authors introduced \textit{repair atoms}  \texttt{del\_a} (or \texttt{add\_a}) for each $\texttt{A}\in\Sigma$ respectively remarking that \texttt{A} was removed (or added) in the input trace, while it needs to be added (removed) to make the string accepted. This allows to transform $\mathcal{A}$ into $\mathcal{A}^+$ accepting all the repaired strings $\tilde{t}$ from $t$ \texttt{\color{red}[TODO]}
 %
 %
 
