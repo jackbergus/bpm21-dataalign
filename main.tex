@@ -19,6 +19,13 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs}
+
+
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -59,17 +66,8 @@
 \makeatother
 \DeclareMathSizes{10}{10}{7}{5}
 
-%\usepackage[justification=centering]{caption} % Figures caption
-\usepackage{graphicx}
-\captionsetup{labelsep = period} % Figure 2. Caption (rather than Figure 2: Caption)
-%\usepackage{float} % To place figures where I want with [H]
-\renewcommand{\figurename}{Fig.} % Fig.2 (rather than Figure 2)
-\usepackage[export]{adjustbox}
-\usepackage{caption, subcaption, floatrow, booktabs}
-\usepackage{pifont}
 
-
-
+\input{config-tikz}
 
 \begin{document}
 %
@@ -108,6 +106,7 @@ Alignments are a conformance checking strategy quantifying the amount of deviati
 \input{sections/03_work_assumpt.tex}
 \input{sections/04_align_as_planning.tex}
 \input{sections/05_pipeline.tex}
+\input{sections/06_validation.tex}
 %
 %
 %

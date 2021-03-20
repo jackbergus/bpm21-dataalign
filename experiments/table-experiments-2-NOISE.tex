@@ -1,0 +1,35 @@
+\newcolumntype{C}{>{\centering\arraybackslash}p{18mm}}
+\pgfplotstabletypeset[
+	%every even row/.style={
+	%	before row={\rowcolor[gray]{0.9}}
+	%},
+font=\scriptsize,
+	every head row/.style={
+    output empty row,
+		before row={%
+            \midrule
+              \multicolumn{1}{c|}{\textbf{\emph{2 const. modified}}}
+            & \multicolumn{2}{p{20mm}|}{3 constraints}
+			& \multicolumn{2}{p{20mm}|}{5 constraints}
+            & \multicolumn{2}{p{20mm}|}{7 constraints}
+            & \multicolumn{2}{p{20mm}|}{10 constraints}
+            \\\midrule
+		},
+	},
+	%
+	columns={length32,symba32,actions32,symba32,actions32,symba32,actions32,symba32,actions32},		
+    columns/{length30}/.style={column name={},column type=C},
+    columns/{symba32}/.style={column name={},column type=C},
+    columns/{actions32}/.style={column name={},column type=C},
+    columns/{symba32}/.style={column name={},column type=C},
+    columns/{actions32}/.style={column name={},column type=C},
+    columns/{symba32}/.style={column name={},column type=C},
+    columns/{actions32}/.style={column name={},column type=C},
+    columns/{symba32}/.style={column name={},column type=C},
+    columns/{actions32}/.style={column name={},column type=C},
+	%%
+    %every row 0 column 0/.style={postproc cell content/.style={@cell content={1-50}}},
+    %every row 1 column 0/.style={postproc cell content/.style={@cell content={51-100}}},
+    %every row 2 column 0/.style={postproc cell content/.style={@cell content={101-150}}},
+    %every row 3 column 0/.style={postproc cell content/.style={@cell content={151-200}}},
+]{\datafileANOISE}
