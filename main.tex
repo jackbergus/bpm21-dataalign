@@ -1,6 +1,16 @@
 \RequirePackage{fix-cm}
 \documentclass[runningheads]{llncs}
-%
+
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem*{excont}{Example \continuation}
+\newcommand{\continuation}{??}
+\newenvironment{continueexample}[1]
+{\renewcommand{\continuation}{\ref{#1}}\excont[continued]}
+{\endexcont}
+
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -57,6 +67,10 @@
 \usepackage[export]{adjustbox}
 \usepackage{caption, subcaption, floatrow, booktabs}
 \usepackage{pifont}
+
+
+
+
 \begin{document}
 %
 \title{Aligning Data-Aware Declarative Process Models and Event Logs}
