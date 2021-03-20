@@ -48,6 +48,15 @@
 	\arrowfill@\leftarrow\relbar\rightarrow}
 \makeatother
 \DeclareMathSizes{10}{10}{7}{5}
+
+%\usepackage[justification=centering]{caption} % Figures caption
+\usepackage{graphicx}
+\captionsetup{labelsep = period} % Figure 2. Caption (rather than Figure 2: Caption)
+%\usepackage{float} % To place figures where I want with [H]
+\renewcommand{\figurename}{Fig.} % Fig.2 (rather than Figure 2)
+\usepackage[export]{adjustbox}
+\usepackage{caption, subcaption, floatrow, booktabs}
+\usepackage{pifont}
 \begin{document}
 %
 \title{Aligning Data-Aware Declarative Process Models and Event Logs}
