@@ -1,14 +1,14 @@
 
 
 \subsection{$\Sigma$-encoding for conformance checking}\label{sec:dadtap}
-As per previous considerations, we want to show that it is sufficient to provide a specific characterization of $\Sigma$, which will be used to generate an automaton accepting symbols in $\Sigma$ and transforming traces as finite sequences in $\Sigma^*$. The proposed approach for obtaining $\Sigma$ from the Declare model $\varphi_{\mathcal{M}}$ is sketched in Figure~\ref{fig:twoexamples}, and described in detail in the following steps.
+As per the previous considerations, we want to show that it is sufficient to provide a specific characterization of $\Sigma$, which will be used to generate an automaton accepting symbols in $\Sigma$ and to transform traces as finite sequences in $\Sigma^*$. The proposed approach for obtaining $\Sigma$ from a (data-aware) Declare model $\varphi_{\mathcal{M}}$ is sketched in Figure~\ref{fig:twoexamples}, and described in detail in the following.
 
 \begin{figure}[!t]
 	%{\hspace{-1.3cm}\includegraphics[width=1.3\textwidth]{images/example_1}}
 	{\hspace{-1.3cm}\includegraphics[width=1.3\textwidth]{images/example_3}}
 	\caption{Intermediate steps required for obtaining $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\{\texttt{A}\}$ from $\mathcal{M}$ and transforming $\mathcal{L}=\Set{\sigma,\sigma'}$ to a set of finite sequences $T=\Set{t_\sigma,t_{\sigma'}}$, as well as replacing atoms in $\varphi_{\mathcal{M}}$ with equivalent atoms in $\Sigma$ ($\varphi_{\mathcal{M}}'$).}\label{fig:twoexamples}
 \end{figure}
-In step 1, we exploit the usual conversion of each single Declare clause into a LTL$_f$ formula in the \textit{negated normal form} \cite{LiPZVR20}, where negation is possibly pushed inside atoms ``$\texttt{a}.k\;\Re\; c$'' by replacing $\Re$ with its negation.
+In step 1, we exploit the usual conversion of each single Declare clause into an LTL$_f$ formula in the \textit{negated normal form} \cite{LiPZVR20}, where negation is possibly pushed inside atoms ``$\texttt{a}.k\;\Re\; c$'' by replacing $\Re$ with its negation.
 
 In step 2, for each compound condition $\psi=\phi_{\texttt{a}}\wedge \phi^d$ over labels $\texttt{a}\in\textsf{Act}$, we collect all the atoms in $\phi_d$ in the form ``$\texttt{a}.k\;\Re\; c$'' for $k\in K$ in a map $\mu(\texttt{a},k)$. Contextually, we represent each atom as an interval, and we \textit{decompose} them
 %
@@ -25,7 +25,7 @@ In step 2, for each compound condition $\psi=\phi_{\texttt{a}}\wedge \phi^d$ ove
 %
 %
 %%In step 3, we collect the data-aware predicates ``$\texttt{A}.\textit{var}\;\Re\;c$'' from all the model's clauses and group them by $\texttt{A}.\textit{var}$; each of these predicates is \textit{decomposed}
-into a disjunction maximal non-overlapping data-aware predicates. This task can be efficiently computed via interval trees \cite{inttree}. E.g., predicates $\texttt{B}.x>3$ and $\texttt{B}.x>0$ are first represented as intervals $\interval({3,+\infty})$ and $\interval({0,+\infty})$, and then decomposed into disjoint sub-invervals $\interval({-\infty,0}]$, $\interval[{0,3}]$, and $\interval({3,+\infty})$. Last, we replace the atoms in each LTL$_f$ formula by its decomposed representation, if any.
+into a disjunction of maximal non-overlapping data-aware predicates. This task can be efficiently computed via interval trees \cite{inttree}. E.g., predicates $\texttt{B}.x>3$ and $\texttt{B}.x>0$ are first represented as intervals $\interval({3,+\infty})$ and $\interval({0,+\infty})$, and then decomposed into disjoint sub-invervals $\interval({-\infty,0}]$, $\interval[{0,3}]$, and $\interval({3,+\infty})$. Last, we replace the atoms in each LTL$_f$ formula by its decomposed representation, if any.
 
 
 In step 3, we put an atom $\texttt{a}\in\textsf{Act}$ in $\Sigma$ if the map $\mu(\texttt{a},k)$ is empty for each key $k\in K$; otherwise, given all the keys $k_{\texttt{a}_1},\dots,k_{\texttt{a}_h}\in K$ for which the map $\mu(\texttt{a},k_{\texttt{a}_i})$ is not empty, we partition the data space by combining the non-overlapping intervals as $\mu(\texttt{a},k_{\texttt{a}_1})\times\cdots\times\mu(\texttt{a},k_{\texttt{a}_h})$ obtained from the previous step. For each of this interval combination, we generate a fresh atom and put it in $\Sigma$. E.g., label \texttt{A} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{A}. Concerning the label \texttt{B}, it is associated to data intervals over keys $x$ and $y$, which induce a space partitioning of 9 intervals, for which we generate distinct atoms $p_1\dots p_9$. As a result, we obtain $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\Set{\texttt{A}}$.
