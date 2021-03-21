@@ -58,7 +58,25 @@
 \pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 1}] {symba73} {\datafileANOISE}
 \pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 2}] {actions73} {\datafileANOISE}
 
+\pgfplotstableread[col sep=comma,header=true]{experiments/10-CONSTRAINTS-0-NOISE-ms.csv}\datafileINOISE
+\pgfplotstablecreatecol[copy column from table={\datafileINOISE}{[index] 0}] {length90} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileINOISE}{[index] 1}] {symba90} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileINOISE}{[index] 2}] {actions90} {\datafileANOISE}
 
+\pgfplotstableread[col sep=comma,header=true]{experiments/10-CONSTRAINTS-1-NOISE-ms.csv}\datafileLNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileLNOISE}{[index] 0}] {length91} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileLNOISE}{[index] 1}] {symba91} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileLNOISE}{[index] 2}] {actions91} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/10-CONSTRAINTS-2-NOISE-ms.csv}\datafileMNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileMNOISE}{[index] 0}] {length92} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileMNOISE}{[index] 1}] {symba92} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileMNOISE}{[index] 2}] {actions92} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/10-CONSTRAINTS-3-NOISE-ms.csv}\datafileNNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileNNOISE}{[index] 0}] {length93} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileNNOISE}{[index] 1}] {symba93} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileNNOISE}{[index] 2}] {actions93} {\datafileANOISE}
 
 \begin{table*}[t!]
 \begin{center}
@@ -66,7 +84,6 @@
 \resizebox{\textwidth}{!}{\input{experiments/table-experiments-1-NOISE}}
 \resizebox{\textwidth}{!}{\input{experiments/table-experiments-2-NOISE}}
 \resizebox{\textwidth}{!}{\input{experiments/table-experiments-3-NOISE}}
-%\resizebox{\textwidth}{!}{\input{experiments/table-experiments-planners-60}}
 \caption{Experimental results for the \emph{synthetic} case study. The time (in \emph{milliseconds}) is the average per trace.}
 \label{table:exp_results_synth}
 \end{center}

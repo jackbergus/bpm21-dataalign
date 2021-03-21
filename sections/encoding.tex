@@ -11,6 +11,8 @@
 \newcommand{\PDDL}[1]{\begin{footnotesize}\texttt{#1}\end{footnotesize}}
 %E.g., the alignment result $\hat{t_\sigma}=p_5\;\texttt{A}\;\texttt{A}\;\textit{ins\_}p_8$ of trace $\sigma=$\texttt{B\{x=1,y=0\}A\{x=6\}\\A\{x=4\}} generates the repair $\varrho=[@\sigma_4\leftarrow p_8]$ after removing the \texttt{sync} operations.
 
+\sloppypar
+
 In this section, we show how, given an augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained from a LTL$_f$ formula  $\varphi_{\mathcal{M}}$, and an augmented trace automaton $\T^+$ obtained from a trace $t$, we build a cost-optimal planning domain $\mathcal{P_D}$ and a problem instance $\mathcal{P}$ in PDDL. $\mathcal{P_D}$ and $\mathcal{P}$ can be used to feed any state-of-the-art planners accepting PDDL 2.1 specification, as discussed in Section \ref{ssec:ap}.
 %
 A solution plan for $\mathcal{P}$ amounts to the set of interventions of minimal cost to repair the trace with respect to $\varphi_{\mathcal{M}}$.
@@ -24,9 +26,9 @@ In $\mathcal{P_D}$, we provide two abstract types: \PDDL{activity} and \PDDL{sta
 %
 The first captures the activities involved in a transition between two different states of a constraint/trace automaton.
 %
-The second is used to uniquely identify the states of any constraint automaton (through the sub-type \texttt{automaton\_state}) and of the trace automaton (through the sub-type \texttt{trace\_state}).
+The second is used to uniquely identify the states of the constraint automaton (through the sub-type \texttt{automaton\_state}) and of the trace automaton (through the sub-type \texttt{trace\_state}).
 %
-To capture the structure of the automata and to monitor their evolution, we defined four \emph{domain propositions} as boolean predicates in $\mathcal{P_D}$:
+To capture the structure of the automaton and to monitor its evolution, we defined four \emph{domain propositions} as boolean predicates in $\mathcal{P_D}$:
 %
 \begin{itemize}
 	\item \PDDL{(trace ?t1 - trace\_state ?e - activity ?t2 - trace\_state)} holds if there exists a transition in the trace automaton between two states \texttt{t1} and \texttt{t2}, being \texttt{e} the activity involved in the transition.
