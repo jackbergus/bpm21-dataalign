@@ -1,6 +1,16 @@
 \RequirePackage{fix-cm}
 \documentclass[runningheads]{llncs}
-%
+
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem*{excont}{Example \continuation}
+\newcommand{\continuation}{??}
+\newenvironment{continueexample}[1]
+{\renewcommand{\continuation}{\ref{#1}}\excont[continued]}
+{\endexcont}
+
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -56,6 +66,7 @@
 \makeatother
 \DeclareMathSizes{10}{10}{7}{5}
 
+
 \input{config-tikz}
 
 \begin{document}
@@ -66,20 +77,20 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-%%\author{Giacomo Bergami\inst{1}\orcidID{0000-0002-1844-0851} \and
-%%Fabrizio Maria Maggi\inst{1}\orcidID{0000-0002-9089-6896} \and
-%%Andrea Marrella\inst{2}\orcidID{0000-0002-1031-0374} \and Marco Montali\inst{1}\orcidID{0000-0002-8021-3430}}
+\author{Giacomo Bergami\inst{1}\orcidID{0000-0002-1844-0851} \and
+Fabrizio Maria Maggi\inst{1}\orcidID{0000-0002-9089-6896} \and
+Andrea Marrella\inst{2}\orcidID{0000-0002-1031-0374} \and Marco Montali\inst{1}\orcidID{0000-0002-8021-3430}}
 
 %
 \authorrunning{G. Bergami et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-%%\institute{Free University of Bozen-Bolzano, Italy \\
-%%\email{gibergami@unibz.it, \{maggi,montali\}@inf.unibz.it}\\
-%% \and
-%%Sapienza - University of Rome, Italy\\
-%%\email{marrella@diag.uniroma1.it}}
+\institute{Free University of Bozen-Bolzano, Italy \\
+\email{gibergami@unibz.it, \{maggi,montali\}@inf.unibz.it}\\
+ \and
+Sapienza - University of Rome, Italy\\
+\email{marrella@diag.uniroma1.it}}
 %
 \maketitle              % typeset the header of the contribution
 %
@@ -91,10 +102,10 @@ Alignments are a conformance checking strategy quantifying the amount of deviati
 
 \input{sections/01_introduction.tex}
 %\input{sections/02_motivating_example.tex}
-
+\input{sections/02_related_work.tex}
 \input{sections/03_work_assumpt.tex}
 \input{sections/04_align_as_planning.tex}
-%\input{sections/05_pipeline.tex}
+\input{sections/05_pipeline.tex}
 \input{sections/06_validation.tex}
 %
 %

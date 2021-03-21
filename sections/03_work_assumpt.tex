@@ -27,9 +27,10 @@
 %\newcommand{\R}{\ensuremath{\mathbf{R}_+}}
 
 
-\section{Background}
+\section{Preliminary Definitions}
 %\section{Modeling Data-Aware Declare Alignment}
-%In this section, we introduce the requirements enabling the computation of data-aware declare alignments.
+\label{sec:background}
+In this section, we introduce some preliminary concepts useful for the presentation of the proposed approach.
 
 \subsection{Event Logs}
 (Data) \textit{payloads} are finite functions $p\in V^K$, where $K$ is a finite set of keys and $V$ is a (finite) set of data values. We consider also the case in which the value of a certain key $k$ is missing in a payload. In particular, we denote as $\varepsilon$ an element $\varepsilon\notin V$, such that $p(k)=\varepsilon$ for $k\notin\textup{dom}(p)$. Given a finite set of activity labels $\textsf{Act}$, an event $\sigma_j$ is a pair $\Braket{\texttt{A},p}$, where $\texttt{A}\in\textsf{Act}$ is an activity label, and $p$ is a payload; we denote with $\lambda$ (and $\varsigma$) the first (and second) projection of such pair, i.e., $\lambda(\sigma_j)=\texttt{A}$ (and $\varsigma(\sigma_j)=p$). A \textit{trace} $\sigma$ is a temporally-ordered and finite sequence of distinct events $\sigma_1\cdots\sigma_n$, modeling a process run. We distinguish the trace keys ($K_t$) from the event keys ($K_e$), such that $K=K_t\cup K_e$ with $K_t\cap K_e=\emptyset$: all events within the same trace associate the same values to the same trace keys, i.e., $\forall \Braket{\texttt{A}_i,p_i},\Braket{\texttt{A}_j,p_j}\in\sigma.\;\forall k\in K_t.\; p_i(k)=p_j(k)$. A log $\mathcal{L}$ is a finite set of traces. This  characterization is compliant with the \textsc{eXtensible Event Stream} format, which is the \textit{de facto} standard for representing event logs within the Business Process Management community \cite{XES}.
