@@ -49,16 +49,16 @@ As per the previous considerations, we want to show that to solve the trace alig
 	\caption{Intermediate steps required for obtaining $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\{\texttt{A}\}$ from $\mathcal{M}$ and transforming $\mathcal{L}=\Set{\sigma,\sigma'}$ to a set of finite sequences $T=\Set{t_\sigma,t_{\sigma'}}$, as well as replacing atoms in $\varphi_{\mathcal{M}}$ with equivalent atoms in $\Sigma$ ($\varphi_{\mathcal{M}}'$).}\label{fig:twoexamples}
 \end{figure}
 
-In the first step, we exploit the usual conversion of each single Declare clause into an LTL$_f$ formula in the \textit{negated normal form} \cite{LiPZVR20}, where negation is possibly pushed inside atoms ``$\texttt{A}.k\;\Re\; c$'' by replacing $\Re$ with its negation.
+In the first \emph{Declare2LTL}$_f$ step, we exploit the usual conversion of each single Declare clause into an LTL$_f$ formula (see Table 1) in the \textit{negated normal form} \cite{LiPZVR20}, where negations are possibly pushed inside atoms ``$\texttt{A}.k\;\Re\; c$'' by replacing $\Re$ with its negation.
 \begin{ex} \label{ex:first}
-Given a Declare model $\mathcal{M}$ composed of the following clauses, $\mathsf{Response}(\texttt{A},\texttt{B},\;\texttt{B}.x>0)$ and
-$\mathsf{Existence}(\texttt{B},\; \texttt{B}.x>3\wedge \texttt{B}.y=0)$, it is represented as the intermediate LTL$_f$ formula $\varphi_{\mathcal{M}}=\lglobally(\neg\texttt{A}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$.
+The Declare model $\mathcal{M}$ composed of the following clauses: $\mathsf{Response}(\texttt{A},\texttt{B},\;\texttt{B}.x>0)$ and
+$\mathsf{Existence}(\texttt{B},\; \texttt{B}.x>3\wedge \texttt{B}.y=0)$ is represented as the intermediate LTL$_f$ formula $\varphi_{\mathcal{M}}=\lglobally(\neg\texttt{A}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$.
 \end{ex}
 
 
 
 
-In the second \textit{decomposition} step, for each compound condition $\psi=\texttt{A}\wedge \phi^d$ over labels $\texttt{A}\in\textsf{Act}$, we collect all the atoms in $\phi_d$ in the form ``$\texttt{A}.k\;\Re\; c$'' for $k\in K$ in a map $\mu(\texttt{A},k)$. Contextually, we represent each atom as an interval, and we \textit{decompose} them
+In the second \textit{decomposition} step, for each compound condition $\psi=\texttt{A}\wedge \phi^d$ over labels $\texttt{A}\in\textsf{Act}$, we collect all the atoms in $\phi_d$ in the form ``$\texttt{A}.k\;\Re\; c$'' for each $k\in K$ in a map $\mu(\texttt{A},k)$. Contextually, we represent each atom as an interval, and we \textit{decompose} them
 %
 %%We now describe the main contribution of the paper, namely a technique for computing log trace alignments over Declare data-aware models. Our approach takes as input \begin{enumerate*}[label=\emph{\alph*})]
 %	\item a Declare data-aware model $\mathcal{M}$ expressed as a set of instantiated templates,
@@ -75,12 +75,12 @@ In the second \textit{decomposition} step, for each compound condition $\psi=\te
 %%In step 3, we collect the data-aware predicates ``$\texttt{A}.\textit{var}\;\Re\;c$'' from all the model's clauses and group them by $\texttt{A}.\textit{var}$; each of these predicates is \textit{decomposed}
 into a disjunction of maximal non-overlapping data-aware predicates. This task can be efficiently computed via interval trees \cite{inttree}. Last, we replace the atoms in each LTL$_f$ formula by its decomposed representation.%, if any.
 \begin{continueexample}{ex:first}\label{ex:second}
-Table~\ref{tab:dimFFT} shows the interval decomposition results for the $\psi$ extracted from the model. E.g., redicates $\texttt{B}.x>3$ and $\texttt{B}.x>0$ are first represented as intervals $\interval({3,+\infty})$ and $\interval({0,+\infty})$, and then decomposed into disjoint sub-invervals $\interval({-\infty,0}]$, $\interval({0,3}]$, and $\interval({3,+\infty})$. As a result, $\varphi_{\mathcal{M}}$ is decomposed into $\varphi_{\mathcal{M}}^d=\lglobally(\neg\texttt{A}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge (0<\texttt{B}.x\leq 3\vee \texttt{B}.x> 3) \wedge \texttt{B}.y=0)$
+Table~\ref{tab:dimFFT} shows the interval decomposition results for the $\psi$ extracted from $\mathcal{M}$. E.g., predicates $\texttt{B}.x>3$ and $\texttt{B}.x>0$ are first represented as intervals $\interval({3,+\infty})$ and $\interval({0,+\infty})$, and then decomposed into disjoint sub-intervals $\interval({-\infty,0}]$, $\interval({0,3}]$, and $\interval({3,+\infty})$. As a result, $\varphi_{\mathcal{M}}$ is decomposed into $\varphi_{\mathcal{M}}^d=\lglobally(\neg\texttt{A}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge (0<\texttt{B}.x\leq 3\vee \texttt{B}.x> 3) \wedge \texttt{B}.y=0)$
 \end{continueexample}
 
-In the third \textit{atomization} step, we put an atom $\texttt{A}\in\textsf{Act}$ in $\Sigma$ if the map $\mu(\texttt{A},k)$ is empty for each key $k\in K$; otherwise, given all the keys $k_{\texttt{A}_1},\dots,k_{\texttt{A}_h}\in K$ for which the map $\mu(\texttt{A},k_{\texttt{A}_i})$ is not empty, we partition the data space by combining the non-overlapping intervals as $\mu(\texttt{A},k_{\texttt{A}_1})\times\cdots\times\mu(\texttt{A},k_{\texttt{A}_h})$ obtained from the previous step. For each of this interval combination, we generate a fresh atom and put it in $\Sigma$.
+In the third \textit{atomization} step, we put an atom $\texttt{A}\in\textsf{Act}$ in $\Sigma$ if the map $\mu(\texttt{A},k)$ is empty for each key $k\in K$; otherwise, given all the keys $k_{\texttt{A}_1},\dots,k_{\texttt{A}_h}\in K$ for which the map $\mu(\texttt{A},k_{\texttt{A}_i})$ is not empty, we partition the data space by combining the non-overlapping intervals as $\mu(\texttt{A},k_{\texttt{A}_1})\times\cdots\times\mu(\texttt{A},k_{\texttt{A}_h})$ obtained from the previous step. For each of these interval combinations, we generate a fresh atom and put it in $\Sigma$.
 \begin{continueexample}{ex:first}
-Label \texttt{A} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{A}. On the other hand, label \texttt{B} can be further atoms by partitioning the data space via the intervals in Table~\ref{tab:dimFFT}.  Table~\ref{tab:dimGMM} shows the atom decomposition of \texttt{B} via data intervals over keys $x$ and $y$, which induce a space partitioning of 9 intervals, for which we generate nine distinct atoms $p_1\dots p_9$. As a result, we obtain $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\Set{\texttt{A}}$ in Figure~\ref{fig:twoexamples}.
+Label \texttt{A} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{A}. On the other hand, label \texttt{B} is associated o several atoms obtained by partitioning the data space via the intervals in Table~\ref{tab:dimFFT}.  Table~\ref{tab:dimGMM} shows the atom decomposition of \texttt{B} via data intervals over keys $x$ and $y$, which induce a space partitioning of 9 intervals, for which we generate nine distinct atoms $p_1\dots p_9$. As a result, we obtain $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\Set{\texttt{A}}$ in Figure~\ref{fig:twoexamples}.
 \end{continueexample}
 
 
