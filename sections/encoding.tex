@@ -28,18 +28,23 @@ The first captures the activities involved in a transition between two different
 %
 The second is used to uniquely identify the states of the constraint automaton (through the sub-type \texttt{automaton\_state}) and of the trace automaton (through the sub-type \texttt{trace\_state}).
 %
-To capture the structure of the automaton and to monitor its evolution, we defined four \emph{domain propositions} as boolean predicates in $\mathcal{P_D}$:
+To capture the structure of the automaton and to monitor its evolution, we defined five \emph{domain propositions} as boolean predicates in $\mathcal{P_D}$:
 %
 \begin{itemize}
 	\item \PDDL{(trace ?t1 - trace\_state ?e - activity ?t2 - trace\_state)} holds if there exists a transition in the trace automaton between two states \texttt{t1} and \texttt{t2}, being \texttt{e} the activity involved in the transition.
 	\item \PDDL{(automaton ?s1 - automaton\_state ?e - activity ?s2 - automaton\_state)} holds if there exists a transition between two states \texttt{s1} to \texttt{s2} of a constraint automaton, being \texttt{e} the activity involved in the transition.
+    \item \PDDL{(atoms ?e1 - activity ?e2 - activity)} holds if \texttt{e1} and \texttt{e2} are two atoms in $\Sigma$ associated to a same activity label.
 	\item \PDDL{(cur\_state ?s - state)} holds if \texttt{s} is the current state of a constraint/trace automaton.
 	\item \PDDL{(final\_state ?s - state)} holds if \texttt{s} is a final state of a constraint/trace automaton.
 \end{itemize}
+It is worth to notice that, if a generic activity \texttt{B} is associated to some data condition, \texttt{B} will be represented as a set of atoms $p_1$, $p_2$, $p_3$, etc. in $\mathcal{P_D}$, see for example Table \ref{tab:dimGMM}. This means that, for any combinations of atoms $p_i$ - $p_j$ associated to \texttt{B}, there will exist an instance of the predicate \PDDL{(atoms)} that will hold for $p_i$ and $p_j$.
+%
+%Label \texttt{C} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{C}. On the other hand, label \texttt{B} is associated to several atoms obtained by partitioning the data space via the intervals
+%
 Furthermore, we define a \emph{numeric fluent} \PDDL{total-cost} to keep track of the cost of the violations. Notice that: \myi in PDDL, parameters are written with a question mark character `?' in front, and the dash character `-' is used to assign types to parameters; and \myii we remain consistent with the PDDL terminology, which allows for both the values of predicates and fluents to change as a result of the execution of an action.
 %
 
-Planning actions are used to express the \emph{repairs} on the original trace $t$. Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions. In our encoding, we have defined three actions to perform \emph{synchronous moves} in the trace automaton and in the constraint automaton, or to add/remove activities to/from the constraint automaton. In the following example, we suppose that both actions \PDDL{ins} and \PDDL{del} have cost equal to 1. We notice that their cost can be customized to properly define the severity of a violation.
+Planning actions are used to express the \emph{repairs} on the original trace $t$. Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions. In our encoding, we have defined four actions to perform \emph{synchronous moves} both in the trace/constraint automaton, or to add/remove/replace activities to/from/in the constraint and trace automata. In the following, we suppose that actions \PDDL{ins}, \PDDL{del} and \PDDL{repl} have cost equal to 1. We notice that their cost can be customized to define the severity of a violation.
 %
 %\begin{tiny}
 %	\begin{verbatim}	
@@ -76,6 +81,15 @@ Planning actions are used to express the \emph{repairs} on the original trace $t
                        (automaton ?s1 ?e ?s2))                     (trace ?t1 ?e ?t2))
                    (and (not (cur_state ?s1))     :effect(and (increase (total-cost) 1)
                         (cur_state ?s2))))))         (not (cur_state ?t1))(cur_state ?t2)))
+
+(:action repl
+ :parameters (?t1 - trace_state ?e1 - activity ?t2 - trace_state ?e2 - activity)
+ :precondition (and (cur_state ?t1) (trace ?t1 ?e1 ?t2) (atoms ?e1 ?e2))
+ :effect(and (increase (total-cost) 1) (not (cur_state ?t1)) (cur_state ?t2)
+             (forall (?s1 ?s2 - automaton_state)
+               (when (and (cur_state ?s1)
+                          (automaton ?s1 ?e2 ?s2))
+                     (and (not (cur_state ?s1))(cur_state ?s2))))))
 \end{verbatim}
 \end{scriptsize}
 \smallskip
@@ -85,8 +99,9 @@ We modeled \PDDL{sync} and \PDDL{del} in such a way that they can be applied onl
 %%
 Notice that, while \PDDL{del} yields a \emph{single} move in the trace automaton, \PDDL{sync} yields, in addition, one move on the constraint automaton, to be performed synchronously. In particular, a synchronous move is performed in the constraint automaton if there exists a transition involving activity \PDDL{e} connecting \PDDL{s1} -- the current state of the automaton -- to a state \PDDL{s2}.
 %
-Finally, \PDDL{ins} is performed only for transitions involving activity \PDDL{e} connecting two states of the constraint automaton, with the current state of the trace automaton that remains the same after the execution of the action.
+Then, \PDDL{ins} is performed only for transitions involving activity \PDDL{e} connecting two states of the constraint automaton, with the current state of the trace automaton that remains the same after the execution of the action.
 %
+Finally, \PDDL{repl} can be seen as a synchronous combination of a \PDDL{del} and an \PDDL{ins}. It yields one move on the trace automaton and one on the constraint automaton, involving two atoms \PDDL{e1} and \PDDL{e2} belonging to a same activity label, i.e., such that the predicate \PDDL{(atoms ?e1 ?e2)} holds.
 
 \smallskip
 \noindent
@@ -95,7 +110,7 @@ Finally, \PDDL{ins} is performed only for transitions involving activity \PDDL{e
 %
 In $\mathcal{P}$, we first define a finite set of constants required to properly ground all the domain propositions defined in $\mathcal{P_D}$. In our case, constants correspond to the state and activity instances involved in the trace/constraint automaton.
 %
-Secondly, we define the \emph{initial state} of $\mathcal{P}$ to capture the exact structure of the trace/constraint automaton. This includes the specification of all the existing transitions that connect two states of the automaton. The current state and the final states of the trace/constraint automaton are identified as well.
+Secondly, we define the \emph{initial state} of $\mathcal{P}$ to capture the exact structure of the trace/constraint automaton. This includes the specification of all the existing transitions that connect two states of the automaton, and the definition of all the pairs of atoms belonging to a same activity label. The current state and the final states of the trace/constraint automaton are identified as well.
 %
 Thirdly, to encode the goal condition, we first pre-process the constraint automaton by: \myi adding a new dummy state with no outgoing transitions; \myii adding a new special action, executable only in the final states of the original automaton, which makes the automaton move to the dummy state; and \myiii including in the set of final states only the dummy state. Then, we define the goal condition as the conjunction of the final states of the trace automaton and of the constraint automaton. In this way, we avoid using disjunctions in goal formulas, which are not supported by all planners.
 %
