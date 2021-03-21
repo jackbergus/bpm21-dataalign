@@ -18,7 +18,7 @@
 	\path (ST) edge[in=225,out=315,looseness=8,red] node[midway,below]  {$\{\textit{del\_}\phi\;\;|\;\phi\in\Sigma\cup\Sigma_t\}$} (ST);
 	
 	\draw[->,blue] (SA) edge[bend left]  node[midway,above,sloped] {$ \{\textit{ins\_}p_8\}$} (ST);
-	\node[state,right=3cm of ST] (bot)  {$s_8$};
+	\node[state,right=3cm of ST] (bot)  {$s_7$};
 	\draw[->] (ST) edge [bend left] node[midway,above,sloped] {$\{\texttt{C}\}$}  (bot)  ; 
 	\draw[->,blue] (ST) edge [bend left=70] node[midway,above,sloped] {$\{\textit{ins\_}\texttt{C}\}$}  (bot)  ; 
 	\draw[->] (bot) 
