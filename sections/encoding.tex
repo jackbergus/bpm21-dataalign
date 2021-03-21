@@ -1,5 +1,100 @@
 \subsection{Encoding in PDDL}\label{ssec:eip}
-\texttt{\color{red}[TODO]}
-\\
 
-E.g., the alignment result $\hat{t_\sigma}=p_5\;\texttt{C}\;\texttt{C}\;\textit{ins\_}p_8$ of trace $\sigma=$\texttt{B\{x=1,y=0\}C\{x=6\}\\C\{x=4\}} generates the repair $\varrho=[@\sigma_4\leftarrow p_8]$ after removing the \texttt{sync} operations.
+\newcommand{\myi}{\emph{(i)}\xspace}
+\newcommand{\myii}{\emph{(ii)}\xspace}
+\newcommand{\myiii}{\emph{(iii)}\xspace}
+\newcommand{\myiv}{\emph{(iv)}\xspace}
+\newcommand{\myv}{\emph{(v)}\xspace}
+\newcommand{\myvi}{\emph{(vi)}\xspace}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\PDDL}[1]{\begin{footnotesize}\texttt{#1}\end{footnotesize}}
+%E.g., the alignment result $\hat{t_\sigma}=p_5\;\texttt{A}\;\texttt{A}\;\textit{ins\_}p_8$ of trace $\sigma=$\texttt{B\{x=1,y=0\}A\{x=6\}\\A\{x=4\}} generates the repair $\varrho=[@\sigma_4\leftarrow p_8]$ after removing the \texttt{sync} operations.
+
+In this section, we show how, given an augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained from a LTL$_f$ formula  $\varphi_{\mathcal{M}}$, and an augmented trace automaton $\T^+$ obtained from a trace $t$, we build a cost-optimal planning domain $\mathcal{P_D}$ and a problem instance $\mathcal{P}$ in PDDL. $\mathcal{P_D}$ and $\mathcal{P}$ can be used to feed any state-of-the-art planners accepting PDDL 2.1 specification, as discussed in Section \ref{ssec:ap}.
+%
+A solution plan for $\mathcal{P}$ amounts to the set of interventions of minimal cost to repair the trace with respect to $\varphi_{\mathcal{M}}$.
+
+%\paragraph{Planning Domain}
+\medskip
+\noindent
+\textbf{Planning Domain.}
+%
+In $\mathcal{P_D}$, we provide two abstract types: \PDDL{activity} and \PDDL{state}.
+%
+The first captures the activities involved in a transition between two different states of a constraint/trace automaton.
+%
+The second is used to uniquely identify the states of any constraint automaton (through the sub-type \texttt{automaton\_state}) and of the trace automaton (through the sub-type \texttt{trace\_state}).
+%
+To capture the structure of the automata and to monitor their evolution, we defined four \emph{domain propositions} as boolean predicates in $\mathcal{P_D}$:
+%
+\begin{itemize}
+	\item \PDDL{(trace ?t1 - trace\_state ?e - activity ?t2 - trace\_state)} holds if there exists a transition in the trace automaton between two states \texttt{t1} and \texttt{t2}, being \texttt{e} the activity involved in the transition.
+	\item \PDDL{(automaton ?s1 - automaton\_state ?e - activity ?s2 - automaton\_state)} holds if there exists a transition between two states \texttt{s1} to \texttt{s2} of a constraint automaton, being \texttt{e} the activity involved in the transition.
+	\item \PDDL{(cur\_state ?s - state)} holds if \texttt{s} is the current state of a constraint/trace automaton.
+	\item \PDDL{(final\_state ?s - state)} holds if \texttt{s} is a final state of a constraint/trace automaton.
+\end{itemize}
+Furthermore, we define a \emph{numeric fluent} \PDDL{total-cost} to keep track of the cost of the violations. Notice that: \myi in PDDL, parameters are written with a question mark character `?' in front, and the dash character `-' is used to assign types to parameters; and \myii we remain consistent with the PDDL terminology, which allows for both the values of predicates and fluents to change as a result of the execution of an action.
+%
+
+Planning actions are used to express the \emph{repairs} on the original trace $t$. Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions. In our encoding, we have defined three actions to perform \emph{synchronous moves} in the trace automaton and in the constraint automaton, or to add/remove activities to/from the constraint automaton. In the following example, we suppose that both actions \PDDL{ins} and \PDDL{del} have cost equal to 1. We notice that their cost can be customized to properly define the severity of a violation.
+%
+%\begin{tiny}
+%	\begin{verbatim}	
+%	(:action sync                                          (:action add                              (:action del
+%	:parameters (?t1 - path_state                           :parameters (?e - activity)               :parameters (?t1 - path_state
+ %                ?e - activity                              :effect (and (increase (total-cost) 1)                  ?e - activity
+  %               ?t2 - path_state)                           (forall (?s1 ?s2 - automaton_state)                    ?t2 - path_state)
+%	:precondition (and (cur_state ?t1) (path ?t1 ?e ?t2))       (when (and (cur_state ?s1)            :precondition (and (cur_state ?t1)
+%	:effect(and (not (cur_state ?t1)) (cur_state ?t2)           (automaton ?s1 ?e ?s2))               :effect(and (increase (total-cost) 1)
+%	 (forall (?s1 ?s2 - automaton_state)                        (path ?t1 ?e ?t2))                    (not (cur_state ?t1)) (cur_state ?t2)))
+%	   (when (and (cur_state ?s1)                               (and (not (cur_state ?s1))
+%	   (automaton ?s1 ?e ?s2))                                  (cur_state ?s2))))))
+%	   (and (not (cur_state ?s1))
+%	   (cur_state ?s2))))))
+%	\end{verbatim}
+%\end{tiny}
+
+\begin{scriptsize}
+\begin{verbatim}
+(:action sync
+ :parameters (?t1 - trace_state ?e - activity ?t2 - trace_state)
+ :precondition (and (cur_state ?t1) (trace ?t1 ?e ?t2))
+ :effect(and (not (cur_state ?t1)) (cur_state ?t2)
+             (forall (?s1 ?s2 - automaton_state)
+               (when (and (cur_state ?s1)
+                          (automaton ?s1 ?e ?s2))
+                     (and (not (cur_state ?s1))(cur_state ?s2))))))
+
+(:action ins                                     (:action del
+ :parameters (?e - activity)                      :parameters (?t1 - trace_state
+ :effect (and (increase (total-cost) 1)                        ?e - activity
+          (forall (?s1 ?s2 - automaton_state)                  ?t2 - trace_state)
+            (when (and (cur_state ?s1)            :precondition (and (cur_state ?t1)
+                       (automaton ?s1 ?e ?s2))                     (trace ?t1 ?e ?t2))
+                   (and (not (cur_state ?s1))     :effect(and (increase (total-cost) 1)
+                        (cur_state ?s2))))))         (not (cur_state ?t1))(cur_state ?t2)))
+\end{verbatim}
+\end{scriptsize}
+\smallskip
+
+\noindent
+We modeled \PDDL{sync} and \PDDL{del} in such a way that they can be applied only if there exists a transition from the current state \PDDL{t1} of the trace automaton to a subsequent state \PDDL{t2}, being \PDDL{e} the activity involved in the transition.
+%%
+Notice that, while \PDDL{del} yields a \emph{single} move in the trace automaton, \PDDL{sync} yields, in addition, one move on the constraint automaton, to be performed synchronously. In particular, a synchronous move is performed in the constraint automaton if there exists a transition involving activity \PDDL{e} connecting \PDDL{s1} -- the current state of the automaton -- to a state \PDDL{s2}.
+%
+Finally, \PDDL{ins} is performed only for transitions involving activity \PDDL{e} connecting two states of the constraint automaton, with the current state of the trace automaton that remains the same after the execution of the action.
+%
+
+\smallskip
+\noindent
+\textbf{Planning Problem.}
+%\paragraph{Planning Problem}
+%
+In $\mathcal{P}$, we first define a finite set of constants required to properly ground all the domain propositions defined in $\mathcal{P_D}$. In our case, constants correspond to the state and activity instances involved in the trace/constraint automaton.
+%
+Secondly, we define the \emph{initial state} of $\mathcal{P}$ to capture the exact structure of the trace/constraint automaton. This includes the specification of all the existing transitions that connect two states of the automaton. The current state and the final states of the trace/constraint automaton are identified as well.
+%
+Thirdly, to encode the goal condition, we first pre-process the constraint automaton by: \myi adding a new dummy state with no outgoing transitions; \myii adding a new special action, executable only in the final states of the original automaton, which makes the automaton move to the dummy state; and \myiii including in the set of final states only the dummy state. Then, we define the goal condition as the conjunction of the final states of the trace automaton and of the constraint automaton. In this way, we avoid using disjunctions in goal formulas, which are not supported by all planners.
+%
+Finally, as our purpose is to minimize the total cost of the plan, $\mathcal{P}$ contains the following specification: \PDDL{(:metric minimize (total-cost))}. 
