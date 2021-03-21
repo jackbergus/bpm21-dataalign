@@ -17,17 +17,17 @@
 	\draw[->,blue] (SA) 
 	edge [bend right] node[midway,below,sloped] {$\{\textit{del\_}p_5\}$} (ST)  ;
 	
-	\node[state,right=2cm of ST] (bot)  {$s_8$};
+	\node[state,right=2cm of ST] (bot)  {$s_3$};
 	\path (bot) edge[loop,red] node[midway,above]  {$\{\textit{ins\_}\phi\;\;|\;\phi\in\Sigma\cup\Sigma_t\}$} (bot);
-	\draw[->] (ST) -- (bot) node[midway,above] {$ \{\texttt{A}\}$};
+	\draw[->] (ST) -- (bot) node[midway,above] {$ \{\texttt{C}\}$};
 	\draw[->,blue] (ST) 
-	edge [bend right] node[midway,below,sloped] {$\{\textit{del\_}\texttt{A}\}$} (bot)  ;
+	edge [bend right] node[midway,below,sloped] {$\{\textit{del\_}\texttt{C}\}$} (bot)  ;
 	
-	\node[state,accepting,right=2cm of bot] (bot2)  {$s_8$};
+	\node[state,accepting,right=2cm of bot] (bot2)  {$s_4$};
 	\path (bot2) edge[loop,red] node[midway,above]  {$\{\textit{ins\_}\phi\;\;|\;\phi\in\Sigma\cup\Sigma_t\}$} (bot2);
-	\draw[->] (bot) -- (bot2) node[midway,above] {$ \{\texttt{A}\}$};
+	\draw[->] (bot) -- (bot2) node[midway,above] {$ \{\texttt{C}\}$};
 	\draw[->,blue] (bot) 
-	edge [bend right] node[midway,below,sloped] {$\{\textit{del\_}\texttt{A}\}$} (bot2)  ;
+	edge [bend right] node[midway,below,sloped] {$\{\textit{del\_}\texttt{C}\}$} (bot2)  ;
 	
 	\end{tikzpicture}
 \end{document}
