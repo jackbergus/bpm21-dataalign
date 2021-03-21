@@ -7,13 +7,13 @@
 \begin{document}
 	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,thick,initial text=$ $,align=center,node distance=5mm,font=\footnotesize]
 	\thickmuskip=0mu
-	\node[state,initial] (SA) {$s_1$};
+	\node[state,initial] (SA) {$s_5$};
 	\path (SA) edge[loop] node[midway,above] (W1) {$\Sigma\backslash\{p_8\}$} (SA);
-	\node[state,accepting,right =2cm of SA] (ST) {$s_2$};
-	\path (ST) edge[loop] node[midway,above] (W2) {$\Sigma\backslash\{\texttt{A}\}$} (ST);
+	\node[state,accepting,right =2cm of SA] (ST) {$s_6$};
+	\path (ST) edge[loop] node[midway,above] (W2) {$\Sigma\backslash\{\texttt{C}\}$} (ST);
 	\draw[->] (SA) -- (ST) node[midway,above] {$ \{p_8\}$};
-	\node[state,right=2cm of ST] (bot)  {$s_8$};
-	\draw[->] (ST) edge [bend left] node[midway,above,sloped] {$\{\texttt{A}\}$}  (bot)  ; 
+	\node[state,right=2cm of ST] (bot)  {$s_7$};
+	\draw[->] (ST) edge [bend left] node[midway,above,sloped] {$\{\texttt{C}\}$}  (bot)  ; 
 	\draw[->] (bot) 
 	edge [bend left] node[midway,below,sloped] {$\{p_i|4\leq i\leq 9\}$} (ST)  ;
 	\draw (bot) to [loop] node[above] (W3) {$\Sigma\backslash\{p_i|4\leq i\leq 9\}$} (bot);
