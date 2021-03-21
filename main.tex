@@ -77,9 +77,9 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Giacomo Bergami\inst{1}\orcidID{0000-0002-1844-0851} \and
-Fabrizio Maria Maggi\inst{1}\orcidID{0000-0002-9089-6896} \and
-Andrea Marrella\inst{2}\orcidID{0000-0002-1031-0374} \and Marco Montali\inst{1}\orcidID{0000-0002-8021-3430}}
+\author{Giacomo Bergami\inst{1} \and
+Fabrizio Maria Maggi\inst{1} \and
+Andrea Marrella\inst{2} \and Marco Montali\inst{1}}
 
 %
 \authorrunning{G. Bergami et al.}
@@ -93,6 +93,7 @@ Sapienza - University of Rome, Italy\\
 \email{marrella@diag.uniroma1.it}}
 %
 \maketitle              % typeset the header of the contribution
+\linespread{0.98}
 %
 \begin{abstract}
 Alignments are a conformance checking strategy quantifying the amount of deviations of a trace with respect to a process model, as well as providing optimal repairs for making the trace compliant with the process model. Data-aware alignment strategies are also gaining momentum, as they provide richer descriptions for deviance detection. Nonetheless, no technique is currently able to provide trace repair solutions in the context data-aware declarative process models: current approaches either focus on procedural models, or numerically quantify the deviance with no proposed repair strategy. After discussing our working hypotheses, we show how such a problem can be reduced to a data agnostic trace alignment problem, while ensuring the correctness of its solution. Finally, we show how to find such a solution, i.e., how to align traces with data-aware declarative models by adding/deleting events in the trace or by changing the attribute values attached to them.
