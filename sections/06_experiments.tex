@@ -5,7 +5,7 @@
 
 We have developed a planning-based alignment tool\footnote{} that implements the approach discussed in Section~\ref{sec:dccap}.
 %
-The tool allows us to load existing logs formatted with the XES (eXtensible Event Stream) standard and to import data-aware models previously designed using RuM \cite{}.
+The tool allows us to load existing logs formatted with the XES (eXtensible Event Stream) standard and to import data-aware models previously designed using RuM \cite{AlmanCHMN20}.
 %
 %A \declare model consists of a set of \emph{constraints}, i.e., \emph{rule templates} applied to activities. Their semantics can be formalized using \LTLf, making them verifiable and executable. \tablename~\ref{table:declarerules} summarizes some \declare templates.
 %
@@ -19,7 +19,7 @@ We tested our approach on the grounded version of the problem presented in Secti
 %
 To have a sense of the scalability with respect to the ``size'' of the model and the ``noise'' in the traces, we have tested the approach on synthetic logs of different complexity.
 %
-Specifically, we generated syntectic logs using the log generator presented in \cite{}. We defined four Declare models having the same alphabet of activities and containing 3, 5, 7 and 10 data-aware constraints respectively.
+Specifically, we generated syntectic logs using the log generator presented in \cite{SkydanienkoFGM18}. We defined four Declare models having the same alphabet of activities and containing 3, 5, 7 and 10 data-aware constraints respectively.
 %
 Then, to create logs containing noise, i.e., behaviors non-compliant with the original Declare models, we changed some of the constraints in these models and generated logs from them. In particular, we modified the original Declare models by replacing 1, 2, and 3 constraints in each model using different strategies. In some cases we replaced a constraint with its negative counterpart (see Table 1); in other cases we replaced a constraint with a weaker constraint; in other cases, we replaced a data condition with its negation. Each modified model was used to generate 5 logs of 1000 traces containing traces of different lengths (i.e., containing 10, 15, 20, 25, and 30 events, respectively).
 
