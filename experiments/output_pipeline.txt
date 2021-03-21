@@ -1,0 +1,99 @@
+-------------
+3 CONSTRAINTS
+-------------
+
+3 CONSTRAINTS/0_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 10 -- avg. trace lenght= 10 -- avg. time= 599,7 ms. -- avg. alignments= 0
+3 CONSTRAINTS/0_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 17 -- avg. trace lenght= 15 -- avg. time= 767,23 ms. -- avg. alignments= 0
+3 CONSTRAINTS/0_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 17 -- avg. trace lenght= 20 -- avg. time= 854,12 ms. -- avg. alignments= 0
+3 CONSTRAINTS/0_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 25 -- avg. trace lenght= 25 -- avg. time= 950,04 ms. -- avg. alignments= 0
+3 CONSTRAINTS/0_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 22 -- avg. trace lenght= 30 -- avg. time= 1026,91 ms. -- avg. alignments= 0
+
+3 CONSTRAINTS/1_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 13 -- avg. trace lenght= 10 -- avg. time= 603,84 ms. -- avg. alignments= 1
+3 CONSTRAINTS/1_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 12 -- avg. trace lenght= 15 -- avg. time= 728,83 ms. -- avg. alignments= 1
+3 CONSTRAINTS/1_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 21 -- avg. trace lenght= 20 -- avg. time= 851,62 ms. -- avg. alignments= 1
+3 CONSTRAINTS/1_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 18 -- avg. trace lenght= 25 -- avg. time= 929.72 ms. -- avg. alignments= 1
+3 CONSTRAINTS/1_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 20 -- avg. trace lenght= 30 -- avg. time= 1114,75 ms. -- avg. alignments= 1
+
+3 CONSTRAINTS/2_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 15 -- avg. trace lenght= 10 -- avg. time= 601,04 ms. -- avg. alignments= 1.066
+3 CONSTRAINTS/2_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 15 -- avg. trace lenght= 15 -- avg. time= 736,93 ms. -- avg. alignments= 1.133
+3 CONSTRAINTS/2_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 16 -- avg. trace lenght= 20 -- avg. time= 864,06 ms. -- avg. alignments= 1.0625
+3 CONSTRAINTS/2_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 21 -- avg. trace lenght= 25 -- avg. time= 973,28 ms. -- avg. alignments= 1.2381
+3 CONSTRAINTS/2_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 26 -- avg. trace lenght= 30 -- avg. time= 1066.69 ms. -- avg. alignments= 1.038
+
+3 CONSTRAINTS/3_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 7 -- avg. trace lenght= 10 -- avg. time= 623,85 ms. -- avg. alignments= 2.1428
+3 CONSTRAINTS/3_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 16 -- avg. trace lenght= 15 -- avg. time= 748,5 ms. -- avg. alignments= 2.25
+3 CONSTRAINTS/3_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 10 -- avg. trace lenght= 20 -- avg. time= 877.4 ms. -- avg. alignments= 2.1
+3 CONSTRAINTS/3_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 20 -- avg. trace lenght= 25 -- avg. time= 1007 ms. -- avg. alignments= 2.55
+3 CONSTRAINTS/3_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 15 -- avg. trace lenght= 30 -- avg. time= 1114,46 ms. -- avg. alignments= 2.066
+
+-------------
+5 CONSTRAINTS
+-------------
+
+5 CONSTRAINTS/0_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 26  -- avg. trace lenght= 10 -- avg. time= 772.92 ms. -- avg. alignments= 0
+5 CONSTRAINTS/0_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 21 -- avg. trace lenght= 15 -- avg. time= 978.38 ms. -- avg. alignments= 0
+5 CONSTRAINTS/0_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 24 -- avg. trace lenght= 20 -- avg. time= 1127.25 ms. -- avg. alignments= 0
+5 CONSTRAINTS/0_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 31 -- avg. trace lenght= 25 -- avg. time= 1268.54 ms. -- avg. alignments= 0
+5 CONSTRAINTS/0_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 33 -- avg. trace lenght= 30 -- avg. time= 1392.93 ms. -- avg. alignments= 0
+
+5 CONSTRAINTS/1_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 24 -- avg. trace lenght= 10 -- avg. time= 797.16 ms. -- avg. alignments= 1
+5 CONSTRAINTS/1_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 17 -- avg. trace lenght= 15 -- avg. time= 898.53 ms. -- avg. alignments= 1
+5 CONSTRAINTS/1_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 36 -- avg. trace lenght= 20 -- avg. time= 1094.13 ms. -- avg. alignments= 1
+5 CONSTRAINTS/1_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 23 -- avg. trace lenght= 25 -- avg. time= 1280.61 ms. -- avg. alignments= 1
+5 CONSTRAINTS/1_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 30 -- avg. trace lenght= 30 -- avg. time= 1379.26 ms. -- avg. alignments= 1
+
+5 CONSTRAINTS/2_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 27 -- avg. trace lenght= 10 -- avg. time= 856.71 ms. -- avg. alignments= 1.18
+5 CONSTRAINTS/2_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 22 -- avg. trace lenght= 15 -- avg. time= 934.45 ms. -- avg. alignments= 1.23
+5 CONSTRAINTS/2_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 18 -- avg. trace lenght= 20 -- avg. time= 1112.61 ms. -- avg. alignments= 1.38
+5 CONSTRAINTS/2_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 32 -- avg. trace lenght= 25 -- avg. time= 1230.41 ms. -- avg. alignments= 1.53
+5 CONSTRAINTS/2_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 35 -- avg. trace lenght= 30 -- avg. time= 1346.02 ms. -- avg. alignments= 1.52
+
+5 CONSTRAINTS/3_mod/length_10.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 8 -- avg. trace lenght= 10 -- avg. time= 937.88 ms. -- avg. alignments= 2.22
+5 CONSTRAINTS/3_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 16 -- avg. trace lenght= 15 -- avg. time= 1012.50 ms. -- avg. alignments= 2.56
+5 CONSTRAINTS/3_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 18 -- avg. trace lenght= 20 -- avg. time= 1026.11 ms. -- avg. alignments= 2.44
+5 CONSTRAINTS/3_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 26 -- avg. trace lenght= 25 -- avg. time= 1115.53 ms. -- avg. alignments= 2.34
+5 CONSTRAINTS/3_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 33 -- avg. trace lenght= 30 -- avg. time= 1230.54 ms. -- avg. alignments= 2.33
+
+-------------
+7 CONSTRAINTS
+-------------
+
+7 CONSTRAINTS/0_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 17 -- avg. trace lenght= 15 -- avg. time= 1887.29 ms. -- avg. alignments= 0
+7 CONSTRAINTS/0_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 28 -- avg. trace lenght= 20 -- avg. time= 2093.71 ms. -- avg. alignments= 0
+7 CONSTRAINTS/0_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 32 -- avg. trace lenght= 25 -- avg. time= 2297.12 ms. -- avg. alignments= 0
+7 CONSTRAINTS/0_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 29 -- avg. trace lenght= 30 -- avg. time= 2381.38 ms. -- avg. alignments= 0
+
+7 CONSTRAINTS/1_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 20 -- avg. trace lenght= 15 -- avg. time= 1932.31 ms. -- avg. alignments= 1
+7 CONSTRAINTS/1_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 25 -- avg. trace lenght= 20 -- avg. time= 2113.08 ms. -- avg. alignments= 1
+7 CONSTRAINTS/1_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 30 -- avg. trace lenght= 25 -- avg. time= 2296.76 ms. -- avg. alignments= 1
+7 CONSTRAINTS/1_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 34 -- avg. trace lenght= 30 -- avg. time= 2499.32 ms. -- avg. alignments= 1
+
+7 CONSTRAINTS/2_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 16 -- avg. trace lenght= 15 -- avg. time= 1875.37 ms. -- avg. alignments= 1.44
+7 CONSTRAINTS/2_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 27 -- avg. trace lenght= 20 -- avg. time= 2112.51 ms. -- avg. alignments= 1.33
+7 CONSTRAINTS/2_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 31 -- avg. trace lenght= 25 -- avg. time= 2299.19 ms. -- avg. alignments= 1.38
+7 CONSTRAINTS/2_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 36 -- avg. trace lenght= 30 -- avg. time= 2453.52 ms. -- avg. alignments= 1.58
+
+7 CONSTRAINTS/5_mod/length_15.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 14 -- avg. trace lenght= 15 -- avg. time= 1893.64 ms. -- avg. alignments= 2.5
+7 CONSTRAINTS/5_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 22 -- avg. trace lenght= 20 -- avg. time= 2095.72 ms. -- avg. alignments= 2.63
+7 CONSTRAINTS/5_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 30 -- avg. trace lenght= 25 -- avg. time= 2287.93 ms. -- avg. alignments= 2.66
+7 CONSTRAINTS/5_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 40 -- avg. trace lenght= 30 -- avg. time= 2462.62 ms. -- avg. alignments= 2.35
+
+--------------
+10 CONSTRAINTS
+--------------
+
+10 CONSTRAINTS/0_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 19 -- avg. trace lenght= 20 -- avg. time= 1760.52 ms. -- avg. alignments= 0
+10 CONSTRAINTS/0_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 28 -- avg. trace lenght= 25 -- avg. time= 1901.57 ms. -- avg. alignments= 0
+10 CONSTRAINTS/0_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 24 -- avg. trace lenght= 30 -- avg. time= 1977.71 ms. -- avg. alignments= 0
+
+10 CONSTRAINTS/1_mod/length_20.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 21 -- avg. trace lenght= 20 -- avg. time= 17770.91 ms. -- avg. alignments= 0.95
+10 CONSTRAINTS/1_mod/length_25.xes_atomized_1.xes ++ log size = 1000 -- distinct traces= 25 -- avg. trace lenght= 25 -- avg. time= 1797.28 ms. -- avg. alignments= 0
+10 CONSTRAINTS/1_mod/length_30.xes_atomized_1.xes ++ log size = 1000 -- distinct traces=  -- avg. trace lenght= 30 -- avg. time=  ms. -- avg. alignments= 0
+
+10 CONSTRAINTS/2_mod/length_20.xes_atomized_1.xes
+10 CONSTRAINTS/2_mod/length_25.xes_atomized_1.xes
+10 CONSTRAINTS/2_mod/length_30.xes_atomized_1.xes
+
+10 CONSTRAINTS/5_mod/length_20.xes_atomized_1.xes
+10 CONSTRAINTS/5_mod/length_25.xes_atomized_1.xes
+10 CONSTRAINTS/5_mod/length_30.xes_atomized_1.xes

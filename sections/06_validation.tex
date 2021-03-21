@@ -21,6 +21,47 @@
 \pgfplotstablecreatecol[copy column from table={\datafileDNOISE}{[index] 1}] {symba33} {\datafileANOISE}
 \pgfplotstablecreatecol[copy column from table={\datafileDNOISE}{[index] 2}] {actions33} {\datafileANOISE}
 
+\pgfplotstableread[col sep=comma,header=true]{experiments/5-CONSTRAINTS-0-NOISE-ms.csv}\datafileENOISE
+\pgfplotstablecreatecol[copy column from table={\datafileENOISE}{[index] 0}] {length50} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileENOISE}{[index] 1}] {symba50} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileENOISE}{[index] 2}] {actions50} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/5-CONSTRAINTS-1-NOISE-ms.csv}\datafileFNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileFNOISE}{[index] 0}] {length51} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileFNOISE}{[index] 1}] {symba51} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileFNOISE}{[index] 2}] {actions51} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/5-CONSTRAINTS-2-NOISE-ms.csv}\datafileGNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileGNOISE}{[index] 0}] {length52} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileGNOISE}{[index] 1}] {symba52} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileGNOISE}{[index] 2}] {actions52} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/5-CONSTRAINTS-3-NOISE-ms.csv}\datafileHNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 0}] {length53} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 1}] {symba53} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 2}] {actions53} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/7-CONSTRAINTS-0-NOISE-ms.csv}\datafileENOISE
+\pgfplotstablecreatecol[copy column from table={\datafileENOISE}{[index] 0}] {length70} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileENOISE}{[index] 1}] {symba70} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileENOISE}{[index] 2}] {actions70} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/7-CONSTRAINTS-1-NOISE-ms.csv}\datafileFNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileFNOISE}{[index] 0}] {length71} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileFNOISE}{[index] 1}] {symba71} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileFNOISE}{[index] 2}] {actions71} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/7-CONSTRAINTS-2-NOISE-ms.csv}\datafileGNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileGNOISE}{[index] 0}] {length72} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileGNOISE}{[index] 1}] {symba72} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileGNOISE}{[index] 2}] {actions72} {\datafileANOISE}
+
+\pgfplotstableread[col sep=comma,header=true]{experiments/7-CONSTRAINTS-3-NOISE-ms.csv}\datafileHNOISE
+\pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 0}] {length73} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 1}] {symba73} {\datafileANOISE}
+\pgfplotstablecreatecol[copy column from table={\datafileHNOISE}{[index] 2}] {actions73} {\datafileANOISE}
+
+
 
 \begin{table*}[t!]
 \begin{center}
