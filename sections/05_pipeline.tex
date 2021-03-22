@@ -1,7 +1,7 @@
 
 
 \subsection{$\Sigma$-encoding for conformance checking}\label{sec:dadtap}
-As per the previous considerations, we want to show that, to solve the trace alignment problem for data-aware declarative conformance checking, it is sufficient to provide a specific characterization of $\Sigma$. $\Sigma$ will be used to generate an automaton accepting symbols in $\Sigma$ and the automaton will be used to test log traces represented as finite sequences in $\Sigma^*$. The proposed approach for obtaining $\Sigma$ from a (data-aware) Declare model $\varphi_{\mathcal{M}}$ is sketched in Figure~\ref{fig:twoexamples}, and described in detail in the following.
+As per the previous considerations, we want to show that, to solve the trace alignment problem for data-aware declarative conformance checking, it is sufficient to provide a specific characterization of $\Sigma$. $\Sigma$ will be used to generate an automaton accepting symbols in $\Sigma$ and the automaton will be used to test log traces represented as finite sequences in $\Sigma^*$. The proposed approach for obtaining $\Sigma$ from a (data-aware) Declare model $\mathcal{M}$ is sketched in Figure~\ref{fig:twoexamples}, and described in detail in the following.
 
 \begin{table*}[!t]
 	\centering
@@ -37,7 +37,7 @@ As per the previous considerations, we want to show that, to solve the trace ali
 	\bottomrule
 \end{tabular}%
 		}
-		\caption{Atom generations for \texttt{B} by data space partitioning via $\times_{k\in K}\mu(\texttt{B},k)$}
+		\caption{Atom generation for \texttt{B} by data space partitioning via $\times_{k\in K}\mu(\texttt{B},k)$}
 		\label{tab:dimGMM}
 	\end{subtable}
 \end{table*}
@@ -51,7 +51,7 @@ As per the previous considerations, we want to show that, to solve the trace ali
 
 In the first \emph{Declare2LTL}$_f$ step, we exploit the usual conversion of each single Declare clause into an LTL$_f$ formula (see Table 1) in the \textit{negated normal form} \cite{LiPZVR20}, where negations are possibly pushed inside atoms ``$\texttt{A}.k\;\Re\; c$'' by replacing $\Re$ with its negation.
 \begin{ex} \label{ex:first}
-The Declare model $\mathcal{M}$ containing the  clauses $\mathsf{Response}(\texttt{C},\texttt{B},\;\texttt{B}.x>0)$ and
+The Declare model $\mathcal{M}$ containing clauses $\mathsf{Response}(\texttt{C},\texttt{B},\;\texttt{B}.x>0)$ and
 $\mathsf{Existence}(\texttt{B},\; \texttt{B}.x>3\wedge \texttt{B}.y=0)$ is represented as the intermediate LTL$_f$ formula $\varphi_{\mathcal{M}}=\lglobally(\neg\texttt{C}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$.
 \end{ex}
 
@@ -75,10 +75,10 @@ In the second \textit{decomposition} step, for each compound condition $\psi=\te
 %%In step 3, we collect the data-aware predicates ``$\texttt{A}.\textit{var}\;\Re\;c$'' from all the model's clauses and group them by $\texttt{A}.\textit{var}$; each of these predicates is \textit{decomposed}
 into a disjunction of maximal non-overlapping data-aware predicates. This task can be efficiently computed via interval trees \cite{inttree}. Last, we replace the atoms in each LTL$_f$ formula by its decomposed representation.%, if any.
 \begin{continueexample}{ex:first}\label{ex:second}
-Table~\ref{tab:dimFFT} shows the interval decomposition results for the $\psi$ extracted from $\mathcal{M}$. E.g., predicates $\texttt{B}.x>3$ and $\texttt{B}.x>0$ are first represented as intervals $\interval({3,+\infty})$ and $\interval({0,+\infty})$, and then decomposed into disjoint sub-intervals $\interval({-\infty,0}]$, $\interval({0,3}]$, and $\interval({3,+\infty})$. As a result, $\varphi_{\mathcal{M}}$ is decomposed into $\varphi_{\mathcal{M}}^d=\lglobally(\neg\texttt{C}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge (0<\texttt{B}.x\leq 3\vee \texttt{B}.x> 3) \wedge \texttt{B}.y=0)$
+Table~\ref{tab:dimFFT} shows the interval decomposition results for the $\psi$ extracted from $\mathcal{M}$. E.g., predicates $\texttt{B}.x>3$ and $\texttt{B}.x>0$ are first represented as intervals $\interval({3,+\infty})$ and $\interval({0,+\infty})$, and then decomposed into disjoint sub-intervals $\interval({-\infty,0}]$, $\interval({0,3}]$, and $\interval({3,+\infty})$. As a result, $\varphi_{\mathcal{M}}$ is decomposed into $\varphi_{\mathcal{M}}^d=\lglobally(\neg\texttt{C}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge (0<\texttt{B}.x\leq 3\vee \texttt{B}.x> 3) \wedge \texttt{B}.y=0)$.
 \end{continueexample}
 
-In the third \textit{atomization} step, we put an atom $\texttt{A}\in\textsf{Act}$ in $\Sigma$ if the map $\mu(\texttt{A},k)$ is empty for each key $k\in K$; otherwise, given all the keys $k_{\texttt{A}_1},\dots,k_{\texttt{A}_h}\in K$ for which the map $\mu(\texttt{A},k_{\texttt{A}_i})$ is not empty, we partition the data space by combining the non-overlapping intervals as $\mu(\texttt{A},k_{\texttt{A}_1})\times\cdots\times\mu(\texttt{A},k_{\texttt{A}_h})$ obtained from the previous step. For each of these interval combinations, we generate a fresh atom and put it in $\Sigma$.
+In the third \textit{atomization} step, we put an atom $\texttt{A}\in\textsf{Act}$ in $\Sigma$ if the map $\mu(\texttt{A},k)$ is empty for each key $k\in K$; otherwise, given all the keys $k_{\texttt{A}_1},\dots,k_{\texttt{A}_h}\in K$ for which the map $\mu(\texttt{A},k_{\texttt{A}_i})$ is not empty, we partition the data space by combining the non-overlapping intervals obtained from the previous step as $\mu(\texttt{A},k_{\texttt{A}_1})\times\cdots\times\mu(\texttt{A},k_{\texttt{A}_h})$. For each of these interval combinations, we generate a fresh atom and put it in $\Sigma$.
 \begin{continueexample}{ex:first}
 Label \texttt{C} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{C}. On the other hand, label \texttt{B} is associated to several atoms obtained by partitioning the data space via the intervals in Table~\ref{tab:dimFFT}. Table~\ref{tab:dimGMM} shows the atom decomposition of \texttt{B} via data intervals over keys $x$ and $y$, which induce a space partitioning of 9 intervals, for which we generate nine distinct atoms $p_1\dots p_9$. As a result, we obtain $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\Set{\texttt{C}}$ in Figure~\ref{fig:twoexamples}.
 \end{continueexample}
@@ -95,7 +95,7 @@ Starting from these atoms, we firstly replace the compound conditions in the LTL
 With reference to our running example, we replace the compound conditions in $\varphi_{\mathcal{M}}^d$ with the previously generated atoms; the compound condition $\texttt{B}\wedge \texttt{B}.x>0$ is replaced by all the possible configurations of $y$ and data intervals $0<\texttt{B}.x\leq 3$ and $\texttt{B}.x>3$, which are identified by the disjunction $p_4\vee p_5\vee p_6\vee p_7\vee p_8\vee p_9$. On the other hand, $\texttt{B}\wedge\texttt{B}.x>3\wedge \texttt{B}.y=0$ can be directly replaced by atom $p_8$: this results into an equivalent formula $\varphi_{\mathcal{M}}'=\lglobally(\neg\texttt{C}\vee(\lfuture(p_4\vee p_5\vee p_6\vee p_7\vee p_8\vee p_9)))\wedge \lfuture p_8$.
 Given a log $\mathcal{L}=\{\texttt{B\{x=1,y=0\}C\{x=6\}C\{x=4\}},
 \texttt{ C\{x=8\}B\{x=10,y=0\}}\}$,
-all the events labeled as \texttt{C} are replaced with the atom \texttt{C}, as there are no (data) conditions in $\mathcal{M}$ that we can exploit to partition the data space. On the other hand, each event labeled as \texttt{B} is replaced by an equivalent atom in $\Sigma$: event \texttt{B\{x=1,y=0\}} is uniquely represented by $p_5$, while event \texttt{B\{x=10,y=0\}} is uniquely represented by $p_8$. %Similar considerations can be drawed for the $\psi$ compound atoms in $\varphi_{\mathcal{M}}$ where compound conditions are replaced into an equivalent disjunction of atoms in $\Sigma$:
+all the events labeled as \texttt{C} are replaced with atom \texttt{C}, as there are no (data) conditions in $\mathcal{M}$ that we can exploit to partition the data space. On the other hand, each event labeled as \texttt{B} is replaced by an equivalent atom in $\Sigma$: event \texttt{B\{x=1,y=0\}} is uniquely represented by $p_5$, while event \texttt{B\{x=10,y=0\}} is uniquely represented by $p_8$. %Similar considerations can be drawed for the $\psi$ compound atoms in $\varphi_{\mathcal{M}}$ where compound conditions are replaced into an equivalent disjunction of atoms in $\Sigma$:
 This transformation results into a set of string sequences $T=\{{ p_5\;\texttt{C\;C}}, \texttt{ C}\;p_8\}$.
 
 \end{continueexample}
@@ -104,7 +104,7 @@ This transformation results into a set of string sequences $T=\{{ p_5\;\texttt{C
 After generating $\varphi_{\mathcal{M}}'$, we can exploit existing approaches \cite{Westergaard11} to generate a DFA that only accepts sequences satisfying $\varphi_{\mathcal{M}}'$. With reference to the previous example, the first trace is not conformant with $\mathcal{M}$, since the first sequence is not accepted by the associated automaton. Similarly, the second trace is conformant with $\mathcal{M}$, since the second sequence is accepted by the associated DFA. In the forthcoming subsection, we will discuss how to generate repaired sequences that are accepted by the reference model.
 
 \subsection{Automaton Manipulation for Trace Alignment}\label{ssec:amfta}
-Consider a sequence $t_\sigma=t_1\cdots t_n$ generated from a trace $\sigma$, and the constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}$ generated from the Declare model $\mathcal{M}$, both generated via a set of atoms $\Sigma$. If the trace is deviant with respect to the model, we are interested in generating a repair sequence $\varrho=\varrho_1\cdots \varrho_m$ from $t_\sigma$ describing the operations to perform over $\sigma$ to make it conformant to the model $\mathcal{M}$.
+Consider a sequence $t_\sigma=t_1\cdots t_n$ generated from a trace $\sigma$, and the constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}$ generated from the Declare model $\mathcal{M}$. If the trace is deviant with respect to the model, we are interested in generating a repair sequence $\varrho=\varrho_1\cdots \varrho_m$ from $t_\sigma$ describing the operations to perform over $\sigma$ to make it conformant to $\mathcal{M}$.
 
 To realize this transformation, we consider two types of atomic violations, which can be caused by wrong (\textit{deletion}) or missing (\textit{insertion}) atoms in $\Sigma$. Differently from the non-data aware case, here, we also need to model \textit{replacement} operations, defined as a data update within one single trace event: these operations can be mimicked by a delete operation followed by an insertion, as they substitute an event within a trace with the same event where a data value has been updated. The above operations can be defined as follows:
 \begin{itemize}
@@ -144,7 +144,7 @@ The process of generating a repair sequence can be addressed by resorting to DFA
 {\includegraphics[width=.7\textwidth]{images/Aplus}}
 \caption{Augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ for $\mathcal{A}_{\varphi_{\mathcal{M}}}$.}\label{fig:aplus}
 \end{figure}
-Next, we augment $\mathcal{T}$ and $\mathcal{A}_{\varphi_{\mathcal{M}}}$ by adding transitions related to just the atomic operations of insertions and deletions: Thus, from $\mathcal{T}$ we generate the automaton $\mathcal{T}^+=(\Sigma_t^+,Q_t,q_0^t,\rho_t^+,F_t)$ having:
+Next, we augment $\mathcal{T}$ and $\mathcal{A}_{\varphi_{\mathcal{M}}}$ by adding transitions related to the atomic operations of insertions and deletions. Thus, from $\mathcal{T}$ we generate the automaton $\mathcal{T}^+=(\Sigma_t^+,Q_t,q_0^t,\rho_t^+,F_t)$ having:
 \begin{itemize}
 	\item $\Sigma_t^+$ extending $\Sigma_t\subseteq \Sigma$ by adding an insertion $\textit{ins\_}\phi$ for each atom $\phi\in\Sigma_t\cup\Sigma$ and a deletion $\textit{del\_}\phi$ for each atom  $\phi\in\Sigma_t$.
 	\item $\rho_t^+$ extending $\rho_t$ by adding deletions $\rho_t^+(p,\textit{del\_}\phi)=q$ for each transition $\rho_t(p,\phi)=q$; and, for all atoms $\phi\in\Sigma\cup\Sigma_t$ and states $q\in Q_t$, we add insertions $\rho_t^+(q,\textit{ins\_}\phi)=q$.
