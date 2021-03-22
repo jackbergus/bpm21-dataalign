@@ -37,7 +37,7 @@
 
 
 \subsection{Data-Aware Declare}\label{ssec:dad}
-Declare is a declarative process modeling language. A Declare model $\mathcal{M}$ is described as a set of constraints $\Set{c_1,\dots,c_m}$ that must be simultaneously satisfied throughout a process execution.
+Declare is a declarative process modeling language \cite{DBLP:conf/edoc/PesicSA07}. A Declare model $\mathcal{M}$ is described as a set of constraints $\Set{c_1,\dots,c_m}$ that must be simultaneously satisfied throughout a process execution.
 %Due to space limitations, we avoid providing a detailed description of Data-Aware Declare \cite{}, henceforth simply referred as Declare, and we will only describe its general features.
 Such constraints express either positive (or negative) dependencies between two events having labels in $\textsf{Act}$, or quantify the occurrence of events having a specific label in $\textsf{Act}$. In the first case, one of the two clause labels is called \textit{activation}, and the other \textit{target}; while testing a trace $\sigma$ for conformance over this clause, the presence of the activation label in $\sigma$ triggers the clause verification, requiring the (non-)execution of an event containing the target label in the same trace.
 
