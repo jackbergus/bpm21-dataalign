@@ -37,7 +37,7 @@ To capture the structure of the automaton and to monitor its evolution, we defin
 	\item \PDDL{(cur\_state ?s - state)} holds if \texttt{s} is the current state of a constraint/trace automaton.
 	\item \PDDL{(final\_state ?s - state)} holds if \texttt{s} is a final state of a constraint/trace automaton.
 \end{itemize}
-It is worth to notice that, if a generic activity \texttt{B} is associated to some data condition, \texttt{B} will be represented as a set of atoms $p_1$, $p_2$, $p_3$, etc. in $\mathcal{P_D}$, see for example Table \ref{tab:dimGMM}. This means that, for any combinations of atoms $p_i$ - $p_j$ associated to \texttt{B}, there will exist an instance of the predicate \PDDL{(atoms)} that will hold for $p_i$ and $p_j$.
+It is worth to notice that, if a generic activity \texttt{A} is associated to some data condition, \texttt{A} will be represented as a set of atoms $p_1$, $p_2$, $p_3$, etc. in $\mathcal{P_D}$, see for example Table \ref{tab:dimGMM}. This means that, for any combinations of atoms $p_i$ - $p_j$ associated to \texttt{A}, there will exist an instance of the predicate \PDDL{(atoms)} that will hold for $p_i$ and $p_j$.
 %
 %Label \texttt{C} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{C}. On the other hand, label \texttt{B} is associated to several atoms obtained by partitioning the data space via the intervals
 %
