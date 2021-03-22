@@ -13,7 +13,7 @@
 
 \sloppypar
 
-In this section, we show how, given an augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained from a LTL$_f$ formula  $\varphi_{\mathcal{M}}$, and an augmented trace automaton $\T^+$ obtained from a trace $t$, we build a cost-optimal planning domain $\mathcal{P_D}$ and a problem instance $\mathcal{P}$ in PDDL. $\mathcal{P_D}$ and $\mathcal{P}$ can be used to feed any state-of-the-art planners accepting PDDL 2.1 specification, as discussed in Section \ref{ssec:ap}.
+In this section, we show how, given an augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained from an LTL$_f$ formula  $\varphi_{\mathcal{M}}$, and an augmented trace automaton $\T^+$ obtained from a trace $t$, we build a cost-optimal planning domain $\mathcal{P_D}$ and a problem instance $\mathcal{P}$ in PDDL. $\mathcal{P_D}$ and $\mathcal{P}$ can be used to feed any state-of-the-art planners accepting PDDL 2.1 specifications, as discussed in Section \ref{ssec:ap}.
 %
 A solution plan for $\mathcal{P}$ amounts to the set of interventions of minimal cost to repair the trace with respect to $\varphi_{\mathcal{M}}'$.
 
@@ -37,14 +37,14 @@ To capture the structure of the automaton and to monitor its evolution, we defin
 	\item \PDDL{(cur\_state ?s - state)} holds if \texttt{s} is the current state of a constraint/trace automaton.
 	\item \PDDL{(final\_state ?s - state)} holds if \texttt{s} is a final state of a constraint/trace automaton.
 \end{itemize}
-It is worth to notice that, if a generic activity \texttt{A} is associated to some data condition, \texttt{A} will be represented as a set of atoms $p_1$, $p_2$, $p_3$, etc. in $\mathcal{P_D}$, see for example Table \ref{tab:dimGMM}. This means that, for any combinations of atoms $p_i$ - $p_j$ associated to \texttt{A}, there will exist an instance of the predicate \PDDL{(atoms)} that will hold for $p_i$ and $p_j$.
+It is worth to notice that, if a generic activity \texttt{A} is associated to some data condition, \texttt{A} will be represented as a set of atoms $p_1$, $p_2$, $p_3$, etc. in $\mathcal{P_D}$, see for example Table \ref{tab:dimGMM}. This means that, for any combination of atoms $p_i$ - $p_j$ associated to \texttt{A}, there will exist an instance of the predicate \PDDL{(atoms)} that will hold for $p_i$ and $p_j$.
 %
 %Label \texttt{C} is never associated to a data condition, and therefore it will be associated to one single atom \texttt{C}. On the other hand, label \texttt{B} is associated to several atoms obtained by partitioning the data space via the intervals
 %
-Furthermore, we define a \emph{numeric fluent} \PDDL{total-cost} to keep track of the cost of the violations. Notice that: \myi in PDDL, parameters are written with a question mark character `?' in front, and the dash character `-' is used to assign types to parameters; and \myii we remain consistent with the PDDL terminology, which allows for both the values of predicates and fluents to change as a result of the execution of an action.
+Furthermore, we define a \emph{numeric fluent} \PDDL{total-cost} to keep track of the cost of the violations. Notice that: \myi in PDDL, parameters are written with a question mark character `?' in front, and the dash character `-' is used to assign types to parameters; and \myii we remain consistent with the PDDL syntax, which allows the values of both predicates and fluents to change as a result of the execution of an action.
 %
 
-Planning actions are used to express the \emph{repairs} on the original trace $t$. Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions. In our encoding, we have defined four actions to perform \emph{synchronous moves} both in the trace/constraint automaton, or to add/remove/replace activities to/from/in the constraint and trace automata. In the following, we suppose that actions \PDDL{ins}, \PDDL{del} and \PDDL{repl} have cost equal to 1. We notice that their cost can be customized to define the severity of a violation.
+Planning actions are used to express the \emph{repairs} on the original trace $t$. Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions. In our encoding, we have defined four actions to perform \emph{synchronous moves} both in the trace/constraint automaton, or to add/remove/replace activities to/from/in the constraint and trace automata. In the following, we suppose that actions \PDDL{ins}, \PDDL{del} and \PDDL{repl} have cost equal to 1. However, their cost can be customized to define the severity of a violation or to force priorities among actions.
 %
 %\begin{tiny}
 %	\begin{verbatim}	
@@ -101,7 +101,7 @@ Notice that, while \PDDL{del} yields a \emph{single} move in the trace automaton
 %
 Then, \PDDL{ins} is performed only for transitions involving activity \PDDL{e} connecting two states of the constraint automaton, with the current state of the trace automaton that remains the same after the execution of the action.
 %
-Finally, \PDDL{repl} can be seen as a synchronous combination of a \PDDL{del} and an \PDDL{ins}. It yields one move on the trace automaton and one on the constraint automaton, involving two atoms \PDDL{e1} and \PDDL{e2} belonging to a same activity label, i.e., such that the predicate \PDDL{(atoms ?e1 ?e2)} holds.
+Finally, \PDDL{repl} can be seen as a synchronous combination of a \PDDL{del} and an \PDDL{ins}. It yields one move on the trace automaton and one on the constraint automaton, involving two atoms \PDDL{e1} and \PDDL{e2} associated to a same activity label, i.e., such that the predicate \PDDL{(atoms ?e1 ?e2)} holds.
 
 \smallskip
 \noindent
