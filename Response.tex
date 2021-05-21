@@ -77,4 +77,46 @@ In this section, we introduce the notation we exploit for the repair sequences g
 %
 %\AR*But I actually have no idea what you were talking about.
 
+\section{Reviewer \#2}
+
+\RC My main concern is that within the scope of BPM, the planning part could use with a bit more detail. E.g. Section 3 mentions the use of a STRIPS fragment without any context. [\dots]
+
+\AR The STRIPS fragment allows the formalization of the planning problem as in the previous paragraph. We added this information.
+
+\RC [\dots] Next, Section 5.3 does not link that well with 5.1/5.2, and the predicates are understandable but not intuitive given the prior formalisation. It is a hard balancing act, but this could confuse some non-informed readers, also concerning the suitability of planning. Can this be formulated as other optimisation exercises as well? The related work section also does not line up the latest in planning to quickly get a grasp of the field, except for the recent usage of it in the declarative process modelling community.
+
+\AR [Andrea?]
+
+\RC From Section 5.4, it is not completely clear whether the planning optimises just the single trace, or the cost for the whole model as the planning problem focuses on a goal condition which lines up with a (single) constraint automaton. Given that the experimental evaluation deals with full Declare models, it would have been nice to have a better insight into how the overarching output could inform the improvement/repair of the whole model with an example.
+
+\AR In the present paper, we are interested in repairing the trace so to make it conformant to the model, as we assume that models represent the golden standard while the traces might contain the anomalies to be detected. Still, we repair a trace by taking the model as a whole via its automaton representation. We rephrased such section to clarify our intent.
+
+
+\subsection{Minor Comments}
+
+%%%
+\RC Abstract: ‘…in the context data-aware declarative…’ : rephrase
+
+\AR Done as suggested by Reviewer \#1
+
+%%%
+\RC Page 2: can can: repetition
+
+\AR Done
+
+%%%
+\RC Page 3: two constraints could be not in conflict: rephrase
+
+\AR Done
+
+%%%
+\RC  Page 5, very minor: walking on the footsteps: walking in
+
+\AR Done (see also Reviewer \#1)
+
+%%%
+\RC Page 6: post mortem – just post analysis? Sounds quite strong
+
+\AR We changed that into ``trace completion''.
+
 \end{document}
