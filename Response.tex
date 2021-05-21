@@ -119,4 +119,23 @@ In this section, we introduce the notation we exploit for the repair sequences g
 
 \AR We changed that into ``trace completion''.
 
+\section{Reviewer \#3}
+
+%%%
+\RC 1) in Section 3.2 you say that your atoms have the form “A.k R c”, where c is a constant. Would your framework easily extend to the case where you have atoms of the form ``A.k $\Re$ A’.k’'' ? I think that your $\Sigma$-encoding (what I might call “cellular decomposition”) can be extended to create a propositional representation. Would other parts of the construction also carry through? (One sticking point might be for the case of inserting steps and inventing values).
+
+\AR The author made some
+
+%%%
+\RC 2) in Section 4 you say that each event trace should be associated to just one activity label. But, if I understand your running example you seem to have both B and C as ``labels'', which I take to be ``activity labels''. Is there an inconsistency here? Also, if you require that there is just one activity label, then why bother with them? [\dots]
+
+\AR In \S4, we said that ``each event trace'' (so, each event which is part of the trace) should contain just one label. So, each trace might be composed of events carrying out different events, where each of them might have a distinct label. 
+
+%%%
+\RC [\dots]  Also, if I wanted to use multiple activity labels then I could simulate that by using a single dummy activity label and using a field in the payload to hold my multiple activity labels, right?
+
+\AR We thank the reviewer for this observation, which is also motivated on our previous work on extending the property graph model. We added it as a further reference. 
+
+\section{Reviewer \#4}
+
 \end{document}
