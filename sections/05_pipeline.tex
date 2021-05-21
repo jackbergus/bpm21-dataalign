@@ -117,7 +117,7 @@ Each of these operations has an associated cost, either quantifying the severity
 
 We can now define the conformance checking problem as follows:
 \begin{definition}[Log/Declare Conformance Checking]
-Given a trace $\sigma$ and a Declare model $\mathcal{M}$, either $\sigma$ conforms to $\mathcal{M}$, or $\sigma$ is deviant and it exists a repair sequence $\varrho$ both making $\sigma$ non-deviant for $\mathcal{M}$ and guaranteeing a minimal transformation cost.
+Given a trace $\sigma$ and a Declare model $\mathcal{M}$, either $\sigma$ conforms to $\mathcal{M}$, or $\sigma$ is deviant and \DIFadd{there} exists a repair sequence $\varrho$ both making $\sigma$ non-deviant for $\mathcal{M}$ and guaranteeing a minimal transformation cost.
 \end{definition}
 
 %\texttt{\color{red}[TODO]} we consider insertions and deletions as possible repairs, while substitutions can be modeled by deletions followed by insertions. Synchronizations are \texttt{noops} requiring that a trace $\sigma$ at step $k$ contains a predicate $\phi$.
