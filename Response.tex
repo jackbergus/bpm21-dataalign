@@ -1,7 +1,7 @@
 \documentclass{article}
 	\def\papertitle{Aligning Data-Aware Declarative Process Models and Event Logs}
-	\def\authors{G. Bergami, F. M. Maggi, A. Marrella, M. Montali}
-	\def\journal{BPM'21}
+	\def\authors{G. Bergami, F. M. Maggi, A. Marrella, and M. Montali}
+	\def\journal{19th International Conference on Business Process Management (BPM 2021)}
 \input{templates/AR_to_RC.tex}
 
 \section{Reviewer \#1}
@@ -122,9 +122,9 @@ In this section, we introduce the notation we exploit for the repair sequences g
 \section{Reviewer \#3}
 
 %%%
-\RC 1) in Section 3.2 you say that your atoms have the form “A.k R c”, where c is a constant. Would your framework easily extend to the case where you have atoms of the form ``A.k $\Re$ A’.k’'' ? I think that your $\Sigma$-encoding (what I might call “cellular decomposition”) can be extended to create a propositional representation. Would other parts of the construction also carry through? (One sticking point might be for the case of inserting steps and inventing values).
+\RC 1) in Section 3.2 you say that your atoms have the form ``A.k R c'', where c is a constant. Would your framework easily extend to the case where you have atoms of the form ``A.k $\Re$ A’.k’'' ? I think that your $\Sigma$-encoding (what I might call ``cellular decomposition'') can be extended to create a propositional representation. Would other parts of the construction also carry through? (One sticking point might be for the case of inserting steps and inventing values).
 
-\AR The author made some
+\AR We merged the response to such comments with the concerns on \S3.2 by the next reviewer.
 
 %%%
 \RC 2) in Section 4 you say that each event trace should be associated to just one activity label. But, if I understand your running example you seem to have both B and C as ``labels'', which I take to be ``activity labels''. Is there an inconsistency here? Also, if you require that there is just one activity label, then why bother with them? [\dots]
@@ -137,5 +137,74 @@ In this section, we introduce the notation we exploit for the repair sequences g
 \AR We thank the reviewer for this observation, which is also motivated on our previous work on extending the property graph model. We added it as a further reference. 
 
 \section{Reviewer \#4}
+
+\subsection{Major Concerns}
+
+\RC Related Work: While the discussion about applicability of alignment-based approaches for conformance checking with procedural models is informative and concise, the discussion of related approaches for declarative models comes up a bit too short. The authors mention two approaches directly related to the proposed approach that ``only'' lack repair strategies. It would be interesting to know, if those approaches are not able to provide repair strategies or if the authors of the cited publications simply left this out of scope. In case of the latter, it is questionable to ``discard'' those approaches without a thorough comparison. If the underlying formalism does not allow for repair strategies instead, this should be stated clearly in section 2.
+
+\RC The main flaw of this (apart from this well-written and sound paper): The paper rather directly jumps into an explanation of how to transform the model-trace alignment problem into a planning problem. I completely miss any discussion of alternative solution strategies and, consequently, advantages and drawbacks of the proposed approach, too. What about transforming the problem into a satisfiability problem and applying optimized SAT solvers instead? It is clear that space is limited but if a new tool is suggested it is essential to comment on alternative solutions and reasons why the strategy chosen is superior.
+
+\AR Some of the discussion of the Related Works was removed due to the lack of space. As we were granted to extend the paper with one more page, we re-introduced such comments in the Related Works section. In particular, we expanded the discussion related to one of our references, that was already using SAT solvers.
+
+%%%
+\RC Section 3.2: Though I like the concise definition of MP-Declare, when referring to activation and target conditions one might ask for the correlation conditions, too. Is it possible to integrate them in the suggested approach, too, or is this a drawback? If so, this should be clearly mentioned as a limitation in the overall evaluation, since it restricts application scenarios to those that do not require correlation conditions.
+
+\AR Despite this is actually a limitation, in \S3.2 we also motivated our choice in the light of previous works such as [17,6], where no correlation conditions are considered. The adoption of such conditions would require us to either support our PDDL approach to support Büchi automata, or to substitute a planning system with a data-aware knowledge base. We thank the reviewer for giving us an exhaustive motivation for extending our \S7 with the former considerations.
+
+
+%%%
+\RC Section 4, assumption b): ``we restrict the space of the possible alignments of the log trace repairs to the traces generated by the automaton representation of the Declare model'' -> It was announced that the assumptions (and restrictions) can be inferred from the literature. However, assumption b) lacks a corresponding reference. Furthermore, to me it is not clear what consequences arise from this restriction. Actually, this whole sentence part is hard to read and I want to encourage the authors to simplify it for reasons of comprehensibility.
+
+\AR We added the reference to the paper [7] from where we drew our assumption. We also simplified the sentence as suggested: the aim is to restrict the possible repairs of a given trace to only the traces that are both conformant to the Declare model and are  generated by its associated automaton. 
+
+%%%
+\RC p. 9: ``E.g., by assigning a higher cost to insertions and deletions and a lower one to replacements, we will favor replacements when possible.'' -> I wonder how appropriate costs for the three operations can be determined. Is this arbitrary? I am also a bit concerned about uniqueness. Let us consider, for instance, the response constraint (and let us stick to plain Declare): response(A,B). This means a trace like AAAAC would violate the constraint. In that case it is easy to see that it can be repaired by inserting a B. But what about the trace AC? I could delete A or insert a B. From an algorithmic perspective it must be defined whether the insertion or the deletion is applied. One way would be to choose different costs for the two operations. This should be briefly clarified (probably at the end of section 5.2).
+
+\AR As customary in probabilistic trace alignments, preferred repair strategies are always modeled by assigning different costs to insertions, deletions, and replacements.  We expanded our example so to better describe the different possible repair solutions.
+
+%%%
+
+
+
+\subsection{Minor Comments}
+
+
+\RC p. 1: ``while the former fully enumerate the set of all the possible allowed traces, the latter provide a compact process representation'' -> This is a bit oversimplified. The first part is at least language-dependent. In BPMN, for instance, we have a concept of swimlanes but they lack a clear definition of their execution semantics. Hence, the model is in that regard underspecified, which means that the model is not able to enumerate the set of all possible allowed traces. Considering the data perspective, it is even worse. Additionally, if declarative models are compact depends on the processes they represent. For instance, a simple sequence of two activities can be represented in a compact way in BPMN but requires comparatively many constraints. I want to encourage the authors to reformulate this sentence.
+
+\AR We rephrased the sentence by only referring to modeling languages (or fragments of such languages) with clear execution semantics, while removing any reference to the compactness of declarative models' representation. 
+
+%%%
+\RC p. 5: What are numeric fluents? I’m not an expert in Planning Problems but this seems to be a specific term of the PDDL language and, consequently, should be introduced to improve comprehensibility.
+
+\AR In PDDL literature, numerical global variables are often referred as numeric fluents. We added this clarification in the text. 
+
+%%%
+\RC At the end of this section: ``We also freely assume that missing values are represented with specific values, such as an empty string, -1, or $\infty$, depending on the type.'' -> Declaring a set of maybe valid values (an empty string could be meaningful, too), is on the one hand valid but on the other hand questionable since it might lead to misbehavior in practical applications. Hence, it should be mentioned as a limitation of the approach in the overall evaluation.
+
+\AR We provided this notion from a data-cleaning perspective, where missing information should be imputed with some real-world values. As our implementation relies on POSets, we can always generalize the argument by assuming that any missing value could be represented by a minimal element  being neither a specific float nor a string value. We rephrased our paper accordingly.
+
+%%%
+\RC p. 13: Until this page I have tried to figure out what the notion of a ``goal condition'' is and which role it plays for the proposed alignment approach. Maybe this could be clarified (probably with a simplified summary) earlier in the paper.
+
+%%%
+\RC Abstract: ``in the context data-aware declarative process models'' -> ``in the context of data-aware declarative process models''
+
+\AR Done (see also Reviewer \#1)
+
+%%%
+\RC p. 2: ``After representing the data-aware'' -> formatting issue (consider ``overfull hbox'' warnings in your LaTeX editor)
+
+\AR Done.
+
+%%%
+\RC In the next line: ``using a data agnostic LTL…'' -> ``… data-agnostic''
+
+\AR Done.
+
+%%%
+\RC p. 5: ``should be associated to just one activity label'' -> ``… associated with just one …''
+
+\AR Done.
+
 
 \end{document}
