@@ -14,12 +14,24 @@ Giacomo Bergami, Fabrizio Maria Maggi, Andrea Marrella, Marco Montali
 
 \section*{MetaReview}
 
+\RC The main weakness of the paper is that the authors are in two minds about the paper. This becomes clear in the presentation of the paper. It presents a) a novel conversion of data-aware alignments into data-agnostic alignments, and b) it proposes the use of automated planning techniques. However, the paper does not address the connection between the two parts sufficiently. As the initial problem can be converted to an data-agnostic alignment problem, why are current techniques insufficient for the converted trace alignment problem?
+
+\AR We thank the PC chairs and the anonymous reviewers for asking questions allowing us to consolidate our paper. We genuinely appreciated these questions, as they allowed us to gain an extra page so to re-insert key details that were previously removed due to space constraints. 
+
+\RC Therefore, an important aspect of the motivation should be a comparison with existing techniques, which is currently missing in the paper.
+
+\AR In order to overcome to such limitations, we expanded the Related Works section and provided a more extended analysis on the already-existing techniques for data-aware alignments. Please see our answers to all of the reviews for more details.
+
+\RC The motivation and justification of the connection between the two parts should be improved to accept the paper at the BPM main conference.
+
+\AR In order to address such a suggestion, we also bridged the notations from the two sections, and added explicit details on how the alignment problem is implemented as a goal-oriented planner program.
+
 \section{Reviewer \#1}
 \subsection{On the usage of Automated Planning}\label{sec:uap}
 
 \RC What I do not fully understand is the need to use Automated Planning techniques here. It seems that the alignment problem on the automatons is not really different from the well-known alignment problem, using synchronous moves, log moves (inserts in this paper), and model moves (deletes). As such, it seems that the paper introduces two ideas that seem orthogonal: How can we align data-aware declarative models to event logs, and how can Automated Planning techniques be used to find alignments. As such, it feels that this paper lacks a single focus. As a result, if the paper would be accepted, I believe that the authors should make clear why the known alignment techniques do not work here. If these do work, the section on the Automated Planning is very odd. To me, it seems like the paper should be split into two papers.
 
-\AR [Comment by Marco, explanation by Andrea in the Paper]
+\AR We thank the reviewer for this observation, as it allows us to clarify the paper’s contribution. Goal-oriented planning has been chosen to show that the conceptual framework can be translated into an operational framework by taking existing solid techniques and extending them appropriately. As stated in the introduction, we exploited the SymBA*-2 planner, that was effectively adopted in our previous work for trace alignment tasks \cite{XuLZ17a,LeoniM17}. In \cite{XuLZ17a}, we showed that such solution outperformed the state-of-the art aligner exploiting A* search. Still, the augmented automata introduced in the present paper have several more edges, as the atomization steps increase the number of possible labels as well as the overall number of states. As we needed to show the feasibility of our approach, we choose the aligner approach providing the best alignment performances: as stated in the experiment section, SymBA*-2’s heuristics efficiently handle the aforementioned increase in complexity with acceptable performance in case of a reasonably large number of data-aware constraints. Therefore, the proposed approach is sufficiently mature to be described in one single paper.
 
 \subsection{Minor Comments}
 
@@ -102,7 +114,7 @@ In this section, we introduce the mathematical notation for repair sequences gen
 
 \RC From Section 5.4, it is not completely clear whether the planning optimises just the single trace, or the cost for the whole model as the planning problem focuses on a goal condition which lines up with a (single) constraint automaton. Given that the experimental evaluation deals with full Declare models, it would have been nice to have a better insight into how the overarching output could inform the improvement/repair of the whole model with an example.
 
-\AR In the present paper, we are interested in repairing the trace so to make it conformant to the model, as we assume that models represent the golden standard while the traces might contain the anomalies to be detected. Still, we repair a trace by taking the model as a whole via its automaton representation. We rephrased such section to clarify our intent.
+\AR In the present paper, we are interested in repairing the trace so as to make it conformant to the model, as we assume that models represent the golden standard while the traces might contain the anomalies to be detected. Still, we repair a trace by taking the model as a whole via its automaton representation. We rephrased such a section to clarify our intent.
 
 
 \subsection{Minor Comments}
@@ -209,7 +221,7 @@ The adoption of such conditions would require us to either support our PDDL appr
 %%%
 \RC p. 5: What are numeric fluents? I’m not an expert in Planning Problems but this seems to be a specific term of the PDDL language and, consequently, should be introduced to improve comprehensibility.
 
-\AR In PDDL literature, numerical global variables are often referred as numeric fluents. We added this clarification in the text. 
+\AR A (numeric) fluent is a variable which applies to zero or more objects and maintains a value throughout the duration of the plan. Numeric fluents can be altered through the effects of both actions: a numeric fluent is used in our scenario for keeping track of the alignment cost. We added this clarification in the text. 
 
 %%%
 \RC At the end of this section: ``We also freely assume that missing values are represented with specific values, such as an empty string, -1, or $\infty$, depending on the type.'' -> Declaring a set of maybe valid values (an empty string could be meaningful, too), is on the one hand valid but on the other hand questionable since it might lead to misbehavior in practical applications. Hence, it should be mentioned as a limitation of the approach in the overall evaluation.
@@ -221,6 +233,15 @@ The adoption of such conditions would require us to either support our PDDL appr
 
 %%%
 \RC p. 13: Until this page I have tried to figure out what the notion of a ``goal condition'' is and which role it plays for the proposed alignment approach. Maybe this could be clarified (probably with a simplified summary) earlier in the paper.
+
+\AR We revised the introduction of \S3.3 by providing a verbose explanation of the mathematical notation that follows, i.e.:
+\begin{quote}
+	\added{Planning systems are an artificial intelligence technology showing how to reach a prefixed goal configuration given an initial world configuration by exploiting a set of actions that could be change the world configuration so to reach the goal configuration.}
+\end{quote} 
+The sequence of actions resulting from the execution of a PDDL plan provide the repair sequence that is going to be exploited to repair the trace, thus describing how the trace should be possibly transformed to be accepted by the model. In particular, the initial world configuration contains the description of the two augmented automata, thus including their initial and final states. On the other hand, actions are the alignment strategies that are enacted to reach the final goal configuration, i.e., reaching a final state in both automata. As now stated at the end of \S5.3:
+\begin{quote}
+	 \added{As the goal  requires that in both augmented automata an accepting state is reached, the actions will encode the strategies to visit both automata by exploiting their transition functions, while assigning different alignment costs to each of the strategies. When the goal is reached, the resulting action sequence (where \texttt{sync}s are stripped) represents the repair sequence $\varrho$ that we are going to exploit in the next section.}
+\end{quote}
 
 %%%
 \RC Abstract: ``in the context data-aware declarative process models'' -> ``in the context of data-aware declarative process models''

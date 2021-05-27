@@ -45,7 +45,7 @@ As per the previous considerations, we want to show that, to solve the trace ali
 \begin{figure}[!t]
 	\centering
 	%{\hspace{-1.3cm}\includegraphics[width=1.3\textwidth]{images/example_1}}
-	{\includegraphics[width=.7\textwidth]{images/example_3}}
+	{\includegraphics[width=.6\textwidth]{images/example_3}}
 	\caption{Intermediate steps required for obtaining $\Sigma=\Set{p_i|1\leq i\leq 9}\cup\{\texttt{C}\}$ from $\mathcal{M}$ and transforming $\mathcal{L}=\Set{\sigma,\sigma'}$ into a set of finite sequences $T=\Set{t_\sigma,t_{\sigma'}}$, as well as replacing atoms in $\varphi_{\mathcal{M}}$ with equivalent atoms in $\Sigma$ ($\varphi_{\mathcal{M}}'$).}\label{fig:twoexamples}
 \end{figure}
 
@@ -106,14 +106,14 @@ After generating $\varphi_{\mathcal{M}}'$, we can exploit existing approaches \c
 \subsection{Automaton Manipulation for Trace Alignment}\label{ssec:amfta}
 Consider a sequence $t_\sigma=t_1\cdots t_n$ generated from a trace $\sigma$, and the constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}$ generated from the Declare model $\mathcal{M}$. If the trace is deviant with respect to the model, we are interested in generating a repair sequence $\varrho=\varrho_1\cdots \varrho_m$ from $t_\sigma$ describing the operations to perform over $\sigma$ to make it conformant to $\mathcal{M}$.
 
-To realize this transformation, we consider two types of atomic violations, which can be caused by wrong (\textit{deletion}) or missing (\textit{insertion}) atoms in $\Sigma$. Differently from the non-data aware case, here, we also need to model \textit{replacement} operations, defined as a data update within one single trace event: these operations can be mimicked by a delete operation followed by an insertion, as they substitute an event within a trace with the same event where a data value has been updated. The above operations can be defined as follows:
+To realize this transformation, we consider two types of atomic violations, which can be caused by wrong (\textit{deletion}) or missing (\textit{insertion}) atoms in $\Sigma$. Differently from the non-data aware case \cite{Moje}, we also need to model \textit{replacement} operations, defined as a data update within one single trace event: these operations can be mimicked by a delete operation followed by an insertion, as they substitute an event within a trace with the same event where a data value has been updated. The above operations\added{, that will be later on encoded as PDDL actions,} can be defined as follows:
 \begin{itemize}
 	%\item synchronization $[\sigma_k\leftrightarrow \phi]$ aborts if $\sigma_k\neq\phi$, for  $1\leq k\leq |\sigma|$
 	\item \textit{deletion}/\texttt{del} $[\#\sigma_k\leftarrow \phi]::= \sigma_1\cdots\sigma_{k-1}\sigma_{k+1}\cdots \sigma_n$,\,\,\, for $n=|\sigma|$, $1\leq k\leq n$, and $\phi=\sigma_k$
 	\item \textit{insertion}/\texttt{ins} $[@\sigma_k\leftarrow \phi]::= \sigma_1\cdots\sigma_{k-1}\phi\sigma_{k}\cdots \sigma_n$,\,\,\,\,\,\,\,\,\,\,\,\, for $n=|\sigma|$ and $1\leq k\leq n$
 	\item \textit{replacement}/\texttt{repl} $[\sigma_k[\phi\mapsto\phi']]::=\sigma_1\cdots \sigma_{k-1}\phi'\sigma_{k+1}\cdots\sigma_n$ for $n=|\sigma|$, $1\leq k\leq n$, and $\phi=\sigma_k$
 \end{itemize}
-Each of these operations has an associated cost, either quantifying the severity of the found violation or determining which operations shall be preferred. E.g., by assigning a higher cost to insertions and deletions and a lower one to replacements, we will favor replacements when possible. The \textit{alignment cost} is defined as the number of deletions multiplied by their cost, plus the number of insertions multiplied by their cost, plus the number of replacements multiplied by their cost.
+\added{Similarly to customary cost-based trace aligners,} each of these operations has an associated cost, either quantifying the severity of the found violation or determining which operations shall be preferred. E.g., by assigning a higher cost to insertions and deletions and a lower one to replacements, we will favor replacements when possible. The \textit{alignment cost} is defined as the number of deletions multiplied by their cost, plus the number of insertions multiplied by their cost, plus the number of replacements multiplied by their cost.
 
 We can now define the conformance checking problem as follows:
 \begin{definition}[Log/Declare Conformance Checking]
@@ -137,11 +137,11 @@ The process of generating a repair sequence can be addressed by resorting to DFA
 
 \begin{figure}[!t]
 	\centering
-	{\includegraphics[width=.7\textwidth]{images/Tplus}}
+	{\includegraphics[width=.65\textwidth]{images/Tplus}}
 	\caption{Augmented trace automaton $\mathcal{T}^+$ for $t_{\sigma'}=p_5\;\texttt{C}\;\texttt{C}$.}\label{fig:tplus}
 \end{figure} \begin{figure}[!t]
 \centering
-{\includegraphics[width=.7\textwidth]{images/Aplus}}
+{\includegraphics[width=.65\textwidth]{images/Aplus}}
 \caption{Augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ for $\mathcal{A}_{\varphi_{\mathcal{M}}}$.}\label{fig:aplus}
 \end{figure}
 Next, we augment $\mathcal{T}$ and $\mathcal{A}_{\varphi_{\mathcal{M}}}$ by adding transitions related to the atomic operations of insertions and deletions. Thus, from $\mathcal{T}$ we generate the automaton $\mathcal{T}^+=(\Sigma_t^+,Q_t,q_0^t,\rho_t^+,F_t)$ having:
