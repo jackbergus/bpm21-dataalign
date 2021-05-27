@@ -2,10 +2,19 @@
 	\def\papertitle{Aligning Data-Aware Declarative Process Models and Event Logs}
 	\def\authors{G. Bergami, F. M. Maggi, A. Marrella, and M. Montali}
 	\def\journal{19th International Conference on Business Process Management (BPM 2021)}
+	\usepackage{changes}
 \input{templates/AR_to_RC.tex}
 
-\section{Reviewer \#1}
+We thank the reviewers for the thorough study and the helpful suggestions provided to improve our manuscript. We are happy to observe that the reviewers acknowledge that the paper presents an innovative idea and addresses an interesting and relevant topic. We have diligently worked in addressing all the comments, thus producing a revised version of the work, which tackles all the concerns raised by the reviewers. Due to the space limitations, we provide longer answers in this letter, and more compact descriptions are added to the paper. Within the revised version, for the reviewer's convenience, the (relevant) changed parts are highlighted, using a blue font color. The detailed actions taken to address all the individual points of the reviewers are listed below. 
 
+Best regards,
+
+The authors:\\
+Giacomo Bergami, Fabrizio Maria Maggi, Andrea Marrella, Marco Montali 
+
+\section*{MetaReview}
+
+\section{Reviewer \#1}
 \subsection{On the usage of Automated Planning}\label{sec:uap}
 
 \RC What I do not fully understand is the need to use Automated Planning techniques here. It seems that the alignment problem on the automatons is not really different from the well-known alignment problem, using synchronous moves, log moves (inserts in this paper), and model moves (deletes). As such, it seems that the paper introduces two ideas that seem orthogonal: How can we align data-aware declarative models to event logs, and how can Automated Planning techniques be used to find alignments. As such, it feels that this paper lacks a single focus. As a result, if the paper would be accepted, I believe that the authors should make clear why the known alignment techniques do not work here. If these do work, the section on the Automated Planning is very odd. To me, it seems like the paper should be split into two papers.
@@ -23,7 +32,11 @@
 
 \RC p.6: Here, LTL\_f is introduced, which is too late.
 
-\AR As suggested, we gave a brief description of LTL\_f in the introduction.
+\AR As kindly suggested by the reviewer, we gave a brief description of $LTL_f$ in the introduction.
+
+\begin{quote}
+	Nevertheless, \deleted{LTL$_f$-based} declarative models expressed in \added{Linear Time Logic on Finite Traces (LTL$_f$)} can always be transformed into procedural via their associated constraint automata. \added{As LTL$_f$ is an extension of modal logic in which worlds are organized in an finite linear structure, this logic is well suited to describe business processes logs having traces of finite length \cite{GiacomoV13}.}
+\end{quote}
 
 %%%
 \RC p.5: "on the footsteps" => either "in the footsteps" or "on the footpath".
@@ -33,12 +46,12 @@
 %%%
 \RC p.6: "such that $\sigma_i \vDash t_i$": Unclear, what does this mean?
 
-\AR It means that any trace composed of events $\sigma_i$ can be expressed as a finite sequence of predicates $t_i$ such that $t_i$ is satisfied by $\sigma_i$. The notation is coming from [7] and an explanation of how to do that is given at \S 5.1. 
+\AR It means that any trace composed of events $\sigma_i$ can be expressed as a finite sequence of predicates $t_i$ such that $t_i$ is satisfied by $\sigma_i$. The notation is coming from [9] and an explanation of how to do that is given at \S5.1.
 
 %%%
 \RC Ex.1 (continued), last line: This seems incorrect. The F clause now also accepts if, say, B.x = 1, whereas the original F clause did not. If guess the or-clause should be in the G clause (and not in this F-clause): G(not(C) $\vee$ F(B $\wedge$ (0 < B.x <= 3) $\vee$ B.x > 3))). This matches the decomposition into the three intervals much better.
 
-\AR The reviewer addresses here the outcome of the decomposition which, still, is achieved in multiple subsequent steps. Still, the proposed decomposition is only partial, as it not considers the $y$ variable. Please refer to the subsequent parts of the Example 1 for the final decomposition and atomization producing the $\Sigma$ required by the alignments. 
+\AR Please observe that, at this step, the only change that is performed is on the data predicates, so the satisfiability is unhaltered. On the other hand, this is just a preliminary decomposition step that, by generating $\Sigma$, will prevent the possible flaw pointed out by the reviewer that might happen at the automata level. Please refer to the subsequent parts of the Example 1 for the final decomposition and atomization producing the $\Sigma$ required by the alignments, where the y variable is also taken into account jointly with x.
 
 %%%
 \RC p.10: A delete operation corresponds to a move on model, whereas an insert operation corresponds to a move on log. This suggests that we now have the standard problem of aligning a trace on a model, and could use the standard alignment techniques. Is this correct? If so, using the planner as suggested is an option, but standard alignment techniques could also be used, right?
@@ -49,13 +62,13 @@
 %%%
 \RC p.9: [i]t seems replacements are not used to augment the trace (see next page). Why introduce them here?
 
-In this section, we introduce the notation we exploit for the repair sequences generated by the PDDL. Despite replacements might be seen as a syntactic sugar for deletions immediately followed by insertions, the definition of such a constraints has direct implications on the final outcome of the alignment: as we observed in the paper, replacement operations might be favored instead of insertions or deletions by assigning to the latter an inferior cost. In fact, the usage of only insertions or deletions will only favor single insertions or deletions operations, while rearing one single event trace might be perceived as less costly than inserting or removing events from a trace. Last, this would require to restrict our analysis to alignment techniques supporting replacement costs as in Levensthein measures. 
+In this section, we introduce the mathematical notation for repair sequences generated by the PDDL. Despite replacements might be seen as a syntactic sugar for deletions immediately followed by insertions, the definition of such a constraints has direct implications on the final outcome of the alignment: as we observed in the paper, replacement operations might be favored instead of insertions or deletions by assigning to the latter an inferior cost. In fact, the usage of only insertions or deletions will only favor single insertions or deletions operations, while rearing one single event trace might be perceived as less costly than inserting or removing events from a trace. Last, this would require to restrict our analysis to alignment techniques supporting replacement costs as in Levenshtein measures. 
 
 
 %%%
 \RC Def.1: Unclear what is being defined here. Reads more like a theorem. Given a trace t and and a model M, a repair sequence r is a sequence of operations (deletion, insertion, replacement) such that r(t) conforms to M. The repair sequence r is called optimal if there exists no repair sequence r' such that the costs of r' are lower than the costs of r. The conformance checking problem is to find an optimal repair sequence for trace t and model M. (?)
 
-\AR As stated in the previous line, we provided a formal definition of the conformance checking problem. Thus, we motivate the required formalisms that will follow. 
+\AR As stated in the previous line and as did in \cite{Moje}, we just remarked the definition of the conformance checking problem that we intend to solve in the paper. By doing this, we motivate the required formalisms that will follow. 
 
 %%%
 \RC Def.1: "it exists" => "there exists".
@@ -65,7 +78,7 @@ In this section, we introduce the notation we exploit for the repair sequences g
 %%%
 \RC Fig.4: The arc from s\_5 to s\_6 is labeled p\_7. I think this should be p\_8.
 
-\AR Done
+\AR We acknowledge the typo, and we fixed it as suggested.
 
 %\begin{quote}
 %The cat in the box is \DIFdelbegin \DIFdel{dead}\DIFdelend \DIFaddbegin \DIFadd{alive}\DIFaddend .
@@ -144,23 +157,40 @@ In this section, we introduce the notation we exploit for the repair sequences g
 
 \RC The main flaw of this (apart from this well-written and sound paper): The paper rather directly jumps into an explanation of how to transform the model-trace alignment problem into a planning problem. I completely miss any discussion of alternative solution strategies and, consequently, advantages and drawbacks of the proposed approach, too. What about transforming the problem into a satisfiability problem and applying optimized SAT solvers instead? It is clear that space is limited but if a new tool is suggested it is essential to comment on alternative solutions and reasons why the strategy chosen is superior.
 
-\AR Some of the discussion of the Related Works was removed due to the lack of space. As we were granted to extend the paper with one more page, we re-introduced such comments in the Related Works section. In particular, we expanded the discussion related to one of our references, that was already using SAT solvers.
+\AR We thank the reviewers for this observation, that gave us the opportunity of clarifying the novelty of our contribution. In fact, some of the discussion of the Related Works was previously removed due to the lack of space. As we were granted to extend the paper with one more page, we re-introduced such comments in the Related Works section. In particular, we expanded the discussion related to one of our references, that was already using SAT solvers. Quoting from the revised paper:
+\begin{quote}
+In \cite{BurattinMS16}, the authors provide an algorithmic framework to efficiently check the conformance of Multi-Perspective Declare (MP-Declare) with respect to logs. \added{In this work, the authors reduce the data-aware conformance checking problem to a maximum constraint-satisfaction problem, where both data and model constraints are encoded. Alternatively, the alignment of data-aware declarative processes can be also reduced to a constraint satisfaction problem, where an optimization function is used to assess the alignment cost \cite{Borrego014}.  The two aforementioned works are, to the best of our knowledge, the only ones providing numerical characterization of the process conformance for declarative models.  Even though it provides a numerical approximation of the degree of conformance of a log trace against the model, no repair strategy is provided. As we will observe in \S5.1, the possibility of repairing traces is strictly related with the definition of strings and numerical data as elements of a partially ordered set, where missing values are the minimal elements of such a set. Furthermore, our work also extends the previous ones by also considering string data as well as numerical data.}
+\end{quote}
 
 %%%
 \RC Section 3.2: Though I like the concise definition of MP-Declare, when referring to activation and target conditions one might ask for the correlation conditions, too. Is it possible to integrate them in the suggested approach, too, or is this a drawback? If so, this should be clearly mentioned as a limitation in the overall evaluation, since it restricts application scenarios to those that do not require correlation conditions.
 
-\AR Despite this is actually a limitation, in \S3.2 we also motivated our choice in the light of previous works such as [17,6], where no correlation conditions are considered. The adoption of such conditions would require us to either support our PDDL approach to support Büchi automata, or to substitute a planning system with a data-aware knowledge base. We thank the reviewer for giving us an exhaustive motivation for extending our \S7 with the former considerations.
+\AR We thank the reviewer for giving us the opportunity of writing a more exhaustive motivation to our work. Despite this is actually a limitation, in §3.2 we have already motivated our choice in the light of previous works, where no correlation conditions are considered. Quoting from \S3.2:
+\begin{quote}
+	 This is a widely adopted assumption, that spans from data-aware procedural models \cite{MultiPerspective} to data-aware declarative models \cite{BurattinMS16}.
+\end{quote}
+The adoption of such conditions would require us to either support our PDDL approach to support Büchi automata, or to substitute a planning system with a data-aware knowledge base. Still, we acknowledge the anonymous reviewer that one pointed out is still a limitation and, in order to overcome it, we added the latter considerations as a future work in our paper as such:
+\begin{quote}
+	 We will also investigate \added{the possibility of supporting correlation conditions by either extending the planning problem by encoding Büchi automata} as well as performing alignments over data-aware knowledge bases \cite{10.1007/978-3-319-39696-5_18}, which potentially quicken the time required to test the satisfiability of the data conditions by conveniently indexing (i.e., pre-ordering) the payload space \cite{IdreosGNMMK12}. \added{This will give us the opportunity of comparing two possible alternatives for computing alignments.}
+\end{quote}
 
 
 %%%
 \RC Section 4, assumption b): ``we restrict the space of the possible alignments of the log trace repairs to the traces generated by the automaton representation of the Declare model'' -> It was announced that the assumptions (and restrictions) can be inferred from the literature. However, assumption b) lacks a corresponding reference. Furthermore, to me it is not clear what consequences arise from this restriction. Actually, this whole sentence part is hard to read and I want to encourage the authors to simplify it for reasons of comprehensibility.
 
-\AR We added the reference to the paper [7] from where we drew our assumption. We also simplified the sentence as suggested: the aim is to restrict the possible repairs of a given trace to only the traces that are both conformant to the Declare model and are  generated by its associated automaton. 
+\AR We added the reference to the paper from where we actually drew our assumption. We also simplified the sentence as suggested: the aim is to restrict the possible repairs of a given trace to only the traces that are both conformant to the Declare model and are  generated by its associated automaton.  Quoting from the revised paper:
+\begin{quote}
+	we restrict \deleted{the space of} the possible \deleted{alignments of the} log trace repairs to the traces generated by the automaton representation of the Declare model \cite{XuLZ17a};
+\end{quote}
+
 
 %%%
 \RC p. 9: ``E.g., by assigning a higher cost to insertions and deletions and a lower one to replacements, we will favor replacements when possible.'' -> I wonder how appropriate costs for the three operations can be determined. Is this arbitrary? I am also a bit concerned about uniqueness. Let us consider, for instance, the response constraint (and let us stick to plain Declare): response(A,B). This means a trace like AAAAC would violate the constraint. In that case it is easy to see that it can be repaired by inserting a B. But what about the trace AC? I could delete A or insert a B. From an algorithmic perspective it must be defined whether the insertion or the deletion is applied. One way would be to choose different costs for the two operations. This should be briefly clarified (probably at the end of section 5.2).
 
-\AR As customary in probabilistic trace alignments, preferred repair strategies are always modeled by assigning different costs to insertions, deletions, and replacements.  We expanded our example so to better describe the different possible repair solutions.
+\AR We than the reviewer for this clarification request, thus allowing us to better explain our solution. As customary in traditional trace alignments \cite{DBLP:conf/edoc/AdriansyahDA11,LeoniM17}, preferred repair strategies are always modeled by assigning different costs to insertions, deletions, and replacements.  We expanded our example so to better describe the different possible repair solutions.
+\begin{quote}
+	Figure~\ref{fig:aplus} shows the automaton augmented with the repair operations $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained for the model $\mathcal{M}$ from Example \ref{ex:first}. Intuitively, $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ accepts all the string sequences conformant to the model and have been obtained by adding/removing the missing/wrong atoms to/from $t_\sigma$, where atomic operations are explicitly marked. As required, both augmented automata do not accept $t_{\sigma'}=p_5\;\texttt{C}\;\texttt{C}$. \added{If insertions are associated to the lowest cost, the best alignment strategy adds $p_8$ at the end on the trace; by  explicitly marking such repair  with $\textit{ins\_}p_8$, the augmented automata now accept $\hat{t_{\sigma'}}=p_5\;\texttt{C}\;\texttt{C}\;\textit{ins\_}p_8$. On the other hand, if re\-place\-ments are associated to the lowest cost, the best alignment strategy would replace the last \texttt{C} with $p_8$, thus requiring to first delete \texttt{C} and then insert $p_8$; the resulting $\hat{t_{\sigma'}}=p_5\;\texttt{C}\;\textit{del\_}p_8\;\textit{ins\_}p_8$ is also accepted by both automata}. 
+\end{quote}
 
 %%%
 
@@ -171,7 +201,10 @@ In this section, we introduce the notation we exploit for the repair sequences g
 
 \RC p. 1: ``while the former fully enumerate the set of all the possible allowed traces, the latter provide a compact process representation'' -> This is a bit oversimplified. The first part is at least language-dependent. In BPMN, for instance, we have a concept of swimlanes but they lack a clear definition of their execution semantics. Hence, the model is in that regard underspecified, which means that the model is not able to enumerate the set of all possible allowed traces. Considering the data perspective, it is even worse. Additionally, if declarative models are compact depends on the processes they represent. For instance, a simple sequence of two activities can be represented in a compact way in BPMN but requires comparatively many constraints. I want to encourage the authors to reformulate this sentence.
 
-\AR We rephrased the sentence by only referring to modeling languages (or fragments of such languages) with clear execution semantics, while removing any reference to the compactness of declarative models' representation. 
+\AR We thank the reviewer for his clarifications on the problems related to BPMN semantics. We rephrased the sentence by only referring to modeling languages (or fragments of such languages) with clear execution semantics, while removing any reference to the compactness of declarative models' representation.
+\begin{quote}
+	In conformance checking, models can be described by either procedural \added{(e.g., safe Petri Nets)} or declarative languages \added{(e.g., Data-Aware Declare)} \added{having a clear data-aware semantics};  while the former fully enumerate the set of all the possible allowed traces, the latter \deleted{provide a compact process representation by} list\deleted{ing} the constraints delimiting the expected behavior \cite{LeoniA13,Westergaard11}.
+\end{quote}
 
 %%%
 \RC p. 5: What are numeric fluents? I’m not an expert in Planning Problems but this seems to be a specific term of the PDDL language and, consequently, should be introduced to improve comprehensibility.
@@ -181,7 +214,10 @@ In this section, we introduce the notation we exploit for the repair sequences g
 %%%
 \RC At the end of this section: ``We also freely assume that missing values are represented with specific values, such as an empty string, -1, or $\infty$, depending on the type.'' -> Declaring a set of maybe valid values (an empty string could be meaningful, too), is on the one hand valid but on the other hand questionable since it might lead to misbehavior in practical applications. Hence, it should be mentioned as a limitation of the approach in the overall evaluation.
 
-\AR We provided this notion from a data-cleaning perspective, where missing information should be imputed with some real-world values. As our implementation relies on POSets, we can always generalize the argument by assuming that any missing value could be represented by a minimal element  being neither a specific float nor a string value. We rephrased our paper accordingly.
+\AR We brought this notion from a data-cleaning perspective, where missing information is seen as a data error and should be imputed with some real-world values. As our implementation relies on POSets, we can always generalize the argument by assuming that any missing value could be represented by a minimal element  being neither a specific float nor a string value. We rephrased our paper accordingly. Please also observe that such extension does not alter the experiments that we already run, as no missing data was generated by the log generator. We then rephrased our claim as such:
+\begin{quote}
+	\added{As both strings and floating point numbers have non-strict partial orders and are hence posets, we can also freely assume that missing values are represented as an extra minimal element $\varepsilon$ being neither a string nor a specific floating point number.}
+\end{quote}
 
 %%%
 \RC p. 13: Until this page I have tried to figure out what the notion of a ``goal condition'' is and which role it plays for the proposed alignment approach. Maybe this could be clarified (probably with a simplified summary) earlier in the paper.
@@ -206,5 +242,7 @@ In this section, we introduce the notation we exploit for the repair sequences g
 
 \AR Done.
 
+\bibliographystyle{splncs04}
+\bibliography{biblio}
 
 \end{document}
