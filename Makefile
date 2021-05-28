@@ -19,3 +19,6 @@ clean:
 	
 images/%.pdf:	images/%.tex
 	pdflatex -interaction nonstopmode -output-directory images $<
+	
+zip:    clean
+	zip -r compress.zip . -x datasets/**\* -x -x templates/**\* -x old_Response.tex -x .git/**\* -x main.pdf  -x copyright.pdf
