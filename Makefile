@@ -13,7 +13,7 @@ paper:
 all:	$(IMAGES) paper
 
 clean:
-	rm -rf *.soc *.out *.log *.blg *.bbl *.aux *.thm *.pgf-plot.gnuplot *.loc *.synctex.gz *.upa *.upb
+	rm -rf *.zip *.soc *.out *.log *.blg *.bbl *.aux *.thm *.pgf-plot.gnuplot *.loc *.synctex.gz *.upa *.upb
 	cd images && rm -rf *.soc *.out *.log *.blg *.bbl *.aux *.thm *.pgf-plot.gnuplot  *.loc *.synctex.gz *.upa *.upb && cd ..
 	cd sections && rm -rf *.soc *.out *.log *.blg *.bbl *.aux *.thm *.pgf-plot.gnuplot *.pdf *.loc *.synctex.gz *.upa *.upb && cd ..
 	
