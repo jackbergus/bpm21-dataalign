@@ -1,6 +1,5 @@
-
-
-\subsection{$\Sigma$-encoding for Conformance Checking}\label{sec:dadtap}
+\subsection{$\Sigma$-encoding for Conformance Checking}
+\label{sec:dadtap}
 As per the previous considerations, we want to show that, to solve the trace alignment problem for data-aware declarative conformance checking, it is sufficient to provide a specific characterization of $\Sigma$. $\Sigma$ will be used to generate an automaton accepting symbols in $\Sigma$ and the automaton will be used to test log traces represented as finite sequences in $\Sigma^*$. The proposed approach for obtaining $\Sigma$ from a (data-aware) Declare model $\mathcal{M}$ is sketched in Figure~\ref{fig:twoexamples}, and described in detail in the following.
 
 \begin{table*}[!t]
@@ -55,9 +54,6 @@ The Declare model $\mathcal{M}$ containing clauses $\mathsf{Response}(\texttt{C}
 $\mathsf{Existence}(\texttt{B},\; \texttt{B}.x>3\wedge \texttt{B}.y=0)$ is represented as the intermediate LTL$_f$ formula $\varphi_{\mathcal{M}}=\lglobally(\neg\texttt{C}\vee \lfuture(\texttt{B}\wedge \texttt{B}.x>0))\wedge \lfuture(\texttt{B}\wedge \texttt{B}.x>3\wedge \texttt{B}.y=0)$.
 \end{ex}
 
-
-
-
 In the second \textit{decomposition} step, for each compound condition $\psi=\texttt{A}\wedge \phi^d$ over labels $\texttt{A}\in\textsf{Act}$, we collect all the atoms in $\phi_d$ in the form ``$\texttt{A}.k\;\Re\; c$'' for each $k\in K$ in a map $\mu(\texttt{A},k)$. Contextually, we represent atoms as intervals, and we \textit{decompose} them
 %
 %%We now describe the main contribution of the paper, namely a technique for computing log trace alignments over Declare data-aware models. Our approach takes as input \begin{enumerate*}[label=\emph{\alph*})]
@@ -96,8 +92,7 @@ With reference to our running example, we replace the compound conditions in $\v
 Given a log $\mathcal{L}=\{\texttt{B\{x=1,y=0\}C\{x=6\}C\{x=4\}},
 \texttt{ C\{x=8\}B\{x=10,y=0\}}\}$,
 all the events labeled as \texttt{C} are replaced with atom \texttt{C}, as there are no (data) conditions related to \texttt{C} in $\mathcal{M}$ that we can exploit to partition the data space. On the other hand, each event labeled as \texttt{B} is replaced by an equivalent atom in $\Sigma$: event \texttt{B\{x=1,y=0\}} is uniquely represented by $p_5$, while event \texttt{B\{x=10,y=0\}} is uniquely represented by $p_8$. %Similar considerations can be drawed for the $\psi$ compound atoms in $\varphi_{\mathcal{M}}$ where compound conditions are replaced into an equivalent disjunction of atoms in $\Sigma$:
-This transformation results into a set of string sequences $T=\{{ p_5\;\texttt{C\;C}}, \texttt{ C}\;p_8\}$.
-
+This transformation results into a set of string sequences $T=\{{ p_5\;\texttt{C\;C}}, \texttt{C}\;p_8\}$.
 \end{continueexample}
 
 
@@ -154,7 +149,7 @@ Figure~\ref{fig:tplus} shows the trace automaton generated from the deviant trac
 	\item $\Sigma^+$ extending $\Sigma$ by adding an insertion $\textit{ins\_}\phi$ for each atom $\phi\in\Sigma$ and a deletion $\textit{del\_}\phi$ for each atom  $\phi\in\Sigma\cup\Sigma_t$.
 \item $\rho^+$ extending $\rho_t$ by adding insertions $\rho^+(p,\textit{ins\_}\phi)=q$ for each transition $\rho(p,\phi)=q$ and deletions $\rho_t^+(q,\textit{del\_}\phi)=q$ for all atoms $\phi\in\Sigma\cup\Sigma_t$ and states $q\in Q$.
 \end{itemize}
-Figure~\ref{fig:aplus} shows the automaton augmented with the repair operations $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained for the model $\mathcal{M}$ from Example \ref{ex:first}. Intuitively, $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ accepts all the string sequences conformant to the model and have been obtained by adding/removing the missing/wrong atoms to/from $t_\sigma$, where atomic operations are explicitly marked. As required, both augmented automata do not accept $t_{\sigma'}=p_5\;\texttt{C}\;\texttt{C}$. \added{If insertions are associated to the lowest cost, the best alignment strategy adds $p_8$ at the end on the trace; by  explicitly marking such repair  with $\textit{ins\_}p_8$, the augmented automata now accept $\hat{t_{\sigma'}}=p_5\;\texttt{C}\;\texttt{C}\;\textit{ins\_}p_8$. On the other hand, if re\-place\-ments are associated to the lowest cost, the best alignment strategy would replace the last \texttt{C} with $p_8$, thus requiring to first delete \texttt{C} and then insert $p_8$; the resulting $\hat{t_{\sigma'}}=p_5\;\texttt{C}\;\textit{del\_}p_8\;\textit{ins\_}p_8$ is also accepted by both automata}. 
+Figure~\ref{fig:aplus} shows the automaton augmented with the repair operations $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained for the model $\mathcal{M}$ from Example \ref{ex:first}. Intuitively, $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ accepts all the string sequences conformant to the model and have been obtained by adding/removing the missing/wrong atoms to/from $t_\sigma$, where atomic operations are explicitly marked. As required, both augmented automata do not accept $t_{\sigma'}=p_5\;\texttt{C}\;\texttt{C}$. \added{If insertions are associated to the lowest cost, the best alignment strategy adds $p_8$ at the end on the trace; by  explicitly marking such repair  with $\textit{ins\_}p_8$, the augmented automata now accept $\hat{t_{\sigma'}}=p_5\;\texttt{C}\;\texttt{C}\;\textit{ins\_}p_8$. On the other hand, if re\-place\-ments are associated to the lowest cost, the best alignment strategy would replace the last \texttt{C} with $p_8$, thus requiring to first delete \texttt{C} and then insert $p_8$; the resulting $\hat{t_{\sigma'}}=p_5\;\texttt{C}\;\textit{del\_}p_8\;\textit{ins\_}p_8$ is also accepted by both automata}.
 
 Next, we show how automated planners can efficiently identify the repair operations $\varrho$ needed to repair the trace $\sigma$ using the augmented automata just defined.
 
