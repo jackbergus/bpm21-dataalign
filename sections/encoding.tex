@@ -43,7 +43,9 @@ It is worth to notice that, if a generic activity \texttt{A} is associated to so
 Furthermore, we define a \emph{numeric fluent} \PDDL{total-cost} to keep track of the cost of the violations. Notice that: \myi in PDDL, parameters are written with a question mark character `?' in front, and the dash character `-' is used to assign types to parameters; and \myii we remain consistent with the PDDL syntax, which allows the values of both predicates and fluents to change as a result of the execution of an action.
 %
 
-Planning actions are used to express the \emph{repairs} on the original trace $t$. Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions. In our encoding, we have defined four actions to perform \emph{synchronous moves} both in the trace/constraint automaton, or to add/remove/replace activities to/from/in the constraint and trace automata. In the following, we suppose that actions \PDDL{ins}, \PDDL{del} and \PDDL{repl} have cost equal to 1. However, their cost can be customized to define the severity of a violation or to force priorities among actions.
+
+Planning actions are used to express the \emph{repairs} on the original trace $t$. %Each action is characterized by its \emph{preconditions} and \emph{effects}, stated in terms of the domain propositions.
+In our encoding, we have defined four actions to perform \emph{synchronous moves} both in the trace/constraint automaton, or to add/remove/replace activities to/from/in the constraint and trace automata. In the following, we suppose that actions \PDDL{ins}, \PDDL{del} and \PDDL{repl} have cost equal to 1. However, their cost can be customized to define the severity of a violation or to force priorities among actions.
 %
 %\begin{tiny}
 %	\begin{verbatim}	
@@ -60,6 +62,7 @@ Planning actions are used to express the \emph{repairs} on the original trace $t
 %	   (cur_state ?s2))))))
 %	\end{verbatim}
 %\end{tiny}
+
 \begin{scriptsize}
 \begin{verbatim}
 (:action sync
@@ -70,6 +73,7 @@ Planning actions are used to express the \emph{repairs} on the original trace $t
                (when (and (cur_state ?s1)
                           (automaton ?s1 ?e ?s2))
                      (and (not (cur_state ?s1))(cur_state ?s2))))))
+                     
 (:action ins                                     (:action del
  :parameters (?e - activity)                      :parameters (?t1 - trace_state
  :effect (and (increase (total-cost) 1)                        ?e - activity
