@@ -114,7 +114,7 @@ To realize this transformation, we consider two types of atomic violations, whic
 
 We can now define the conformance checking problem as follows:
 \begin{definition}[Log/Declare Conformance Checking]
-Given a trace $\sigma$ and a Declare model $\mathcal{M}$, checking the conformance of $\sigma$ against $\mathcal{M}$ is the task of verifying if $\sigma$ conforms to $\mathcal{M}$, or $\sigma$ is deviant and \added{there} exists a repair sequence $\varrho$ making $\sigma$ non-deviant for $\mathcal{M}$ and guaranteeing a minimal transformation cost.
+Given a trace $\sigma$ and a Declare model $\mathcal{M}$, checking the conformance of $\sigma$ against $\mathcal{M}$ is the task of verifying whether $\sigma$ conforms to $\mathcal{M}$, or $\sigma$ is deviant and \added{there} exists a repair sequence $\varrho$ making $\sigma$ non-deviant for $\mathcal{M}$ and guaranteeing a minimal transformation cost.
 \end{definition}
 
 %\texttt{\color{red}[TODO]} we consider insertions and deletions as possible repairs, while substitutions can be modeled by deletions followed by insertions. Synchronizations are \texttt{noops} requiring that a trace $\sigma$ at step $k$ contains a predicate $\phi$.
