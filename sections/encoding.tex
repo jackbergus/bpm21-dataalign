@@ -14,7 +14,7 @@
 
 In this section, we show how, given an augmented constraint automaton $\mathcal{A}_{\varphi_{\mathcal{M}}}^+$ obtained from an LTL$_f$ formula  $\varphi_{\mathcal{M}}$, and an augmented trace automaton $\T^+$ obtained from a trace $t$, we build a cost-optimal planning domain $\mathcal{P_D}$ and a problem instance $\mathcal{P}$ in PDDL. $\mathcal{P_D}$ and $\mathcal{P}$ can be used to feed any state-of-the-art planners accepting PDDL 2.1 specifications, as discussed in Section \ref{ssec:ap}.
 %
-A solution plan for $\mathcal{P}$ amounts to the set of interventions of minimal cost to repair the trace with respect to $\varphi_{\mathcal{M}}'$,\added{ and generates a repair sequence $\varrho$ that is going to be exploited in the forthcoming subsection for finally repairing the trace.}
+A solution plan for $\mathcal{P}$ amounts to the set of interventions of minimal cost to repair the trace with respect to $\varphi_{\mathcal{M}}'$, and generates a repair sequence $\varrho$ that is going to be exploited in the forthcoming subsection for finally repairing the trace.
 
 %\paragraph{Planning Domain}
 \medskip
@@ -98,11 +98,11 @@ In our encoding, we have defined four actions to perform \emph{synchronous moves
 \noindent
 We modeled \PDDL{sync} and \PDDL{del} in such a way that they can be applied only if there exists a transition from the current state \PDDL{t1} of the trace automaton to a subsequent state \PDDL{t2}, being \PDDL{e} the activity involved in the transition.
 %%
-Notice that, while \PDDL{del} \added{$[\#\texttt{t1}\leftarrow \texttt{e}]$} yields a \emph{single} move in the trace automaton, \PDDL{sync} yields, in addition, one move on the constraint automaton, to be performed synchronously. In particular, a synchronous move is performed in the constraint automaton if there exists a transition involving activity \PDDL{e} connecting \PDDL{s1} -- the current state of the automaton -- to a state \PDDL{s2}.
+Notice that, while \PDDL{del} {$[\#\texttt{t1}\leftarrow \texttt{e}]$} yields a \emph{single} move in the trace automaton, \PDDL{sync} yields, in addition, one move on the constraint automaton, to be performed synchronously. In particular, a synchronous move is performed in the constraint automaton if there exists a transition involving activity \PDDL{e} connecting \PDDL{s1} -- the current state of the automaton -- to a state \PDDL{s2}.
 %
-Then, \PDDL{ins} \added{$[@\texttt{t1}\leftarrow \texttt{e}]$} is performed only for transitions involving activity \PDDL{e} connecting two states of the constraint automaton, with the current state of the trace automaton that remains the same after the execution of the action.
+Then, \PDDL{ins} {$[@\texttt{t1}\leftarrow \texttt{e}]$} is performed only for transitions involving activity \PDDL{e} connecting two states of the constraint automaton, with the current state of the trace automaton that remains the same after the execution of the action.
 %
-Finally, \PDDL{repl} \added{$[\texttt{t1}[\texttt{e1}\mapsto \texttt{e2}]]$} can be seen as a synchronous combination of a \PDDL{del} and an \PDDL{ins}. It yields one move on the trace automaton and one on the constraint automaton, involving two atoms \PDDL{e1} and \PDDL{e2} associated to a same activity label, i.e., such that the predicate \PDDL{(atoms ?e1 ?e2)} holds.
+Finally, \PDDL{repl} {$[\texttt{t1}[\texttt{e1}\mapsto \texttt{e2}]]$} can be seen as a synchronous combination of a \PDDL{del} and an \PDDL{ins}. It yields one move on the trace automaton and one on the constraint automaton, involving two atoms \PDDL{e1} and \PDDL{e2} associated to a same activity label, i.e., such that the predicate \PDDL{(atoms ?e1 ?e2)} holds.
 
 \smallskip
 \noindent
@@ -115,4 +115,4 @@ Secondly, we define the \emph{initial state} of $\mathcal{P}$ to capture the exa
 %
 Thirdly, to encode the goal condition, we first pre-process the constraint automaton by: \myi adding a new dummy state with no outgoing transitions; \myii adding a new special action, executable only in the final states of the original automaton, which makes the automaton move to the dummy state; and \myiii including in the set of final states only the dummy state. Then, we define the goal condition as the conjunction of the final states of the trace automaton and of the constraint automaton. In this way, we avoid using disjunctions in goal formulas, which are not supported by all planners.
 %
-Finally, as our purpose is to minimize the total cost of the plan, $\mathcal{P}$ contains the following specification: \PDDL{(:metric minimize (total-cost))}. \added{As the goal requires that in both augmented automata an accepting state is reached, the actions will encode the strategies to successfully visit both automata via their transition functions, while assigning different alignment costs to each of the strategies. When the goal is reached, the resulting action sequence (where \texttt{sync}s are stripped) represent the repair sequence $\varrho$ that we are going to exploit in the next section.} 
+Finally, as our purpose is to minimize the total cost of the plan, $\mathcal{P}$ contains the following specification: \PDDL{(:metric minimize (total-cost))}. {As the goal requires that in both augmented automata an accepting state is reached, the actions will encode the strategies to successfully visit both automata via their transition functions, while assigning different alignment costs to each of the strategies. When the goal is reached, the resulting action sequence (where \texttt{sync}s are stripped) represent the repair sequence $\varrho$ that we are going to exploit in the next section.} 
