@@ -14,7 +14,7 @@ Multi-perspective checking for process conformance is gaining momentum, as confo
 \\
 \indent
 To tackle this research gap, we propose a novel approach for aligning event logs and data-aware declarative models based on the reduction of this problem into a data-agnostic alignment problem. This solution exploits the following considerations: \begin{enumerate*}[label=\emph{\alph*})]
-	\item \label{it1} to represent the process model, we use a sub-set of the data-aware extension of Declare presented in \cite{BurattinMS16}. After representing the data-aware Declare model using a data\added{-}agnostic LTL$_f$ semantics,
+	\item \label{it1} to represent the process model, we use a sub-set of the data-aware extension of Declare presented in \cite{BurattinMS16}. After representing the data-aware Declare model using a data{-}agnostic LTL$_f$ semantics,
 	\item \label{it2} we exploit the data predicates in the data-aware Declare clauses to partition the data space. This provides propositions representing data in addition to event labels. Then,
 	\item we combine each event label with the propositions generated in \ref{it2} and transform the model in \ref{it1} into its data-aware counterpart. The automata-based representation of such a model is used to align traces (seen as sequences of events with a payload of data attribute-value pairs) with the model.
 In particular, we show that the alignment problem can be expressed as a planning problem in Artificial Intelligence, which can be efficiently solved by selected state-of-the-art planners \cite{XuLZ17a,Marrella17}.
